@@ -1,0 +1,19 @@
+name: greenie
+description: "For your golf leagues"
+publish_to: "none"
+version: 0.0.1
+environment:
+  sdk: ^3.9.2
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_riverpod: ^3.0.0
+  riverpod_annotation: ^3.0.0
+dev_dependencies:
+  build_runner:
+  custom_lint:
+  flutter_test:
+    sdk: flutter
+  go_router: ^16.2.2
+  riverpod_generator: ^3.0.0
+  riverpod_lint: ^3.0.0
