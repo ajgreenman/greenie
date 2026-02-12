@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Greenie is a Flutter mobile app for managing golf leagues. It tracks courses, leagues, and player scorecards. The app is in early development (v0.0.1) using fake/mock data repositories.
 
+A plan for the project has been written to @plan.md.
+
 ## Common Commands
 
 ```bash

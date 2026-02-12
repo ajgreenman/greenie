@@ -7,6 +7,5 @@ enum DayOfTheWeek {
   saturday,
   sunday;
 
-  String get displayName =>
-      '${this.name[0].toUpperCase()}${this.name.substring(1)}';
+  String get displayName => '${name[0].toUpperCase()}${name.substring(1)}';
 }

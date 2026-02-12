@@ -1,8 +1,13 @@
 import 'package:greenie/course/infrastructure/models/hole.dart';
 
 class CourseModel {
-  CourseModel({required this.name, required this.holes});
+  const CourseModel({
+    required this.id,
+    required this.name,
+    required this.holes,
+  });
 
+  final String id;
   final String name;
 
   final List<HoleModel> holes;

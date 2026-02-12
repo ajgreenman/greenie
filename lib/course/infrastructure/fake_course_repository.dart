@@ -8,8 +8,14 @@ class FakeCourseRepository extends CourseRepository {
     return courses;
   }
 
+  @override
+  Future<CourseModel?> fetchCourse(String id) async {
+    return courses.where((c) => c.id == id).firstOrNull;
+  }
+
   static final courses = [
     CourseModel(
+      id: 'course-1',
       name: 'Crown',
       holes: [
         HoleModel(number: 1, par: 5),
@@ -33,6 +39,7 @@ class FakeCourseRepository extends CourseRepository {
       ],
     ),
     CourseModel(
+      id: 'course-2',
       name: 'Elmbrook',
       holes: [
         HoleModel(number: 1, par: 4),
@@ -56,6 +63,7 @@ class FakeCourseRepository extends CourseRepository {
       ],
     ),
     CourseModel(
+      id: 'course-3',
       name: 'Bahle Farms',
       holes: [
         HoleModel(number: 1, par: 4),

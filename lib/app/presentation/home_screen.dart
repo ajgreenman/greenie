@@ -1,32 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:greenie/course/course_providers.dart';
-import 'package:greenie/course/presentation/components/scorecard.dart';
+import 'package:go_router/go_router.dart';
+import 'package:greenie/app/presentation/components/empty_state.dart';
 import 'package:greenie/league/league_providers.dart';
-import 'package:greenie/league/presentation/league_home_screen.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final courses = ref.watch(fetchCoursesProvider);
     final leagues = ref.watch(fetchLeaguesProvider);
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Welcome to Greenie!'),
-          switch (courses) {
-            AsyncData(:final value) => Scorecard(course: value.first),
-            _ => Text('Loading courses...'),
+      appBar: AppBar(title: const Text('Greenie')),
+      body: switch (leagues) {
+        AsyncData(:final value) when value.isEmpty => const EmptyState(
+          icon: Icons.sports_golf,
+          message: 'No leagues yet.',
+        ),
+        AsyncData(:final value) => ListView.builder(
+          itemCount: value.length,
+          itemBuilder: (context, index) {
+            final league = value[index];
+            return ListTile(
+              leading: const Icon(Icons.emoji_events),
+              title: Text(league.name),
+              subtitle: Text(
+                '${league.course.name} \u2022 ${league.day.displayName}s',
+              ),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => context.go('/league/${league.id}'),
+            );
           },
-          switch (leagues) {
-            AsyncData(:final value) => LeagueHomeScreen(league: value.first),
-            _ => Text('Loading leagues...'),
-          },
-        ],
-      ),
+        ),
+        AsyncError(:final error) => Center(child: Text('Error: $error')),
+        _ => const Center(child: CircularProgressIndicator()),
+      },
     );
   }
 }

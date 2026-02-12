@@ -11,4 +11,5 @@ CourseRepository courseRepository(Ref ref) {
 
 abstract class CourseRepository {
   Future<List<CourseModel>> fetchCourses();
+  Future<CourseModel?> fetchCourse(String id);
 }
