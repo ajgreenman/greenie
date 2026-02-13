@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenie/app/core/design_constants.dart';
 import 'package:greenie/course/infrastructure/models/course.dart';
 import 'package:greenie/course/infrastructure/models/hole.dart';
 import 'package:greenie/course/presentation/components/hole_header_cell.dart';
@@ -59,8 +60,8 @@ class Scorecard extends StatelessWidget {
             cells: holes
                 .map(
                   (h) => Container(
-                    width: 36,
-                    height: 36,
+                    width: scoreCellSize,
+                    height: scoreCellSize,
                     alignment: Alignment.center,
                     child: Text(
                       '${h.par}',
@@ -111,8 +112,8 @@ class Scorecard extends StatelessWidget {
                   ? members.where((m) => m.id == winnerId).firstOrNull
                   : null;
               return Container(
-                width: 36,
-                height: 36,
+                width: scoreCellSize,
+                height: scoreCellSize,
                 alignment: Alignment.center,
                 child: Text(
                   winner?.initials ?? '-',

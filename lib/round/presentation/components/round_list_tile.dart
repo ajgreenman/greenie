@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:greenie/app/core/design_constants.dart';
 import 'package:greenie/app/core/extensions/date_extensions.dart';
 import 'package:greenie/app/presentation/components/info_card.dart';
 import 'package:greenie/course/course_providers.dart';
@@ -25,12 +26,12 @@ class RoundListTile extends ConsumerWidget {
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 2,
               children: [
                 Text(switch (courseAsync) {
                   AsyncData(:final value) => value?.name ?? 'Unknown Course',
                   _ => '...',
                 }, style: theme.textTheme.titleSmall),
-                const SizedBox(height: 2),
                 Text(
                   '${round.date.displayDate} \u2022 Holes ${round.holeNumbers.first}-${round.holeNumbers.last}',
                   style: theme.textTheme.bodySmall,
@@ -67,10 +68,13 @@ class _StatusChip extends StatelessWidget {
       ),
     };
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      padding: const EdgeInsets.symmetric(
+        horizontal: small,
+        vertical: extraSmall,
+      ),
       decoration: BoxDecoration(
         color: bgColor,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(statusChipRadius),
       ),
       child: Text(
         status.displayName,

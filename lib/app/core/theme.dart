@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:greenie/app/core/design_constants.dart';
+
 const _greenPrimary = Color(0xFF26BD00);
 
 ThemeData buildLightTheme() {
@@ -11,6 +13,44 @@ ThemeData buildLightTheme() {
     colorScheme: colorScheme,
     useMaterial3: true,
     extensions: const [GreenieScoreColors.light],
+    appBarTheme: const AppBarTheme(
+      backgroundColor: fairwayGreen,
+      foregroundColor: Colors.white,
+      centerTitle: true,
+      elevation: 0,
+    ),
+    cardTheme: CardThemeData(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(cardBorderRadius),
+      ),
+      elevation: 1,
+      clipBehavior: Clip.antiAlias,
+    ),
+    filledButtonTheme: FilledButtonThemeData(
+      style: FilledButton.styleFrom(
+        backgroundColor: teeBoxGreen,
+        foregroundColor: Colors.white,
+        padding: const EdgeInsets.symmetric(
+          horizontal: extraLarge,
+          vertical: large,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(ctaButtonRadius),
+        ),
+      ),
+    ),
+    bottomSheetTheme: const BottomSheetThemeData(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(large)),
+      ),
+    ),
+    dividerTheme: DividerThemeData(
+      thickness: 1,
+      color: colorScheme.outlineVariant.withValues(alpha: 0.5),
+    ),
+    listTileTheme: const ListTileThemeData(
+      contentPadding: EdgeInsets.symmetric(horizontal: large),
+    ),
   );
 }
 
@@ -24,6 +64,45 @@ ThemeData buildDarkTheme() {
     useMaterial3: true,
     brightness: Brightness.dark,
     extensions: const [GreenieScoreColors.dark],
+    appBarTheme: AppBarTheme(
+      backgroundColor: const Color(0xFF0D3311),
+      foregroundColor: Colors.white,
+      centerTitle: true,
+      elevation: 0,
+      surfaceTintColor: colorScheme.surface,
+    ),
+    cardTheme: CardThemeData(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(cardBorderRadius),
+      ),
+      elevation: 1,
+      clipBehavior: Clip.antiAlias,
+    ),
+    filledButtonTheme: FilledButtonThemeData(
+      style: FilledButton.styleFrom(
+        backgroundColor: const Color(0xFF43A047),
+        foregroundColor: Colors.white,
+        padding: const EdgeInsets.symmetric(
+          horizontal: extraLarge,
+          vertical: large,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(ctaButtonRadius),
+        ),
+      ),
+    ),
+    bottomSheetTheme: const BottomSheetThemeData(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(large)),
+      ),
+    ),
+    dividerTheme: DividerThemeData(
+      thickness: 1,
+      color: colorScheme.outlineVariant.withValues(alpha: 0.5),
+    ),
+    listTileTheme: const ListTileThemeData(
+      contentPadding: EdgeInsets.symmetric(horizontal: large),
+    ),
   );
 }
 

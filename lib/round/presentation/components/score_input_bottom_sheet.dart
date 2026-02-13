@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenie/app/core/design_constants.dart';
 
 class ScoreInputBottomSheet extends StatelessWidget {
   const ScoreInputBottomSheet({
@@ -16,30 +17,34 @@ class ScoreInputBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(large),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Hole $holeNumber', style: theme.textTheme.titleMedium),
-          const SizedBox(height: 12),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: List.generate(10, (i) {
-              final score = i + 1;
-              final isSelected = currentScore == score;
-              return ChoiceChip(
-                label: Text('$score'),
-                selected: isSelected,
-                onSelected: (_) {
-                  onScoreSelected(score);
-                  Navigator.of(context).pop();
-                },
-              );
-            }),
+          Padding(
+            padding: const EdgeInsets.only(bottom: medium),
+            child: Text('Hole $holeNumber', style: theme.textTheme.titleMedium),
           ),
-          const SizedBox(height: 16),
+          Padding(
+            padding: const EdgeInsets.only(bottom: large),
+            child: Wrap(
+              spacing: small,
+              runSpacing: small,
+              children: List.generate(10, (i) {
+                final score = i + 1;
+                final isSelected = currentScore == score;
+                return ChoiceChip(
+                  label: Text('$score'),
+                  selected: isSelected,
+                  onSelected: (_) {
+                    onScoreSelected(score);
+                    Navigator.of(context).pop();
+                  },
+                );
+              }),
+            ),
+          ),
         ],
       ),
     );

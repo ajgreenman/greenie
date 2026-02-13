@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenie/app/core/design_constants.dart';
 
 class StartRoundButton extends StatelessWidget {
   const StartRoundButton({
@@ -14,8 +15,11 @@ class StartRoundButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FilledButton(
       onPressed: onPressed,
-      style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(48)),
-      child: Text(label),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        spacing: extraSmall,
+        children: [Text(label), const Icon(Icons.chevron_right)],
+      ),
     );
   }
 }

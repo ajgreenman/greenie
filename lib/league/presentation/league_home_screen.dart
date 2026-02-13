@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:greenie/app/core/design_constants.dart';
 import 'package:greenie/league/league_providers.dart';
 import 'package:greenie/league/presentation/components/league_info_header.dart';
 import 'package:greenie/league/presentation/components/league_quick_links.dart';
@@ -20,15 +21,20 @@ class LeagueHomeScreen extends ConsumerWidget {
     final userAsync = ref.watch(currentUserProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('League')),
+      appBar: AppBar(
+        title: Text(switch (leagueAsync) {
+          AsyncData(:final value) when value != null => value.name,
+          _ => 'League',
+        }),
+      ),
       body: switch (leagueAsync) {
         AsyncData(:final value) when value != null => SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(vertical: 16),
+          padding: const EdgeInsets.symmetric(vertical: large),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: large,
             children: [
               LeagueInfoHeader(league: value),
-              const SizedBox(height: 16),
               if (roundsAsync case AsyncData(:final value))
                 ...() {
                   final upcoming =
@@ -46,7 +52,6 @@ class LeagueHomeScreen extends ConsumerWidget {
                         round: upcoming.first,
                         leagueId: leagueId,
                       ),
-                      const SizedBox(height: 16),
                     ];
                   }
                   return <Widget>[];
