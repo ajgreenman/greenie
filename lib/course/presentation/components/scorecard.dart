@@ -5,6 +5,7 @@ import 'package:greenie/course/presentation/components/hole_header_cell.dart';
 import 'package:greenie/course/presentation/components/score_cell.dart';
 import 'package:greenie/course/presentation/components/scorecard_row.dart';
 import 'package:greenie/course/presentation/components/scorecard_totals.dart';
+import 'package:greenie/round/infrastructure/handicap_calculator.dart';
 import 'package:greenie/round/infrastructure/models/round_model.dart';
 import 'package:greenie/round/infrastructure/models/score_model.dart';
 import 'package:greenie/round/infrastructure/skins_calculator.dart';
@@ -74,11 +75,14 @@ class Scorecard extends StatelessWidget {
             ),
           ),
           const Divider(height: 1),
-          // Player score rows
+          // Player score rows with net scores
           ...round.scores.map((score) {
             final member = members
                 .where((m) => m.id == score.memberId)
                 .firstOrNull;
+            final handicapStrokes = member != null
+                ? calculateHandicapStrokes(member.handicap, round.holeNumbers)
+                : <int, int>{};
             return Column(
               children: [
                 ScorecardRow(
@@ -96,6 +100,30 @@ class Scorecard extends StatelessWidget {
                   }).toList(),
                   totalWidget: ScorecardTotals(
                     total: _playerTotal(score, holes),
+                  ),
+                ),
+                ScorecardRow(
+                  label: 'Net',
+                  cells: holes.map((h) {
+                    final strokes = score.holeScores[h.number];
+                    final hcStrokes = handicapStrokes[h.number] ?? 0;
+                    return Container(
+                      width: 36,
+                      height: 36,
+                      alignment: Alignment.center,
+                      child: Text(
+                        strokes != null
+                            ? '${netScore(strokes, hcStrokes)}'
+                            : '-',
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Theme.of(context).colorScheme.outline,
+                          fontSize: 11,
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                  totalWidget: ScorecardTotals(
+                    total: _playerNetTotal(score, holes, handicapStrokes),
                   ),
                 ),
                 const Divider(height: 1),
@@ -136,6 +164,21 @@ class Scorecard extends StatelessWidget {
     for (final h in holes) {
       final strokes = score.holeScores[h.number];
       if (strokes != null) total += strokes;
+    }
+    return total;
+  }
+
+  int _playerNetTotal(
+    ScoreModel score,
+    List<HoleModel> holes,
+    Map<int, int> handicapStrokes,
+  ) {
+    var total = 0;
+    for (final h in holes) {
+      final strokes = score.holeScores[h.number];
+      if (strokes != null) {
+        total += netScore(strokes, handicapStrokes[h.number] ?? 0);
+      }
     }
     return total;
   }
