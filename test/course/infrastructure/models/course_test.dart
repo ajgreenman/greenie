@@ -18,7 +18,7 @@ void main() {
     });
 
     test('totalPar is zero for empty holes', () {
-      final course = CourseModel(id: 'c1', name: 'Empty', holes: []);
+      const course = CourseModel(id: 'c1', name: 'Empty', holes: []);
       expect(course.totalPar, 0);
     });
 
