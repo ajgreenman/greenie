@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:greenie/app/core/design_constants.dart';
 
 class HoleHeaderCell extends StatelessWidget {
   const HoleHeaderCell({super.key, required this.holeNumber});
@@ -9,8 +8,8 @@ class HoleHeaderCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: scoreCellSize,
-      height: scoreCellSize,
+      width: 36,
+      height: 36,
       alignment: Alignment.center,
       child: Text(
         '$holeNumber',

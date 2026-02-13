@@ -19,20 +19,29 @@ It's used at runtime but currently listed as a dev dependency.
 - Enable `strict-casts`, `strict-raw-types`
 - Add rules: `avoid_print`, `prefer_const_constructors`, `prefer_final_locals`, `require_trailing_commas`, `unawaited_futures`, etc.
 
-### 1.3 Build theme system (light + dark)
-- **Modify:** `lib/app/core/theme.dart` — replace color-only file with `buildLightTheme()` and `buildDarkTheme()` returning full `ThemeData` using `ColorScheme.fromSeed(seedColor: greenPrimary)`. Add `GreenieScoreColors` `ThemeExtension` for golf indicator colors (eagle, birdie, par, bogey, double bogey, triple+).
+### 1.3 Build theme system (light + dark) ✅
+- **Modify:** `lib/app/core/theme.dart` — contains brand colors (fairwayGreen, teeBoxGreen, clubhouseCream), spacing scale (extraSmall through doubleExtraLarge, multiples of 4), `buildLightTheme()` and `buildDarkTheme()` with rich component themes (AppBarTheme, CardTheme, FilledButtonTheme, BottomSheetTheme, DividerTheme, ListTileTheme), and `GreenieScoreColors` ThemeExtension.
 - **Modify:** `lib/main.dart` — add `theme`, `darkTheme`, `themeMode: ThemeMode.system` to `MaterialApp.router`.
+- Design principles: no separate design constants file; spacing scale lives in theme.dart; no hardcoded widget sizes (use flex layouts, padding, Column/Row spacing); component sizing inlined only where absolutely necessary (e.g. scorecard grid cells).
 
-### 1.4 Create shared widgets
+### 1.4 Create shared widgets ✅
 - `lib/app/presentation/components/section_header.dart` — titled section with optional trailing action
 - `lib/app/presentation/components/info_card.dart` — themed Card wrapper with optional `onTap`
 - `lib/app/presentation/components/empty_state.dart` — icon + message for empty lists
 - `lib/app/core/extensions/date_extensions.dart` — display formatting for dates
 
-### Phase 1 verification
+### 1.5 Theme & styling redesign ✅
+Applied polished golf-app styling across all widgets:
+- Dark-green AppBar, green CTA button with chevron arrow, leaderboard with CircleAvatars
+- Responsive layouts using flex values and GridView (supports iPad)
+- No SizedBox spacers — uses Column/Row `spacing` parameter and Padding instead
+- All 17 widget files updated to use theme constants from `theme.dart`
+
+### Phase 1 verification ✅
 1. `flutter analyze` — zero issues
 2. `dart format . --set-exit-if-changed` — all formatted
-3. `flutter run` — app launches with themed AppBar and green color scheme. Toggle device dark mode → app switches to dark theme. Existing HomeScreen still renders.
+3. `flutter test` — all 156 tests pass
+4. Visual: dark green AppBar, green CTA button with arrow, leaderboard with avatars, scorecard with colored cells. Dark mode works.
 
 ---
 

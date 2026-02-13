@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:greenie/app/core/design_constants.dart';
+import 'package:greenie/app/core/theme.dart';
 
 class ScorecardRow extends StatelessWidget {
   const ScorecardRow({
@@ -19,7 +19,7 @@ class ScorecardRow extends StatelessWidget {
     return Row(
       children: [
         SizedBox(
-          width: scorecardLabelWidth,
+          width: 80,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: extraSmall),
             child: Text(
@@ -32,8 +32,8 @@ class ScorecardRow extends StatelessWidget {
         ...cells,
         if (totalWidget != null)
           Container(
-            width: scorecardTotalWidth,
-            height: scoreCellSize,
+            width: 44,
+            height: 36,
             alignment: Alignment.center,
             child: totalWidget,
           ),

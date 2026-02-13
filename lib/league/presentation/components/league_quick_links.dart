@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:greenie/app/core/design_constants.dart';
+import 'package:greenie/app/core/theme.dart';
 
 class LeagueQuickLinks extends StatelessWidget {
   const LeagueQuickLinks({

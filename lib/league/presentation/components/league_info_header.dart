@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:greenie/app/core/design_constants.dart';
+import 'package:greenie/app/core/theme.dart';
 import 'package:greenie/league/infrastructure/models/league_model.dart';
 
 class LeagueInfoHeader extends StatelessWidget {

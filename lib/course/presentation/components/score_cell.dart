@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:greenie/app/core/design_constants.dart';
 import 'package:greenie/app/core/theme.dart';
 import 'package:greenie/round/infrastructure/models/score_relative_to_par.dart';
 
@@ -26,8 +25,8 @@ class ScoreCell extends StatelessWidget {
       return GestureDetector(
         onTap: isEditable ? onTap : null,
         child: Container(
-          width: scoreCellSize,
-          height: scoreCellSize,
+          width: 36,
+          height: 36,
           alignment: Alignment.center,
           child: Text(
             '-',
@@ -47,8 +46,8 @@ class ScoreCell extends StatelessWidget {
     return GestureDetector(
       onTap: isEditable ? onTap : null,
       child: Container(
-        width: scoreCellSize,
-        height: scoreCellSize,
+        width: 36,
+        height: 36,
         alignment: Alignment.center,
         decoration: decoration,
         child: Text(

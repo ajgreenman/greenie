@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:greenie/app/core/design_constants.dart';
+import 'package:greenie/app/core/theme.dart';
 import 'package:greenie/round/infrastructure/models/round_model.dart';
 import 'package:greenie/user/user_providers.dart';
 
@@ -48,9 +48,10 @@ class RoundLeaderboard extends ConsumerWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: small),
                     child: Row(
+                      spacing: small,
                       children: [
                         SizedBox(
-                          width: leaderboardRankWidth,
+                          width: 28,
                           child: Text(
                             '$rank',
                             style: theme.textTheme.titleSmall?.copyWith(
@@ -58,16 +59,8 @@ class RoundLeaderboard extends ConsumerWidget {
                             ),
                           ),
                         ),
-                        CircleAvatar(
-                          radius: avatarRadius,
-                          child: Text(initials),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: small),
-                            child: Text(memberName ?? score.memberId),
-                          ),
-                        ),
+                        CircleAvatar(child: Text(initials)),
+                        Expanded(child: Text(memberName ?? score.memberId)),
                         Text(
                           '${score.totalStrokes}',
                           style: theme.textTheme.titleSmall?.copyWith(

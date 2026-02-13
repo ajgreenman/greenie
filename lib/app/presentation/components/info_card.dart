@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:greenie/app/core/design_constants.dart';
+import 'package:greenie/app/core/theme.dart';
 
 class InfoCard extends StatelessWidget {
   const InfoCard({super.key, required this.child, this.onTap});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:greenie/app/core/design_constants.dart';
+import 'package:greenie/app/core/theme.dart';
 import 'package:greenie/league/league_providers.dart';
 import 'package:greenie/league/presentation/components/league_info_header.dart';
 import 'package:greenie/league/presentation/components/league_quick_links.dart';

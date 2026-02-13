@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:greenie/app/core/design_constants.dart';
 import 'package:greenie/user/infrastructure/models/member_model.dart';
 
 class MemberListTile extends StatelessWidget {
@@ -10,7 +9,7 @@ class MemberListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: CircleAvatar(radius: avatarRadius, child: Text(member.initials)),
+      leading: CircleAvatar(child: Text(member.initials)),
       title: Text(member.name),
       trailing: Text(
         'HC ${member.handicap}',
