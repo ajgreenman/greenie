@@ -24,8 +24,15 @@ class HomeScreen extends ConsumerWidget {
             return ListTile(
               leading: const Icon(Icons.emoji_events),
               title: Text(league.name),
-              subtitle: Text(
-                '${league.course.name} \u2022 ${league.day.displayName}s',
+              subtitle: Row(
+                children: [
+                  Text(league.course.name),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 6),
+                    child: Icon(Icons.circle, size: 4),
+                  ),
+                  Text('${league.day.displayName}s'),
+                ],
               ),
               trailing: const Icon(Icons.chevron_right),
               onTap: () => context.go('/league/${league.id}'),

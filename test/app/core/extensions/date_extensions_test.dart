@@ -12,15 +12,5 @@ void main() {
       final date = DateTime(2025, 12, 25);
       expect(date.displayDate, 'Dec 25, 2025');
     });
-
-    test('shortDate formats correctly', () {
-      final date = DateTime(2025, 6, 4);
-      expect(date.shortDate, '6/4/2025');
-    });
-
-    test('shortDate for double-digit month and day', () {
-      final date = DateTime(2025, 11, 28);
-      expect(date.shortDate, '11/28/2025');
-    });
   });
 }

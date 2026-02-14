@@ -32,9 +32,25 @@ class RoundListTile extends ConsumerWidget {
                   AsyncData(:final value) => value?.name ?? 'Unknown Course',
                   _ => '...',
                 }, style: theme.textTheme.titleSmall),
-                Text(
-                  '${round.date.displayDate} \u2022 Holes ${round.holeNumbers.first}-${round.holeNumbers.last}',
-                  style: theme.textTheme.bodySmall,
+                Row(
+                  children: [
+                    Text(
+                      round.date.displayDate,
+                      style: theme.textTheme.bodySmall,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 6),
+                      child: Icon(
+                        Icons.circle,
+                        size: 4,
+                        color: theme.textTheme.bodySmall?.color,
+                      ),
+                    ),
+                    Text(
+                      'Holes ${round.holeNumbers.first}-${round.holeNumbers.last}',
+                      style: theme.textTheme.bodySmall,
+                    ),
+                  ],
                 ),
               ],
             ),

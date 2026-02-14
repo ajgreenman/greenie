@@ -72,9 +72,7 @@ void main() {
       expect(find.text('Sunday Skins'), findsNWidgets(2));
     });
 
-    testWidgets('shows league info header with course and day', (
-      tester,
-    ) async {
+    testWidgets('shows league info header with course and day', (tester) async {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [

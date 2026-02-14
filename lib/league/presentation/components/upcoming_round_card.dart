@@ -40,12 +40,21 @@ class UpcomingRoundCard extends ConsumerWidget {
                       fontSize: 16,
                     ),
                   ),
-                  Text(
-                    '${round.date.displayDate} \u2022 ${switch (courseAsync) {
-                      AsyncData(:final value) => value?.name ?? 'Unknown',
-                      _ => '...',
-                    }}',
-                    style: const TextStyle(fontSize: 13),
+                  Row(
+                    children: [
+                      Text(
+                        round.date.displayDate,
+                        style: const TextStyle(fontSize: 13),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 6),
+                        child: Icon(Icons.circle, size: 4),
+                      ),
+                      Text(switch (courseAsync) {
+                        AsyncData(:final value) => value?.name ?? 'Unknown',
+                        _ => '...',
+                      }, style: const TextStyle(fontSize: 13)),
+                    ],
                   ),
                 ],
               ),

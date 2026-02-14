@@ -12,19 +12,5 @@ void main() {
       const score = ScoreModel(memberId: 'm1', holeScores: {});
       expect(score.totalStrokes, 0);
     });
-
-    test('copyWithHoleScore adds a new hole score', () {
-      const score = ScoreModel(memberId: 'm1', holeScores: {1: 4, 2: 3});
-      final updated = score.copyWithHoleScore(3, 5);
-      expect(updated.holeScores, {1: 4, 2: 3, 3: 5});
-      expect(updated.memberId, 'm1');
-    });
-
-    test('copyWithHoleScore replaces existing hole score', () {
-      const score = ScoreModel(memberId: 'm1', holeScores: {1: 4, 2: 3});
-      final updated = score.copyWithHoleScore(1, 6);
-      expect(updated.holeScores[1], 6);
-      expect(updated.holeScores[2], 3);
-    });
   });
 }

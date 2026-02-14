@@ -16,8 +16,4 @@ extension DateExtensions on DateTime {
     ];
     return '${months[month - 1]} $day, $year';
   }
-
-  String get shortDate {
-    return '$month/$day/$year';
-  }
 }

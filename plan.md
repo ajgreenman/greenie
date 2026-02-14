@@ -5,11 +5,8 @@
 The app is a Flutter golf league manager. Most features are implemented with fake data: league home, round management, interactive scorecard with golf indicators and skins, score entry, light/dark theming, and 156 passing tests. Built UI-first with fake repositories so screens are functional immediately.
 
 ## Remaining work
-- [x] **5.4** Handicap net score row rendered in scorecard
-- [x] **6.3** Widget test: `league_home_screen_test.dart`
-- [x] **6.3** Widget test: `upcoming_round_card_test.dart`
-- [x] **6.3** Widget test: `score_entry_screen_test.dart`
-- [x] **6** Measure coverage and reach 95% target (96.5% excluding *.g.dart)
+
+No outstanding tasks.
 
 ---
 
@@ -180,3 +177,34 @@ The app is a Flutter golf league manager. Most features are implemented with fak
 - [x] `flutter test --coverage` — 96.5% line coverage excluding generated (`*.g.dart`) files
 - [x] `flutter analyze` — zero issues
 - [x] `dart format . --set-exit-if-changed` — all formatted
+
+---
+
+## Phase 7: Cleanup
+
+169 tests pass across 44 test files after removing 4 tests for deleted dead code.
+
+### 7.1 Delete empty file
+- [x] **Delete:** `lib/course/infrastructure/course_service.dart` — empty file, never imported
+
+### 7.2 Remove unused constants from theme.dart
+- [x] Remove `clubhouseCream` — defined but never used anywhere
+- [x] Remove `doubleExtraLarge` — defined but never used anywhere
+
+### 7.3 Remove unused `shortDate` extension method
+- [x] **Modify:** `lib/app/core/extensions/date_extensions.dart` — remove the `shortDate` getter
+- [x] **Modify:** `test/app/core/extensions/date_extensions_test.dart` — remove the test case for `shortDate`
+
+### 7.4 Remove unused `copyWithHoleScore` method
+- [x] **Modify:** `lib/round/infrastructure/models/score_model.dart` — remove `copyWithHoleScore` method
+- [x] **Modify:** `test/round/infrastructure/models/score_model_test.dart` — remove the test case for `copyWithHoleScore`
+
+### 7.5 Replace `\u2022` bullet separators with icon dots
+- [x] **Modify:** `lib/app/presentation/home_screen.dart` — refactor ListTile subtitle to a Row with a small dot icon separator
+- [x] **Modify:** `lib/league/presentation/components/upcoming_round_card.dart` — same pattern
+- [x] **Modify:** `lib/round/presentation/components/round_list_tile.dart` — same pattern
+
+### Phase 7 verification
+- [x] `flutter analyze` — zero issues
+- [x] `dart format . --set-exit-if-changed` — all formatted
+- [x] `flutter test` — all 169 tests pass

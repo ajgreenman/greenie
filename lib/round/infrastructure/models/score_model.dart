@@ -8,11 +8,4 @@ class ScoreModel {
 
   int get totalStrokes =>
       holeScores.values.fold(0, (total, strokes) => total + strokes);
-
-  ScoreModel copyWithHoleScore(int holeNumber, int strokes) {
-    return ScoreModel(
-      memberId: memberId,
-      holeScores: {...holeScores, holeNumber: strokes},
-    );
-  }
 }
