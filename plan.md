@@ -6,7 +6,14 @@ The app is a Flutter golf league manager. Most features are implemented with fak
 
 ## Remaining work
 
-No outstanding tasks.
+See `specs/stats-tab-plan.md` for detailed implementation plan.
+
+### Phase 8: Bottom Navigation + Stats Tab
+- [ ] 8.1 Bottom navigation shell — `StatefulShellRoute` with League/Stats branches
+- [ ] 8.2 Stats screen — personal stats, recent rounds, league stats placeholder
+- [ ] 8.3 Settings screen + theme provider — theme toggle (light/dark/system)
+- [ ] 8.4 Update quick links + polish — wire Standings tile, remove dead handlers
+- [ ] 8.5 Tests — stats screen, stat card, settings screen, theme provider, routing updates
 
 ---
 
