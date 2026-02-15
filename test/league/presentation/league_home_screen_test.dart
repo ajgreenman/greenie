@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:greenie/app/core/enums/day_of_the_week.dart';
-import 'package:greenie/app/core/theme.dart';
+import 'package:greenie/app/core/theme/theme.dart';
 import 'package:greenie/course/course_providers.dart';
 import 'package:greenie/course/infrastructure/models/course.dart';
 import 'package:greenie/course/infrastructure/models/hole.dart';
@@ -62,7 +62,7 @@ void main() {
             currentUserProvider.overrideWith((ref) async => _testUser),
           ],
           child: MaterialApp(
-            theme: buildLightTheme(),
+            theme: GreenieTheme.light,
             home: const LeagueHomeScreen(leagueId: 'league-1'),
           ),
         ),
@@ -85,7 +85,7 @@ void main() {
             currentUserProvider.overrideWith((ref) async => _testUser),
           ],
           child: MaterialApp(
-            theme: buildLightTheme(),
+            theme: GreenieTheme.light,
             home: const LeagueHomeScreen(leagueId: 'league-1'),
           ),
         ),
@@ -111,7 +111,7 @@ void main() {
             ).overrideWith((ref) async => _testCourse),
           ],
           child: MaterialApp(
-            theme: buildLightTheme(),
+            theme: GreenieTheme.light,
             home: const LeagueHomeScreen(leagueId: 'league-1'),
           ),
         ),
@@ -133,7 +133,7 @@ void main() {
             currentUserProvider.overrideWith((ref) async => _testUser),
           ],
           child: MaterialApp(
-            theme: buildLightTheme(),
+            theme: GreenieTheme.light,
             home: const LeagueHomeScreen(leagueId: 'league-1'),
           ),
         ),
@@ -147,7 +147,7 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           child: MaterialApp(
-            theme: buildLightTheme(),
+            theme: GreenieTheme.light,
             home: const LeagueHomeScreen(leagueId: 'league-1'),
           ),
         ),
@@ -165,7 +165,7 @@ void main() {
             currentUserProvider.overrideWith((ref) async => _testUser),
           ],
           child: MaterialApp(
-            theme: buildLightTheme(),
+            theme: GreenieTheme.light,
             home: const LeagueHomeScreen(leagueId: 'league-1'),
           ),
         ),
@@ -187,7 +187,7 @@ void main() {
             currentUserProvider.overrideWith((ref) async => _testUser),
           ],
           child: MaterialApp(
-            theme: buildLightTheme(),
+            theme: GreenieTheme.light,
             home: const LeagueHomeScreen(leagueId: 'league-1'),
           ),
         ),
@@ -215,7 +215,7 @@ void main() {
             currentUserProvider.overrideWith((ref) async => nonAdmin),
           ],
           child: MaterialApp(
-            theme: buildLightTheme(),
+            theme: GreenieTheme.light,
             home: const LeagueHomeScreen(leagueId: 'league-1'),
           ),
         ),

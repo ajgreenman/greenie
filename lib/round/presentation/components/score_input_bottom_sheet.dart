@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:greenie/app/core/theme.dart';
+import 'package:greenie/app/core/theme/sizes.dart';
 
 class ScoreInputBottomSheet extends StatelessWidget {
   const ScoreInputBottomSheet({
@@ -17,20 +17,20 @@ class ScoreInputBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Padding(
-      padding: const EdgeInsets.all(large),
+      padding: const EdgeInsets.all(GreenieSizes.large),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom: medium),
+            padding: const EdgeInsets.only(bottom: GreenieSizes.medium),
             child: Text('Hole $holeNumber', style: theme.textTheme.titleMedium),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: large),
+            padding: const EdgeInsets.only(bottom: GreenieSizes.large),
             child: Wrap(
-              spacing: small,
-              runSpacing: small,
+              spacing: GreenieSizes.small,
+              runSpacing: GreenieSizes.small,
               children: List.generate(10, (i) {
                 final score = i + 1;
                 final isSelected = currentScore == score;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:greenie/app/core/theme.dart';
+import 'package:greenie/app/core/theme/theme.dart';
 import 'package:greenie/course/infrastructure/models/course.dart';
 import 'package:greenie/course/infrastructure/models/hole.dart';
 import 'package:greenie/course/presentation/components/scorecard.dart';
@@ -41,7 +41,7 @@ final _testCompletedRound = RoundModel(
 Widget _buildTestApp(Widget child) {
   return ProviderScope(
     child: MaterialApp(
-      theme: buildLightTheme(),
+      theme: GreenieTheme.light,
       home: Scaffold(body: child),
     ),
   );

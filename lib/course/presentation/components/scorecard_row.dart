@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:greenie/app/core/theme.dart';
+import 'package:greenie/app/core/theme/sizes.dart';
 
 class ScorecardRow extends StatelessWidget {
   const ScorecardRow({
@@ -21,7 +21,9 @@ class ScorecardRow extends StatelessWidget {
         SizedBox(
           width: 80,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: extraSmall),
+            padding: const EdgeInsets.symmetric(
+              horizontal: GreenieSizes.extraSmall,
+            ),
             child: Text(
               label,
               style: theme.textTheme.labelSmall,

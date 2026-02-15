@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:greenie/app/core/theme.dart';
+import 'package:greenie/app/core/theme/sizes.dart';
 
 class SectionHeader extends StatelessWidget {
   const SectionHeader({super.key, required this.title, this.trailing});
@@ -10,7 +10,10 @@ class SectionHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: large, vertical: small),
+      padding: const EdgeInsets.symmetric(
+        horizontal: GreenieSizes.large,
+        vertical: GreenieSizes.small,
+      ),
       child: Row(
         children: [
           Text(

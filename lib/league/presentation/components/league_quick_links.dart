@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:greenie/app/core/theme.dart';
+import 'package:greenie/app/core/theme/sizes.dart';
 
 class LeagueQuickLinks extends StatelessWidget {
   const LeagueQuickLinks({
@@ -35,12 +35,12 @@ class LeagueQuickLinks extends StatelessWidget {
     ];
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: large),
+      padding: const EdgeInsets.symmetric(horizontal: GreenieSizes.large),
       child: GridView(
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 120,
-          mainAxisSpacing: small,
-          crossAxisSpacing: small,
+          mainAxisSpacing: GreenieSizes.small,
+          crossAxisSpacing: GreenieSizes.small,
         ),
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
@@ -68,10 +68,10 @@ class _QuickLinkTile extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Padding(
-          padding: const EdgeInsets.all(small),
+          padding: const EdgeInsets.all(GreenieSizes.small),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            spacing: extraSmall,
+            spacing: GreenieSizes.extraSmall,
             children: [
               Icon(icon, color: theme.colorScheme.primary),
               Text(label, style: theme.textTheme.labelSmall),

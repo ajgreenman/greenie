@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:greenie/app/core/theme.dart';
+import 'package:greenie/app/core/theme/sizes.dart';
 import 'package:greenie/app/core/extensions/date_extensions.dart';
 import 'package:greenie/course/course_providers.dart';
 import 'package:greenie/round/infrastructure/models/round_model.dart';
@@ -23,7 +23,7 @@ class UpcomingRoundCard extends ConsumerWidget {
     final isInProgress = round.status == RoundStatus.inProgress;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: large),
+      padding: const EdgeInsets.symmetric(horizontal: GreenieSizes.large),
       child: FilledButton(
         onPressed: () => context.go('/league/$leagueId/round/${round.id}'),
         child: Row(

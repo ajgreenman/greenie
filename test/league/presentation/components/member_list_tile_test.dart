@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:greenie/app/core/theme.dart';
+import 'package:greenie/app/core/theme/theme.dart';
 import 'package:greenie/league/presentation/components/member_list_tile.dart';
 import 'package:greenie/user/infrastructure/models/member_model.dart';
 
 Widget _buildTestApp(Widget child) {
   return ProviderScope(
     child: MaterialApp(
-      theme: buildLightTheme(),
+      theme: GreenieTheme.light,
       home: Scaffold(body: child),
     ),
   );

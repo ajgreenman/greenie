@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:greenie/app/core/theme.dart';
+import 'package:greenie/app/core/theme/sizes.dart';
 import 'package:greenie/league/infrastructure/models/league_model.dart';
 
 class LeagueInfoHeader extends StatelessWidget {
@@ -11,10 +11,10 @@ class LeagueInfoHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: large),
+      padding: const EdgeInsets.symmetric(horizontal: GreenieSizes.large),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: extraSmall,
+        spacing: GreenieSizes.extraSmall,
         children: [
           Text(league.name, style: theme.textTheme.headlineMedium),
           Row(
@@ -25,7 +25,7 @@ class LeagueInfoHeader extends StatelessWidget {
                 color: theme.colorScheme.outline,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: extraSmall),
+                padding: const EdgeInsets.only(left: GreenieSizes.extraSmall),
                 child: Text(
                   league.course.name,
                   style: theme.textTheme.bodyMedium?.copyWith(
@@ -34,7 +34,7 @@ class LeagueInfoHeader extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: medium),
+                padding: const EdgeInsets.only(left: GreenieSizes.medium),
                 child: Icon(
                   Icons.calendar_today,
                   size: 16,
@@ -42,7 +42,7 @@ class LeagueInfoHeader extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: extraSmall),
+                padding: const EdgeInsets.only(left: GreenieSizes.extraSmall),
                 child: Text(
                   '${league.day.displayName}s',
                   style: theme.textTheme.bodyMedium?.copyWith(

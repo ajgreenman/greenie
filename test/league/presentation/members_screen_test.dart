@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:greenie/app/core/theme.dart';
+import 'package:greenie/app/core/theme/theme.dart';
 import 'package:greenie/league/presentation/members_screen.dart';
 import 'package:greenie/user/infrastructure/models/member_model.dart';
 import 'package:greenie/user/user_providers.dart';
@@ -22,7 +22,7 @@ void main() {
             ).overrideWith((ref) async => _testMembers),
           ],
           child: MaterialApp(
-            theme: buildLightTheme(),
+            theme: GreenieTheme.light,
             home: const MembersScreen(leagueId: 'league-1'),
           ),
         ),
@@ -41,7 +41,7 @@ void main() {
             fetchMembersProvider('league-1').overrideWith((ref) async => []),
           ],
           child: MaterialApp(
-            theme: buildLightTheme(),
+            theme: GreenieTheme.light,
             home: const MembersScreen(leagueId: 'league-1'),
           ),
         ),
@@ -59,7 +59,7 @@ void main() {
             ).overrideWith((ref) async => _testMembers),
           ],
           child: MaterialApp(
-            theme: buildLightTheme(),
+            theme: GreenieTheme.light,
             home: const MembersScreen(leagueId: 'league-1'),
           ),
         ),

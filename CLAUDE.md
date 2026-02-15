@@ -63,6 +63,6 @@ UI (ConsumerWidget) → fetchX providers → repository providers → FakeReposi
 
 - Generated files use the `part 'filename.g.dart'` pattern — never edit `*.g.dart` files directly
 - Repositories are provided via Riverpod (no separate DI container)
-- Theme uses a green primary color (`0xFF26BD00`) with brand colors and spacing scale defined in `lib/app/core/theme.dart`
+- Theme: `lib/app/core/theme.dart` (GreenieTheme light/dark), `colors.dart` (GreenieColors: brand colors, score palettes), `sizes.dart` (GreenieSizes: spacing scale), `text_styles.dart` (GreenieTextStyles)
 - No need to run `flutter pub get` after installing packages — the IDE does this automatically
 - Ignore generated `*.g.dart` files when measuring test coverage

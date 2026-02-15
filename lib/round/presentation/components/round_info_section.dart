@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:greenie/app/core/theme.dart';
+import 'package:greenie/app/core/theme/sizes.dart';
 import 'package:greenie/app/core/extensions/date_extensions.dart';
 import 'package:greenie/course/course_providers.dart';
 import 'package:greenie/round/infrastructure/models/round_model.dart';
@@ -17,10 +17,10 @@ class RoundInfoSection extends ConsumerWidget {
 
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(large),
+        padding: const EdgeInsets.all(GreenieSizes.large),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: small,
+          spacing: GreenieSizes.small,
           children: [
             Text(switch (courseAsync) {
               AsyncData(:final value) => value?.name ?? 'Unknown Course',
@@ -34,14 +34,14 @@ class RoundInfoSection extends ConsumerWidget {
                   color: theme.colorScheme.outline,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: extraSmall),
+                  padding: const EdgeInsets.only(left: GreenieSizes.extraSmall),
                   child: Text(
                     round.date.displayDate,
                     style: theme.textTheme.bodySmall,
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: large),
+                  padding: const EdgeInsets.only(left: GreenieSizes.large),
                   child: Icon(
                     Icons.flag,
                     size: 16,
@@ -49,7 +49,7 @@ class RoundInfoSection extends ConsumerWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: extraSmall),
+                  padding: const EdgeInsets.only(left: GreenieSizes.extraSmall),
                   child: Text(
                     'Holes ${round.holeNumbers.first}-${round.holeNumbers.last}',
                     style: theme.textTheme.bodySmall,

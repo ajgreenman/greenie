@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:greenie/app/core/theme.dart';
+import 'package:greenie/app/core/theme/sizes.dart';
 import 'package:greenie/round/infrastructure/models/round_model.dart';
 import 'package:greenie/user/user_providers.dart';
 
@@ -24,12 +24,12 @@ class RoundLeaderboard extends ConsumerWidget {
 
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(large),
+        padding: const EdgeInsets.all(GreenieSizes.large),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: small),
+              padding: const EdgeInsets.only(bottom: GreenieSizes.small),
               child: Text('Leaderboard', style: theme.textTheme.titleSmall),
             ),
             ...sorted.asMap().entries.map((entry) {
@@ -46,9 +46,11 @@ class RoundLeaderboard extends ConsumerWidget {
                 children: [
                   if (rank > 1) const Divider(height: 1),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: small),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: GreenieSizes.small,
+                    ),
                     child: Row(
-                      spacing: small,
+                      spacing: GreenieSizes.small,
                       children: [
                         SizedBox(
                           width: 28,

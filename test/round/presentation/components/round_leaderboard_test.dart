@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:greenie/app/core/theme.dart';
+import 'package:greenie/app/core/theme/theme.dart';
 import 'package:greenie/round/infrastructure/models/round_model.dart';
 import 'package:greenie/round/infrastructure/models/round_status.dart';
 import 'package:greenie/round/infrastructure/models/score_model.dart';
@@ -38,7 +38,7 @@ void main() {
             ).overrideWith((ref) async => _testMembers),
           ],
           child: MaterialApp(
-            theme: buildLightTheme(),
+            theme: GreenieTheme.light,
             home: Scaffold(
               body: RoundLeaderboard(
                 round: _testCompletedRound,

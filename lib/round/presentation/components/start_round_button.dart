@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:greenie/app/core/theme.dart';
+import 'package:greenie/app/core/theme/sizes.dart';
 
 class StartRoundButton extends StatelessWidget {
   const StartRoundButton({
@@ -17,7 +17,7 @@ class StartRoundButton extends StatelessWidget {
       onPressed: onPressed,
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        spacing: extraSmall,
+        spacing: GreenieSizes.extraSmall,
         children: [Text(label), const Icon(Icons.chevron_right)],
       ),
     );

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:greenie/app/core/enums/day_of_the_week.dart';
-import 'package:greenie/app/core/theme.dart';
+import 'package:greenie/app/core/theme/theme.dart';
 import 'package:greenie/app/presentation/home_screen.dart';
 import 'package:greenie/course/infrastructure/models/course.dart';
 import 'package:greenie/course/infrastructure/models/hole.dart';
@@ -26,7 +26,7 @@ final _testLeague = LeagueModel(
 
 Widget _buildTestApp(Widget child) {
   return ProviderScope(
-    child: MaterialApp(theme: buildLightTheme(), home: child),
+    child: MaterialApp(theme: GreenieTheme.light, home: child),
   );
 }
 
@@ -44,7 +44,7 @@ void main() {
             fetchLeaguesProvider.overrideWith((ref) async => [_testLeague]),
           ],
           child: MaterialApp(
-            theme: buildLightTheme(),
+            theme: GreenieTheme.light,
             home: const HomeScreen(),
           ),
         ),
@@ -59,7 +59,7 @@ void main() {
         ProviderScope(
           overrides: [fetchLeaguesProvider.overrideWith((ref) async => [])],
           child: MaterialApp(
-            theme: buildLightTheme(),
+            theme: GreenieTheme.light,
             home: const HomeScreen(),
           ),
         ),
@@ -75,7 +75,7 @@ void main() {
             fetchLeaguesProvider.overrideWith((ref) => throw Exception('fail')),
           ],
           child: MaterialApp(
-            theme: buildLightTheme(),
+            theme: GreenieTheme.light,
             home: const HomeScreen(),
           ),
         ),

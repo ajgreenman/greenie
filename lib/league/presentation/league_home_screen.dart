@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:greenie/app/core/theme.dart';
+import 'package:greenie/app/core/theme/sizes.dart';
+import 'package:greenie/app/core/theme/theme.dart';
 import 'package:greenie/league/league_providers.dart';
 import 'package:greenie/league/presentation/components/league_info_header.dart';
 import 'package:greenie/league/presentation/components/league_quick_links.dart';
@@ -29,10 +30,10 @@ class LeagueHomeScreen extends ConsumerWidget {
       ),
       body: switch (leagueAsync) {
         AsyncData(:final value) when value != null => SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(vertical: large),
+          padding: const EdgeInsets.symmetric(vertical: GreenieSizes.large),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: large,
+            spacing: GreenieSizes.large,
             children: [
               LeagueInfoHeader(league: value),
               if (roundsAsync case AsyncData(:final value))

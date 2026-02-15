@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:greenie/app/core/extensions/date_extensions.dart';
-import 'package:greenie/app/core/theme.dart';
+import 'package:greenie/app/core/theme/sizes.dart';
 import 'package:greenie/app/presentation/components/info_card.dart';
 import 'package:greenie/course/course_providers.dart';
 import 'package:greenie/round/infrastructure/models/round_model.dart';
@@ -85,8 +85,8 @@ class _StatusChip extends StatelessWidget {
     };
     return Container(
       padding: const EdgeInsets.symmetric(
-        horizontal: small,
-        vertical: extraSmall,
+        horizontal: GreenieSizes.small,
+        vertical: GreenieSizes.extraSmall,
       ),
       decoration: BoxDecoration(
         color: bgColor,
