@@ -47,8 +47,13 @@ class UpcomingRoundCard extends ConsumerWidget {
                         style: const TextStyle(fontSize: 13),
                       ),
                       const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 6),
-                        child: Icon(Icons.circle, size: 4),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: GreenieSizes.extraSmall,
+                        ),
+                        child: Icon(
+                          Icons.circle,
+                          size: GreenieSizes.extraSmall,
+                        ),
                       ),
                       Text(switch (courseAsync) {
                         AsyncData(:final value) => value?.name ?? 'Unknown',

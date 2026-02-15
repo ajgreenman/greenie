@@ -15,10 +15,10 @@ void main() {
     testWidgets('displays icon and message', (tester) async {
       await tester.pumpWidget(
         _buildTestApp(
-          const EmptyState(icon: Icons.sports_golf, message: 'Nothing here'),
+          const EmptyState(icon: Icons.info, message: 'Nothing here'),
         ),
       );
-      expect(find.byIcon(Icons.sports_golf), findsOneWidget);
+      expect(find.byIcon(Icons.info), findsOneWidget);
       expect(find.text('Nothing here'), findsOneWidget);
     });
   });

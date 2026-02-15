@@ -16,18 +16,16 @@ void main() {
 
     test('fetchLeague returns existing league by id', () async {
       final league = await repo.fetchLeague('league-1');
-      expect(league, isNotNull);
-      expect(league!.name, 'Wednesday Amateur Players (WAP)');
+      expect(league.name, 'Wednesday Amateur Players (WAP)');
     });
 
-    test('fetchLeague returns null for unknown id', () async {
-      final league = await repo.fetchLeague('unknown');
-      expect(league, isNull);
+    test('fetchLeague throws for unknown id', () async {
+      expect(() => repo.fetchLeague('unknown'), throwsStateError);
     });
 
     test('league has memberIds and adminId', () async {
       final league = await repo.fetchLeague('league-1');
-      expect(league!.memberIds.isNotEmpty, true);
+      expect(league.memberIds.isNotEmpty, true);
       expect(league.adminId, isNotEmpty);
     });
   });

@@ -30,7 +30,7 @@ class RoundInfoSection extends ConsumerWidget {
               children: [
                 Icon(
                   Icons.calendar_today,
-                  size: 16,
+                  size: GreenieSizes.large,
                   color: theme.colorScheme.outline,
                 ),
                 Padding(
@@ -44,7 +44,7 @@ class RoundInfoSection extends ConsumerWidget {
                   padding: const EdgeInsets.only(left: GreenieSizes.large),
                   child: Icon(
                     Icons.flag,
-                    size: 16,
+                    size: GreenieSizes.large,
                     color: theme.colorScheme.outline,
                   ),
                 ),

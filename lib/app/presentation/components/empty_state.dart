@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenie/app/core/theme/sizes.dart';
 
 class EmptyState extends StatelessWidget {
   const EmptyState({super.key, required this.icon, required this.message});
@@ -13,9 +14,9 @@ class EmptyState extends StatelessWidget {
         padding: const EdgeInsets.all(32),
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          spacing: GreenieSizes.large,
           children: [
             Icon(icon, size: 64, color: Theme.of(context).colorScheme.outline),
-            const SizedBox(height: 16),
             Text(
               message,
               textAlign: TextAlign.center,

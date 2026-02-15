@@ -10,8 +10,8 @@ class FakeLeagueRepository extends LeagueRepository {
   }
 
   @override
-  Future<LeagueModel?> fetchLeague(String id) async {
-    return leagues.where((l) => l.id == id).firstOrNull;
+  Future<LeagueModel> fetchLeague(String id) async {
+    return leagues.where((l) => l.id == id).first;
   }
 
   static final leagues = [

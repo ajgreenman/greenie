@@ -47,7 +47,7 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-      expect(find.text('No members yet.'), findsOneWidget);
+      expect(find.text('No members yet'), findsOneWidget);
     });
 
     testWidgets('shows Members title in app bar', (tester) async {

@@ -33,7 +33,7 @@ void main() {
         ),
       );
       expect(find.text('Admin'), findsOneWidget);
-      expect(find.byIcon(Icons.admin_panel_settings), findsOneWidget);
+      expect(find.byIcon(Icons.settings), findsOneWidget);
     });
 
     testWidgets('hides Admin tile when isAdmin is false', (tester) async {

@@ -11,5 +11,5 @@ LeagueRepository leagueRepository(Ref ref) {
 
 abstract class LeagueRepository {
   Future<List<LeagueModel>> fetchLeagues();
-  Future<LeagueModel?> fetchLeague(String id);
+  Future<LeagueModel> fetchLeague(String id);
 }

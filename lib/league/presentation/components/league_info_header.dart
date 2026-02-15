@@ -21,7 +21,7 @@ class LeagueInfoHeader extends StatelessWidget {
             children: [
               Icon(
                 Icons.golf_course,
-                size: 16,
+                size: GreenieSizes.large,
                 color: theme.colorScheme.outline,
               ),
               Padding(
@@ -37,7 +37,7 @@ class LeagueInfoHeader extends StatelessWidget {
                 padding: const EdgeInsets.only(left: GreenieSizes.medium),
                 child: Icon(
                   Icons.calendar_today,
-                  size: 16,
+                  size: GreenieSizes.large,
                   color: theme.colorScheme.outline,
                 ),
               ),

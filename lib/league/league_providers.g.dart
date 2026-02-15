@@ -56,11 +56,11 @@ const fetchLeagueProvider = FetchLeagueFamily._();
 final class FetchLeagueProvider
     extends
         $FunctionalProvider<
-          AsyncValue<LeagueModel?>,
-          LeagueModel?,
-          FutureOr<LeagueModel?>
+          AsyncValue<LeagueModel>,
+          LeagueModel,
+          FutureOr<LeagueModel>
         >
-    with $FutureModifier<LeagueModel?>, $FutureProvider<LeagueModel?> {
+    with $FutureModifier<LeagueModel>, $FutureProvider<LeagueModel> {
   const FetchLeagueProvider._({
     required FetchLeagueFamily super.from,
     required String super.argument,
@@ -84,12 +84,12 @@ final class FetchLeagueProvider
 
   @$internal
   @override
-  $FutureProviderElement<LeagueModel?> $createElement(
+  $FutureProviderElement<LeagueModel> $createElement(
     $ProviderPointer pointer,
   ) => $FutureProviderElement(pointer);
 
   @override
-  FutureOr<LeagueModel?> create(Ref ref) {
+  FutureOr<LeagueModel> create(Ref ref) {
     final argument = this.argument as String;
     return fetchLeague(ref, argument);
   }
@@ -105,10 +105,10 @@ final class FetchLeagueProvider
   }
 }
 
-String _$fetchLeagueHash() => r'2a0d1a7b5d918c7874008f0f85520a82fdafb2eb';
+String _$fetchLeagueHash() => r'd58f390e4afd24c6d628ce91277ae3812dc42a65';
 
 final class FetchLeagueFamily extends $Family
-    with $FunctionalFamilyOverride<FutureOr<LeagueModel?>, String> {
+    with $FunctionalFamilyOverride<FutureOr<LeagueModel>, String> {
   const FetchLeagueFamily._()
     : super(
         retry: null,

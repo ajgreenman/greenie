@@ -11,13 +11,13 @@ class MembersScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final membersAsync = ref.watch(fetchMembersProvider(leagueId));
+    final membersState = ref.watch(fetchMembersProvider(leagueId));
     return Scaffold(
       appBar: AppBar(title: const Text('Members')),
-      body: switch (membersAsync) {
+      body: switch (membersState) {
         AsyncData(:final value) when value.isEmpty => const EmptyState(
           icon: Icons.people_outline,
-          message: 'No members yet.',
+          message: 'No members yet',
         ),
         AsyncData(:final value) => ListView.builder(
           itemCount: value.length,

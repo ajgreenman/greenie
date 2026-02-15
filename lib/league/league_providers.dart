@@ -11,7 +11,7 @@ Future<List<LeagueModel>> fetchLeagues(Ref ref) {
 }
 
 @riverpod
-Future<LeagueModel?> fetchLeague(Ref ref, String leagueId) {
+Future<LeagueModel> fetchLeague(Ref ref, String leagueId) {
   final leagueRepository = ref.watch(leagueRepositoryProvider);
   return leagueRepository.fetchLeague(leagueId);
 }

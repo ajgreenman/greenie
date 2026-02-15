@@ -18,7 +18,7 @@ void main() {
 
     test('fetchMembersForLeague returns members', () async {
       final members = await repo.fetchMembersForLeague('league-1');
-      expect(members.length, 6);
+      expect(members.length, 14);
     });
 
     test('members have unique IDs', () async {

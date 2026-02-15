@@ -39,10 +39,12 @@ class RoundListTile extends ConsumerWidget {
                       style: theme.textTheme.bodySmall,
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 6),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: GreenieSizes.extraSmall,
+                      ),
                       child: Icon(
                         Icons.circle,
-                        size: 4,
+                        size: GreenieSizes.extraSmall,
                         color: theme.textTheme.bodySmall?.color,
                       ),
                     ),

@@ -2,7 +2,7 @@
 
 ## Context
 
-The app is a Flutter golf league manager. Most features are implemented with fake data: league home, round management, interactive scorecard with golf indicators and skins, score entry, light/dark theming, and 156 passing tests. Built UI-first with fake repositories so screens are functional immediately.
+The app is a Flutter golf league manager. Most features are implemented with fake data: league home, round management, interactive scorecard with golf indicators and skins, score entry, light/dark theming, and 173 passing tests across 44 test files. Built UI-first with fake repositories so screens are functional immediately.
 
 ## Remaining work
 
@@ -29,9 +29,9 @@ See `specs/stats-tab-plan.md` for detailed implementation plan.
 - [x] Add rules: `avoid_print`, `prefer_const_constructors`, `prefer_final_locals`, `require_trailing_commas`, `unawaited_futures`, etc.
 
 ### 1.3 Build theme system (light + dark)
-- [x] **Modify:** `lib/app/core/theme.dart` — contains brand colors (fairwayGreen, teeBoxGreen, clubhouseCream), spacing scale (extraSmall through doubleExtraLarge, multiples of 4), `buildLightTheme()` and `buildDarkTheme()` with rich component themes (AppBarTheme, CardTheme, FilledButtonTheme, BottomSheetTheme, DividerTheme, ListTileTheme), and `GreenieScoreColors` ThemeExtension.
+- [x] **Restructured:** `lib/app/core/theme/` — split into `theme.dart` (`GreenieTheme` with light/dark themes), `colors.dart` (`GreenieColors`: brand colors, score palettes), `sizes.dart` (`GreenieSizes`: spacing scale, multiples of 4), `text_styles.dart` (`GreenieTextStyles`). Score colors moved to `GolfScore` enum in `lib/app/core/enums/golf_score.dart`.
 - [x] **Modify:** `lib/main.dart` — add `theme`, `darkTheme`, `themeMode: ThemeMode.system` to `MaterialApp.router`.
-- [x] Design principles: no separate design constants file; spacing scale lives in theme.dart; no hardcoded widget sizes (use flex layouts, padding, Column/Row spacing); component sizing inlined only where absolutely necessary (e.g. scorecard grid cells).
+- [x] Design principles: no separate design constants file; spacing scale lives in sizes.dart; no hardcoded widget sizes (use flex layouts, padding, Column/Row spacing); component sizing inlined only where absolutely necessary (e.g. scorecard grid cells).
 
 ### 1.4 Create shared widgets
 - [x] `lib/app/presentation/components/section_header.dart` — titled section with optional trailing action
@@ -215,3 +215,39 @@ See `specs/stats-tab-plan.md` for detailed implementation plan.
 - [x] `flutter analyze` — zero issues
 - [x] `dart format . --set-exit-if-changed` — all formatted
 - [x] `flutter test` — all 169 tests pass
+
+---
+
+## Pre-work: Theming Alignment + Icon Fixes
+
+173 tests pass across 44 test files after pre-work cleanup.
+
+### PW.1 Fix icons across the app
+- [x] Replace problematic icons that render as Chinese-looking glyphs on some devices
+- [x] `Icons.emoji_events` → `Icons.flag`, `Icons.sports_golf` → `Icons.flag_outlined`
+- [x] `Icons.leaderboard` → `Icons.bar_chart`, `Icons.admin_panel_settings` → `Icons.settings`
+- [x] Add `uses-material-design: true` to `pubspec.yaml`
+
+### PW.2 Fix hardcoded sizes to use GreenieSizes
+- [x] Dot separator padding/size in `home_screen.dart`, `upcoming_round_card.dart` → `GreenieSizes.extraSmall`
+- [x] `empty_state.dart` — replaced `SizedBox(height: 16)` with `Column(spacing: GreenieSizes.large)`
+- [x] `round_info_section.dart` — icon `size: 16` → `size: GreenieSizes.large`
+
+### PW.3 Fix stale null checks
+- [x] `league_home_screen.dart` — removed `when value != null` guards (fetchLeague is non-nullable)
+- [x] Regenerated provider code via `build_runner`
+- [x] Updated tests to remove unnecessary `!` operators and fix null-return expectations to `throwsStateError`
+
+### PW.4 Fix duplicate member IDs
+- [x] `fake_user_repository.dart` — members 7–14 now have unique IDs (`member-7` through `member-14`)
+
+### PW.5 Update tests
+- [x] `empty_state_test.dart` — use neutral `Icons.info` instead of `Icons.sports_golf`
+- [x] `league_quick_links_test.dart` — `Icons.admin_panel_settings` → `Icons.settings`
+- [x] `fake_user_repository_test.dart` — member count `6` → `14`
+- [x] `members_screen_test.dart` — fixed pre-existing text mismatch (`'No members yet.'` → `'No members yet'`)
+
+### Pre-work verification
+- [x] `flutter analyze` — zero issues
+- [x] `dart format . --set-exit-if-changed` — all formatted
+- [x] `flutter test` — all 173 tests pass

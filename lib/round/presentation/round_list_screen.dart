@@ -16,7 +16,7 @@ class RoundListScreen extends ConsumerWidget {
       appBar: AppBar(title: const Text('Rounds')),
       body: switch (roundsAsync) {
         AsyncData(:final value) when value.isEmpty => const EmptyState(
-          icon: Icons.sports_golf,
+          icon: Icons.flag_outlined,
           message: 'No rounds yet.',
         ),
         AsyncData(:final value) => ListView.builder(
