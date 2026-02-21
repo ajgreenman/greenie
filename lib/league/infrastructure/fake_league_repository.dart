@@ -17,7 +17,7 @@ class FakeLeagueRepository extends LeagueRepository {
   static final leagues = [
     LeagueModel(
       id: 'league-1',
-      name: 'Wednesday Amateur Players (WAP)',
+      name: 'Wednesday Amateur Players',
       course: FakeCourseRepository.courses.first,
       day: DayOfTheWeek.wednesday,
       memberIds: [
@@ -28,6 +28,14 @@ class FakeLeagueRepository extends LeagueRepository {
         'member-5',
         'member-6',
       ],
+      adminId: 'user-1',
+    ),
+    LeagueModel(
+      id: 'league-2',
+      name: 'Faith Reformed Church',
+      course: FakeCourseRepository.courses[1],
+      day: DayOfTheWeek.thursday,
+      memberIds: ['member-1', 'member-2', 'member-3'],
       adminId: 'user-1',
     ),
   ];

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:greenie/app/core/theme/sizes.dart';
 import 'package:greenie/league/league_providers.dart';
 import 'package:greenie/league/presentation/components/league_info_header.dart';
@@ -16,18 +17,19 @@ class LeagueHomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final leagueAsync = ref.watch(fetchLeagueProvider(leagueId));
+    final leagueState = ref.watch(fetchLeagueProvider(leagueId));
     final roundsAsync = ref.watch(fetchRoundsForLeagueProvider(leagueId));
     final userAsync = ref.watch(currentUserProvider);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(switch (leagueAsync) {
-          AsyncData(:final value) => value.name,
-          _ => 'League',
-        }),
+        title: Text(leagueState.hasValue ? leagueState.value!.name : ''),
+        leading: IconButton(
+          onPressed: () => context.go('/'),
+          icon: const Icon(Icons.arrow_back),
+        ),
       ),
-      body: switch (leagueAsync) {
+      body: switch (leagueState) {
         AsyncData(:final value) => SingleChildScrollView(
           padding: const EdgeInsets.symmetric(vertical: GreenieSizes.large),
           child: Column(

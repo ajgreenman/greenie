@@ -13,38 +13,61 @@ class HomeScreen extends ConsumerWidget {
     final leagues = ref.watch(fetchLeaguesProvider);
     return Scaffold(
       appBar: AppBar(title: const Text('Greenie')),
-      body: switch (leagues) {
-        AsyncData(:final value) when value.isEmpty => const EmptyState(
-          icon: Icons.flag_outlined,
-          message: 'No leagues yet.',
-        ),
-        AsyncData(:final value) => ListView.builder(
-          itemCount: value.length,
-          itemBuilder: (context, index) {
-            final league = value[index];
-            return ListTile(
-              leading: const Icon(Icons.flag),
-              title: Text(league.name),
-              subtitle: Row(
-                children: [
-                  Text(league.course.name),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: GreenieSizes.extraSmall,
-                    ),
-                    child: Icon(Icons.circle, size: GreenieSizes.extraSmall),
-                  ),
-                  Text('${league.day.displayName}s'),
-                ],
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(
+              GreenieSizes.large,
+              GreenieSizes.large,
+              GreenieSizes.large,
+              GreenieSizes.small,
+            ),
+            child: Text(
+              'My Leagues',
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+          ),
+          Expanded(
+            child: switch (leagues) {
+              AsyncData(:final value) when value.isEmpty => const EmptyState(
+                icon: Icons.flag_outlined,
+                message: 'No leagues yet.',
               ),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () => context.go('/league/${league.id}'),
-            );
-          },
-        ),
-        AsyncError(:final error) => Center(child: Text('Error: $error')),
-        _ => const Center(child: CircularProgressIndicator()),
-      },
+              AsyncData(:final value) => ListView.separated(
+                itemCount: value.length,
+                separatorBuilder: (context, index) => const Divider(),
+                itemBuilder: (context, index) {
+                  final league = value[index];
+                  return ListTile(
+                    leading: const Icon(Icons.flag),
+                    title: Text(league.name),
+                    subtitle: Row(
+                      children: [
+                        Text(league.course.name),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: GreenieSizes.extraSmall,
+                          ),
+                          child: Icon(
+                            Icons.circle,
+                            size: GreenieSizes.extraSmall,
+                          ),
+                        ),
+                        Text('${league.day.displayName}s'),
+                      ],
+                    ),
+                    trailing: const Icon(Icons.chevron_right),
+                    onTap: () => context.go('/league/${league.id}'),
+                  );
+                },
+              ),
+              AsyncError(:final error) => Center(child: Text('Error: $error')),
+              _ => const Center(child: CircularProgressIndicator()),
+            },
+          ),
+        ],
+      ),
     );
   }
 }

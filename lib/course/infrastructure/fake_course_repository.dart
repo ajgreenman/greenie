@@ -16,7 +16,7 @@ class FakeCourseRepository extends CourseRepository {
   static final courses = [
     CourseModel(
       id: 'course-1',
-      name: 'Crown',
+      name: 'Crown Golf Club',
       holes: [
         HoleModel(number: 1, par: 5),
         HoleModel(number: 2, par: 4),
@@ -40,7 +40,7 @@ class FakeCourseRepository extends CourseRepository {
     ),
     CourseModel(
       id: 'course-2',
-      name: 'Elmbrook',
+      name: 'Elmbrook Golf Course',
       holes: [
         HoleModel(number: 1, par: 4),
         HoleModel(number: 2, par: 3),
@@ -64,7 +64,7 @@ class FakeCourseRepository extends CourseRepository {
     ),
     CourseModel(
       id: 'course-3',
-      name: 'Bahle Farms',
+      name: 'Bahle Farms Golf Course',
       holes: [
         HoleModel(number: 1, par: 4),
         HoleModel(number: 2, par: 5),
