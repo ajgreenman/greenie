@@ -32,7 +32,7 @@ class FakeLeagueRepository extends LeagueRepository {
     ),
     LeagueModel(
       id: 'league-2',
-      name: 'Faith Reformed Church',
+      name: 'Faith Reformed',
       course: FakeCourseRepository.courses[1],
       day: DayOfTheWeek.thursday,
       memberIds: ['member-1', 'member-2', 'member-3'],

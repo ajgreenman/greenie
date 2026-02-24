@@ -6,14 +6,28 @@ The app is a Flutter golf league manager. Most features are implemented with fak
 
 ## Remaining work
 
-See `specs/stats-tab-plan.md` for detailed implementation plan.
+See `specs/stats-tab-plan.md` for Phase 8 detailed plan.
+See `specs/league-scoring-plan.md` for Phase 9 detailed plan.
 
 ### Phase 8: Bottom Navigation + Stats Tab
 - [ ] 8.1 Bottom navigation shell — `StatefulShellRoute` with League/Stats branches
 - [ ] 8.2 Stats screen — personal stats, recent rounds, league stats placeholder
 - [ ] 8.3 Settings screen + theme provider — theme toggle (light/dark/system)
-- [ ] 8.4 Update quick links + polish — wire Standings tile, remove dead handlers
+- [ ] 8.4 Update quick links + polish — remove dead handlers (Standings wired in Phase 9)
 - [ ] 8.5 Tests — stats screen, stat card, settings screen, theme provider, routing updates
+
+### Phase 9: League Scoring
+- [ ] 9.1 New models — `TeamModel`, `MatchupModel`, `MatchupResult` (+ `HoleMatchupResult`, `PointResult`, `MatchupOutcome`), `TeamStanding`
+- [ ] 9.2 Update existing models — add `teams` to `LeagueModel`, `matchups` to `RoundModel`, `memberId` to `UserModel`
+- [ ] 9.3 Calculator — `league_scoring_calculator.dart` with `calculateMatchupResult` and `calculateStandings`
+- [ ] 9.4 Providers — `fetchMatchupResult`, `fetchStandings`; run build_runner
+- [ ] 9.5 Fake data — 7 teams in fake league, matchup schedule across 6 rounds, expanded scores
+- [ ] 9.6 UI: Leaderboard gross/net toggle — `SegmentedButton` on `RoundLeaderboard`
+- [ ] 9.7 UI: `MatchupCard` component + wire into `RoundDetailScreen`
+- [ ] 9.8 UI: `MatchupDetailScreen` — per-hole breakdown table
+- [ ] 9.9 UI: `StandingsScreen` + wire Standings quick link
+- [ ] 9.10 Routing — `/standings` and `/matchup/:matchupId` routes; run build_runner
+- [ ] 9.11 Tests — calculator unit tests, model tests, widget tests (~230+ total)
 
 ---
 
