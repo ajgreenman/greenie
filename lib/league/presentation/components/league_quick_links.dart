@@ -25,7 +25,11 @@ class LeagueQuickLinks extends StatelessWidget {
         label: 'Past Rounds',
         onTap: () => context.go('/league/$leagueId/rounds'),
       ),
-      _QuickLinkTile(icon: Icons.bar_chart, label: 'Standings', onTap: () {}),
+      _QuickLinkTile(
+        icon: Icons.bar_chart,
+        label: 'Standings',
+        onTap: () => context.go('/league/$leagueId/standings'),
+      ),
       if (isAdmin)
         _QuickLinkTile(icon: Icons.settings, label: 'Admin', onTap: () {}),
     ];

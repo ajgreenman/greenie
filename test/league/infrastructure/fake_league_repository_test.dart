@@ -16,7 +16,12 @@ void main() {
 
     test('fetchLeague returns existing league by id', () async {
       final league = await repo.fetchLeague('league-1');
-      expect(league.name, 'Wednesday Amateur Players (WAP)');
+      expect(league.name, 'Wednesday Amateur Players');
+    });
+
+    test('league-1 has 7 teams', () async {
+      final league = await repo.fetchLeague('league-1');
+      expect(league.teams.length, 7);
     });
 
     test('fetchLeague throws for unknown id', () async {

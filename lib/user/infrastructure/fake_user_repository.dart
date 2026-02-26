@@ -10,6 +10,7 @@ class FakeUserRepository extends UserRepository {
       name: 'AJ Greenman',
       email: 'aj@greenie.app',
       isAdmin: true,
+      memberId: 'member-1',
     );
   }
 

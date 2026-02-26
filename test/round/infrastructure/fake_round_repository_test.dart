@@ -32,9 +32,10 @@ void main() {
     });
 
     test('updateScore modifies existing score', () async {
-      await repo.updateScore('round-1', 'member-1', {1: 10});
+      // member-14 plays in round-1 (team-1 vs team-2, team-7 has bye)
+      await repo.updateScore('round-1', 'member-14', {1: 10});
       final round = await repo.fetchRound('round-1');
-      final score = round!.scores.firstWhere((s) => s.memberId == 'member-1');
+      final score = round!.scores.firstWhere((s) => s.memberId == 'member-14');
       expect(score.holeScores[1], 10);
     });
 
@@ -61,6 +62,26 @@ void main() {
       expect(statuses, contains(RoundStatus.completed));
       expect(statuses, contains(RoundStatus.inProgress));
       expect(statuses, contains(RoundStatus.upcoming));
+    });
+
+    test('completed rounds have matchups', () async {
+      final rounds = await repo.fetchRoundsForLeague('league-1');
+      final completed = rounds
+          .where((r) => r.status == RoundStatus.completed)
+          .toList();
+      for (final round in completed) {
+        expect(round.matchups, isNotEmpty);
+      }
+    });
+
+    test('each matchup in completed rounds has 3 matchups', () async {
+      final rounds = await repo.fetchRoundsForLeague('league-1');
+      final completed = rounds
+          .where((r) => r.status == RoundStatus.completed)
+          .toList();
+      for (final round in completed) {
+        expect(round.matchups.length, 3);
+      }
     });
   });
 }

@@ -31,6 +31,7 @@ final _testCompletedRound = RoundModel(
   scores: const [
     ScoreModel(memberId: 'member-1', holeScores: {1: 4, 2: 3, 3: 5}),
   ],
+  matchups: const [],
 );
 
 final _testUpcomingRound = RoundModel(
@@ -41,6 +42,7 @@ final _testUpcomingRound = RoundModel(
   status: RoundStatus.upcoming,
   holeNumbers: const [1, 2, 3],
   scores: const [],
+  matchups: const [],
 );
 
 void main() {

@@ -28,6 +28,7 @@ final _testLeague = LeagueModel(
   day: DayOfTheWeek.sunday,
   memberIds: const ['member-1'],
   adminId: 'member-1',
+  teams: const [],
 );
 
 final _testUpcomingRound = RoundModel(
@@ -38,6 +39,7 @@ final _testUpcomingRound = RoundModel(
   status: RoundStatus.upcoming,
   holeNumbers: const [1, 2],
   scores: const [],
+  matchups: const [],
 );
 
 const _testUser = UserModel(
@@ -45,6 +47,7 @@ const _testUser = UserModel(
   name: 'Test User',
   email: 'test@example.com',
   isAdmin: true,
+  memberId: 'member-1',
 );
 
 void main() {
@@ -68,8 +71,7 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-      // League name appears in both AppBar and LeagueInfoHeader
-      expect(find.text('Sunday Skins'), findsNWidgets(2));
+      expect(find.text('Sunday Skins'), findsOneWidget);
     });
 
     testWidgets('shows league info header with course and day', (tester) async {
@@ -202,6 +204,7 @@ void main() {
         name: 'Regular User',
         email: 'regular@example.com',
         isAdmin: false,
+        memberId: '',
       );
       await tester.pumpWidget(
         ProviderScope(

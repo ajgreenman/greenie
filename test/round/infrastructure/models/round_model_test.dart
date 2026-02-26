@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:greenie/round/infrastructure/models/matchup_model.dart';
 import 'package:greenie/round/infrastructure/models/round_model.dart';
 import 'package:greenie/round/infrastructure/models/round_status.dart';
 import 'package:greenie/round/infrastructure/models/score_model.dart';
@@ -15,6 +16,7 @@ void main() {
       scores: [
         const ScoreModel(memberId: 'm1', holeScores: {1: 4, 2: 3, 3: 5}),
       ],
+      matchups: const [],
     );
 
     test('stores all fields', () {
@@ -48,6 +50,21 @@ void main() {
       expect(updated.id, round.id);
       expect(updated.status, round.status);
       expect(updated.scores, round.scores);
+      expect(updated.matchups, round.matchups);
+    });
+
+    test('copyWith replaces matchups', () {
+      final newMatchups = [
+        const MatchupModel(
+          id: 'm1',
+          roundId: 'r1',
+          team1Id: 'team-1',
+          team2Id: 'team-2',
+        ),
+      ];
+      final updated = round.copyWith(matchups: newMatchups);
+      expect(updated.matchups, newMatchups);
+      expect(updated.status, round.status);
     });
   });
 }

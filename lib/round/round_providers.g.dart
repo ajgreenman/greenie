@@ -159,3 +159,79 @@ final class FetchRoundFamily extends $Family
   @override
   String toString() => r'fetchRoundProvider';
 }
+
+@ProviderFor(fetchMatchupResult)
+const fetchMatchupResultProvider = FetchMatchupResultFamily._();
+
+final class FetchMatchupResultProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<MatchupResult>,
+          MatchupResult,
+          FutureOr<MatchupResult>
+        >
+    with $FutureModifier<MatchupResult>, $FutureProvider<MatchupResult> {
+  const FetchMatchupResultProvider._({
+    required FetchMatchupResultFamily super.from,
+    required (String, String) super.argument,
+  }) : super(
+         retry: null,
+         name: r'fetchMatchupResultProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$fetchMatchupResultHash();
+
+  @override
+  String toString() {
+    return r'fetchMatchupResultProvider'
+        ''
+        '$argument';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<MatchupResult> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<MatchupResult> create(Ref ref) {
+    final argument = this.argument as (String, String);
+    return fetchMatchupResult(ref, argument.$1, argument.$2);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is FetchMatchupResultProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$fetchMatchupResultHash() =>
+    r'9cbc4b51ecb84c895cfa34f5e43a7a598a0cabb2';
+
+final class FetchMatchupResultFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<MatchupResult>, (String, String)> {
+  const FetchMatchupResultFamily._()
+    : super(
+        retry: null,
+        name: r'fetchMatchupResultProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  FetchMatchupResultProvider call(String roundId, String matchupId) =>
+      FetchMatchupResultProvider._(argument: (roundId, matchupId), from: this);
+
+  @override
+  String toString() => r'fetchMatchupResultProvider';
+}

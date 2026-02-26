@@ -1,3 +1,4 @@
+import 'package:greenie/round/infrastructure/models/matchup_model.dart';
 import 'package:greenie/round/infrastructure/models/round_status.dart';
 import 'package:greenie/round/infrastructure/models/score_model.dart';
 
@@ -10,6 +11,7 @@ class RoundModel {
     required this.status,
     required this.holeNumbers,
     required this.scores,
+    required this.matchups,
   });
 
   final String id;
@@ -22,8 +24,13 @@ class RoundModel {
   final List<int> holeNumbers;
 
   final List<ScoreModel> scores;
+  final List<MatchupModel> matchups;
 
-  RoundModel copyWith({RoundStatus? status, List<ScoreModel>? scores}) {
+  RoundModel copyWith({
+    RoundStatus? status,
+    List<ScoreModel>? scores,
+    List<MatchupModel>? matchups,
+  }) {
     return RoundModel(
       id: id,
       leagueId: leagueId,
@@ -32,6 +39,7 @@ class RoundModel {
       status: status ?? this.status,
       holeNumbers: holeNumbers,
       scores: scores ?? this.scores,
+      matchups: matchups ?? this.matchups,
     );
   }
 }

@@ -17,17 +17,17 @@ See `specs/league-scoring-plan.md` for Phase 9 detailed plan.
 - [ ] 8.5 Tests — stats screen, stat card, settings screen, theme provider, routing updates
 
 ### Phase 9: League Scoring
-- [ ] 9.1 New models — `TeamModel`, `MatchupModel`, `MatchupResult` (+ `HoleMatchupResult`, `PointResult`, `MatchupOutcome`), `TeamStanding`
-- [ ] 9.2 Update existing models — add `teams` to `LeagueModel`, `matchups` to `RoundModel`, `memberId` to `UserModel`
-- [ ] 9.3 Calculator — `league_scoring_calculator.dart` with `calculateMatchupResult` and `calculateStandings`
-- [ ] 9.4 Providers — `fetchMatchupResult`, `fetchStandings`; run build_runner
-- [ ] 9.5 Fake data — 7 teams in fake league, matchup schedule across 6 rounds, expanded scores
-- [ ] 9.6 UI: Leaderboard gross/net toggle — `SegmentedButton` on `RoundLeaderboard`
-- [ ] 9.7 UI: `MatchupCard` component + wire into `RoundDetailScreen`
-- [ ] 9.8 UI: `MatchupDetailScreen` — per-hole breakdown table
-- [ ] 9.9 UI: `StandingsScreen` + wire Standings quick link
-- [ ] 9.10 Routing — `/standings` and `/matchup/:matchupId` routes; run build_runner
-- [ ] 9.11 Tests — calculator unit tests, model tests, widget tests (~230+ total)
+- [x] 9.1 New models — `TeamModel`, `MatchupModel`, `MatchupResult` (+ `HoleMatchupResult`, `PointResult`, `MatchupOutcome`), `TeamStanding`
+- [x] 9.2 Update existing models — add `teams` to `LeagueModel`, `matchups` to `RoundModel`, `memberId` to `UserModel`
+- [x] 9.3 Calculator — `league_scoring_calculator.dart` with `calculateMatchupResult` and `calculateStandings`
+- [x] 9.4 Providers — `fetchMatchupResult`, `fetchStandings`; run build_runner
+- [x] 9.5 Fake data — 7 teams in fake league, matchup schedule across 6 rounds, expanded scores
+- [x] 9.6 UI: Leaderboard gross/net toggle — `SegmentedButton` on `RoundLeaderboard`
+- [x] 9.7 UI: `MatchupCard` component + wire into `RoundDetailScreen`
+- [x] 9.8 UI: `MatchupDetailScreen` — per-hole breakdown table
+- [x] 9.9 UI: `StandingsScreen` + wire Standings quick link
+- [x] 9.10 Routing — `/standings` and `/matchup/:matchupId` routes; run build_runner
+- [x] 9.11 Tests — calculator unit tests, model tests, widget tests (~230+ total)
 
 ---
 

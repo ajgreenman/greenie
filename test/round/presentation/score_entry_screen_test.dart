@@ -39,6 +39,7 @@ final _testRound = RoundModel(
     ScoreModel(memberId: 'member-1', holeScores: {1: 4, 2: 3}),
     ScoreModel(memberId: 'member-2', holeScores: {1: 5}),
   ],
+  matchups: const [],
 );
 
 void main() {

@@ -16,6 +16,11 @@ void main() {
       expect(user.email, isNotEmpty);
     });
 
+    test('getCurrentUser has memberId member-1', () async {
+      final user = await repo.getCurrentUser();
+      expect(user.memberId, 'member-1');
+    });
+
     test('fetchMembersForLeague returns members', () async {
       final members = await repo.fetchMembersForLeague('league-1');
       expect(members.length, 14);

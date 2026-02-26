@@ -22,6 +22,7 @@ final _testLeague = LeagueModel(
   day: DayOfTheWeek.wednesday,
   memberIds: const ['member-1'],
   adminId: 'member-1',
+  teams: const [],
 );
 
 Widget _buildTestApp(Widget child) {

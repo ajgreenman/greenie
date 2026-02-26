@@ -14,6 +14,7 @@ void main() {
         day: DayOfTheWeek.monday,
         memberIds: ['m1', 'm2'],
         adminId: 'u1',
+        teams: [],
       );
       expect(league.id, 'l1');
       expect(league.name, 'Test League');
@@ -21,6 +22,7 @@ void main() {
       expect(league.day, DayOfTheWeek.monday);
       expect(league.memberIds, ['m1', 'm2']);
       expect(league.adminId, 'u1');
+      expect(league.teams, isEmpty);
     });
   });
 }

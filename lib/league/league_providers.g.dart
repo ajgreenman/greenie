@@ -124,3 +124,80 @@ final class FetchLeagueFamily extends $Family
   @override
   String toString() => r'fetchLeagueProvider';
 }
+
+@ProviderFor(fetchStandings)
+const fetchStandingsProvider = FetchStandingsFamily._();
+
+final class FetchStandingsProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<TeamStanding>>,
+          List<TeamStanding>,
+          FutureOr<List<TeamStanding>>
+        >
+    with
+        $FutureModifier<List<TeamStanding>>,
+        $FutureProvider<List<TeamStanding>> {
+  const FetchStandingsProvider._({
+    required FetchStandingsFamily super.from,
+    required String super.argument,
+  }) : super(
+         retry: null,
+         name: r'fetchStandingsProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$fetchStandingsHash();
+
+  @override
+  String toString() {
+    return r'fetchStandingsProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<List<TeamStanding>> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<List<TeamStanding>> create(Ref ref) {
+    final argument = this.argument as String;
+    return fetchStandings(ref, argument);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is FetchStandingsProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$fetchStandingsHash() => r'25cc3994be349d050ea820325408ba45088575bb';
+
+final class FetchStandingsFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<List<TeamStanding>>, String> {
+  const FetchStandingsFamily._()
+    : super(
+        retry: null,
+        name: r'fetchStandingsProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  FetchStandingsProvider call(String leagueId) =>
+      FetchStandingsProvider._(argument: leagueId, from: this);
+
+  @override
+  String toString() => r'fetchStandingsProvider';
+}

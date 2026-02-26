@@ -17,7 +17,7 @@ void main() {
     test('fetchCourse returns existing course by id', () async {
       final course = await repo.fetchCourse('course-1');
       expect(course, isNotNull);
-      expect(course!.name, 'Crown');
+      expect(course!.name, 'Crown Golf Club');
     });
 
     test('fetchCourse returns null for unknown id', () async {

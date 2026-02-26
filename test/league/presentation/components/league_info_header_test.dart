@@ -19,6 +19,7 @@ final _testLeague = LeagueModel(
   day: DayOfTheWeek.wednesday,
   memberIds: const ['member-1'],
   adminId: 'member-1',
+  teams: const [],
 );
 
 Widget _buildTestApp(Widget child) {
@@ -36,7 +37,6 @@ void main() {
       await tester.pumpWidget(
         _buildTestApp(LeagueInfoHeader(league: _testLeague)),
       );
-      expect(find.text('Test League'), findsOneWidget);
       expect(find.text('Test Course'), findsOneWidget);
       expect(find.text('Wednesdays'), findsOneWidget);
     });

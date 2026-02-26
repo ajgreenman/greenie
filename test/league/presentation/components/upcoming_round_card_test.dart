@@ -23,6 +23,7 @@ final _testUpcomingRound = RoundModel(
   status: RoundStatus.upcoming,
   holeNumbers: const [1],
   scores: const [],
+  matchups: const [],
 );
 
 final _testInProgressRound = RoundModel(
@@ -33,6 +34,7 @@ final _testInProgressRound = RoundModel(
   status: RoundStatus.inProgress,
   holeNumbers: const [1],
   scores: const [],
+  matchups: const [],
 );
 
 void main() {
