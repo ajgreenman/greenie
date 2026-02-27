@@ -10,11 +10,11 @@ See `specs/stats-tab-plan.md` for Phase 8 detailed plan.
 See `specs/league-scoring-plan.md` for Phase 9 detailed plan.
 
 ### Phase 8: Bottom Navigation + Stats Tab
-- [ ] 8.1 Bottom navigation shell — `StatefulShellRoute` with League/Stats branches
-- [ ] 8.2 Stats screen — personal stats, recent rounds, league stats placeholder
-- [ ] 8.3 Settings screen + theme provider — theme toggle (light/dark/system)
-- [ ] 8.4 Update quick links + polish — remove dead handlers (Standings wired in Phase 9)
-- [ ] 8.5 Tests — stats screen, stat card, settings screen, theme provider, routing updates
+- [x] 8.1 Bottom navigation shell — `StatefulShellRoute` with League/Stats branches
+- [x] 8.2 Stats screen — personal stats, recent rounds, league stats placeholder
+- [x] 8.3 Settings screen + theme provider — theme toggle (light/dark/system)
+- [x] 8.4 Update quick links + polish — remove dead handlers (Standings wired in Phase 9)
+- [x] 8.5 Tests — stats screen, stat card, settings screen, theme provider, routing updates
 
 ### Phase 9: League Scoring
 - [x] 9.1 New models — `TeamModel`, `MatchupModel`, `MatchupResult` (+ `HoleMatchupResult`, `PointResult`, `MatchupOutcome`), `TeamStanding`

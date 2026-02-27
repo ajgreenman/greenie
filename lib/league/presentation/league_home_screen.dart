@@ -22,12 +22,36 @@ class LeagueHomeScreen extends ConsumerWidget {
     final userAsync = ref.watch(currentUserProvider);
 
     return Scaffold(
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: 0,
+        onDestinationSelected: (index) {
+          if (index == 1) context.go('/league/$leagueId/stats');
+        },
+        destinations: const [
+          NavigationDestination(
+            icon: Icon(Icons.emoji_events_outlined),
+            selectedIcon: Icon(Icons.emoji_events),
+            label: 'League',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.bar_chart_outlined),
+            selectedIcon: Icon(Icons.bar_chart),
+            label: 'Stats',
+          ),
+        ],
+      ),
       appBar: AppBar(
         title: Text(leagueState.hasValue ? leagueState.value!.name : ''),
         leading: IconButton(
           onPressed: () => context.go('/'),
           icon: const Icon(Icons.arrow_back),
         ),
+        actions: [
+          IconButton(
+            onPressed: () => context.go('/league/$leagueId/settings'),
+            icon: const Icon(Icons.settings),
+          ),
+        ],
       ),
       body: switch (leagueState) {
         AsyncData(:final value) => SingleChildScrollView(

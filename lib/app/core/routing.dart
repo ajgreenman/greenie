@@ -1,8 +1,10 @@
 import 'package:go_router/go_router.dart';
 import 'package:greenie/app/presentation/home_screen.dart';
+import 'package:greenie/app/presentation/settings_screen.dart';
 import 'package:greenie/league/presentation/league_home_screen.dart';
 import 'package:greenie/league/presentation/members_screen.dart';
 import 'package:greenie/league/presentation/standings_screen.dart';
+import 'package:greenie/league/presentation/stats_screen.dart';
 import 'package:greenie/round/presentation/matchup_detail_screen.dart';
 import 'package:greenie/round/presentation/round_detail_screen.dart';
 import 'package:greenie/round/presentation/round_list_screen.dart';
@@ -18,23 +20,36 @@ GoRouter router(Ref ref) {
       GoRoute(path: '/', builder: (context, state) => const HomeScreen()),
       GoRoute(
         path: '/league/:leagueId',
-        builder: (context, state) =>
-            LeagueHomeScreen(leagueId: state.pathParameters['leagueId']!),
+        builder: (context, state) => LeagueHomeScreen(
+          leagueId: state.pathParameters['leagueId']!,
+        ),
         routes: [
           GoRoute(
-            path: 'members',
+            path: 'stats',
             builder: (context, state) =>
-                MembersScreen(leagueId: state.pathParameters['leagueId']!),
+                StatsScreen(leagueId: state.pathParameters['leagueId']!),
+          ),
+          GoRoute(
+            path: 'members',
+            builder: (context, state) => MembersScreen(
+              leagueId: state.pathParameters['leagueId']!,
+            ),
           ),
           GoRoute(
             path: 'rounds',
-            builder: (context, state) =>
-                RoundListScreen(leagueId: state.pathParameters['leagueId']!),
+            builder: (context, state) => RoundListScreen(
+              leagueId: state.pathParameters['leagueId']!,
+            ),
           ),
           GoRoute(
             path: 'standings',
-            builder: (context, state) =>
-                StandingsScreen(leagueId: state.pathParameters['leagueId']!),
+            builder: (context, state) => StandingsScreen(
+              leagueId: state.pathParameters['leagueId']!,
+            ),
+          ),
+          GoRoute(
+            path: 'settings',
+            builder: (context, state) => const SettingsScreen(),
           ),
           GoRoute(
             path: 'round/:roundId',

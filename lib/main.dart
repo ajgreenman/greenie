@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:greenie/app/core/app_providers.dart';
 import 'package:greenie/app/core/routing.dart';
 import 'package:greenie/app/core/theme/theme.dart';
 
@@ -16,7 +17,7 @@ class _App extends ConsumerWidget {
       title: 'Greenie',
       theme: GreenieTheme.light,
       darkTheme: GreenieTheme.dark,
-      themeMode: ThemeMode.system,
+      themeMode: ref.watch(themeModeProvider),
       routerConfig: ref.watch(routerProvider),
     );
   }
