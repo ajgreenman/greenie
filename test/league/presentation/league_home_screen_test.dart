@@ -12,6 +12,7 @@ import 'package:greenie/league/presentation/league_home_screen.dart';
 import 'package:greenie/round/infrastructure/models/round_model.dart';
 import 'package:greenie/round/infrastructure/models/round_status.dart';
 import 'package:greenie/round/round_providers.dart';
+import 'package:greenie/user/infrastructure/models/member_model.dart';
 import 'package:greenie/user/user_model.dart';
 import 'package:greenie/user/user_providers.dart';
 
@@ -50,48 +51,53 @@ const _testUser = UserModel(
   memberId: 'member-1',
 );
 
+const _testMembers = [MemberModel(id: 'member-1', name: 'Test User', handicap: 10)];
+
+/// Builds the screen with sensible defaults. Any of the overrides can be
+/// individually swapped out in specific tests.
+Widget _buildScreen({
+  bool isAdmin = true,
+  List<RoundModel>? rounds,
+  List<MemberModel>? members,
+}) {
+  final user = UserModel(
+    id: 'member-1',
+    name: 'Test User',
+    email: 'test@example.com',
+    isAdmin: isAdmin,
+    memberId: 'member-1',
+  );
+  return ProviderScope(
+    overrides: [
+      fetchLeagueProvider('league-1').overrideWith((ref) async => _testLeague),
+      fetchRoundsForLeagueProvider(
+        'league-1',
+      ).overrideWith((ref) async => rounds ?? []),
+      currentUserProvider.overrideWith((ref) async => user),
+      fetchStandingsProvider(
+        'league-1',
+      ).overrideWith((ref) async => []),
+      fetchMembersProvider(
+        'league-1',
+      ).overrideWith((ref) async => members ?? _testMembers),
+    ],
+    child: MaterialApp(
+      theme: GreenieTheme.light,
+      home: const LeagueHomeScreen(leagueId: 'league-1'),
+    ),
+  );
+}
+
 void main() {
   group('LeagueHomeScreen', () {
     testWidgets('shows league name in app bar', (tester) async {
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [
-            fetchLeagueProvider(
-              'league-1',
-            ).overrideWith((ref) async => _testLeague),
-            fetchRoundsForLeagueProvider(
-              'league-1',
-            ).overrideWith((ref) async => [_testUpcomingRound]),
-            currentUserProvider.overrideWith((ref) async => _testUser),
-          ],
-          child: MaterialApp(
-            theme: GreenieTheme.light,
-            home: const LeagueHomeScreen(leagueId: 'league-1'),
-          ),
-        ),
-      );
+      await tester.pumpWidget(_buildScreen());
       await tester.pumpAndSettle();
       expect(find.text('Sunday Skins'), findsOneWidget);
     });
 
     testWidgets('shows league info header with course and day', (tester) async {
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [
-            fetchLeagueProvider(
-              'league-1',
-            ).overrideWith((ref) async => _testLeague),
-            fetchRoundsForLeagueProvider(
-              'league-1',
-            ).overrideWith((ref) async => [_testUpcomingRound]),
-            currentUserProvider.overrideWith((ref) async => _testUser),
-          ],
-          child: MaterialApp(
-            theme: GreenieTheme.light,
-            home: const LeagueHomeScreen(leagueId: 'league-1'),
-          ),
-        ),
-      );
+      await tester.pumpWidget(_buildScreen());
       await tester.pumpAndSettle();
       expect(find.text('Pine Valley'), findsOneWidget);
       expect(find.text('Sundays'), findsOneWidget);
@@ -108,6 +114,12 @@ void main() {
               'league-1',
             ).overrideWith((ref) async => [_testUpcomingRound]),
             currentUserProvider.overrideWith((ref) async => _testUser),
+            fetchStandingsProvider(
+              'league-1',
+            ).overrideWith((ref) async => []),
+            fetchMembersProvider(
+              'league-1',
+            ).overrideWith((ref) async => []),
             fetchCourseProvider(
               'course-1',
             ).overrideWith((ref) async => _testCourse),
@@ -122,27 +134,10 @@ void main() {
       expect(find.text('Next Round'), findsOneWidget);
     });
 
-    testWidgets('shows quick links', (tester) async {
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [
-            fetchLeagueProvider(
-              'league-1',
-            ).overrideWith((ref) async => _testLeague),
-            fetchRoundsForLeagueProvider(
-              'league-1',
-            ).overrideWith((ref) async => <RoundModel>[]),
-            currentUserProvider.overrideWith((ref) async => _testUser),
-          ],
-          child: MaterialApp(
-            theme: GreenieTheme.light,
-            home: const LeagueHomeScreen(leagueId: 'league-1'),
-          ),
-        ),
-      );
+    testWidgets('shows Members section when members loaded', (tester) async {
+      await tester.pumpWidget(_buildScreen());
       await tester.pumpAndSettle();
       expect(find.text('Members'), findsOneWidget);
-      expect(find.text('Past Rounds'), findsOneWidget);
     });
 
     testWidgets('shows loading indicator initially', (tester) async {
@@ -176,55 +171,26 @@ void main() {
       expect(find.textContaining('Error'), findsOneWidget);
     });
 
-    testWidgets('shows admin quick link for admin user', (tester) async {
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [
-            fetchLeagueProvider(
-              'league-1',
-            ).overrideWith((ref) async => _testLeague),
-            fetchRoundsForLeagueProvider(
-              'league-1',
-            ).overrideWith((ref) async => <RoundModel>[]),
-            currentUserProvider.overrideWith((ref) async => _testUser),
-          ],
-          child: MaterialApp(
-            theme: GreenieTheme.light,
-            home: const LeagueHomeScreen(leagueId: 'league-1'),
-          ),
-        ),
-      );
+    testWidgets('shows Admin option in gear menu for admin user', (
+      tester,
+    ) async {
+      await tester.pumpWidget(_buildScreen(isAdmin: true));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byIcon(Icons.settings));
       await tester.pumpAndSettle();
       expect(find.text('Admin'), findsOneWidget);
+      expect(find.text('Settings'), findsOneWidget);
     });
 
-    testWidgets('hides admin quick link for non-admin user', (tester) async {
-      const nonAdmin = UserModel(
-        id: 'member-2',
-        name: 'Regular User',
-        email: 'regular@example.com',
-        isAdmin: false,
-        memberId: '',
-      );
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [
-            fetchLeagueProvider(
-              'league-1',
-            ).overrideWith((ref) async => _testLeague),
-            fetchRoundsForLeagueProvider(
-              'league-1',
-            ).overrideWith((ref) async => <RoundModel>[]),
-            currentUserProvider.overrideWith((ref) async => nonAdmin),
-          ],
-          child: MaterialApp(
-            theme: GreenieTheme.light,
-            home: const LeagueHomeScreen(leagueId: 'league-1'),
-          ),
-        ),
-      );
+    testWidgets('hides Admin option in gear menu for non-admin user', (
+      tester,
+    ) async {
+      await tester.pumpWidget(_buildScreen(isAdmin: false));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byIcon(Icons.settings));
       await tester.pumpAndSettle();
       expect(find.text('Admin'), findsNothing);
+      expect(find.text('Settings'), findsOneWidget);
     });
   });
 }

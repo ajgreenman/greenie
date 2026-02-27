@@ -2,13 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:greenie/app/core/theme/sizes.dart';
+import 'package:greenie/app/presentation/components/section_header.dart';
 import 'package:greenie/league/league_providers.dart';
 import 'package:greenie/league/presentation/components/league_info_header.dart';
-import 'package:greenie/league/presentation/components/league_quick_links.dart';
+import 'package:greenie/league/presentation/components/members_preview.dart';
+import 'package:greenie/league/presentation/components/rounds_preview.dart';
+import 'package:greenie/league/presentation/components/standings_preview.dart';
 import 'package:greenie/league/presentation/components/upcoming_round_card.dart';
 import 'package:greenie/round/infrastructure/models/round_status.dart';
 import 'package:greenie/round/round_providers.dart';
 import 'package:greenie/user/user_providers.dart';
+
+enum _MenuAction { settings, admin }
 
 class LeagueHomeScreen extends ConsumerWidget {
   const LeagueHomeScreen({super.key, required this.leagueId});
@@ -17,9 +22,20 @@ class LeagueHomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final leagueState = ref.watch(fetchLeagueProvider(leagueId));
+    final leagueAsync = ref.watch(fetchLeagueProvider(leagueId));
     final roundsAsync = ref.watch(fetchRoundsForLeagueProvider(leagueId));
     final userAsync = ref.watch(currentUserProvider);
+    final standingsAsync = ref.watch(fetchStandingsProvider(leagueId));
+    final membersAsync = ref.watch(fetchMembersProvider(leagueId));
+
+    final memberId = switch (userAsync) {
+      AsyncData(value: final u) => u.memberId,
+      _ => '',
+    };
+    final isAdmin = switch (userAsync) {
+      AsyncData(value: final u) => u.isAdmin,
+      _ => false,
+    };
 
     return Scaffold(
       bottomNavigationBar: NavigationBar(
@@ -41,54 +57,91 @@ class LeagueHomeScreen extends ConsumerWidget {
         ],
       ),
       appBar: AppBar(
-        title: Text(leagueState.hasValue ? leagueState.value!.name : ''),
+        title: Text(leagueAsync.hasValue ? leagueAsync.value!.name : ''),
         leading: IconButton(
           onPressed: () => context.go('/'),
           icon: const Icon(Icons.arrow_back),
         ),
         actions: [
-          IconButton(
-            onPressed: () => context.go('/league/$leagueId/settings'),
+          PopupMenuButton<_MenuAction>(
             icon: const Icon(Icons.settings),
+            onSelected: (action) {
+              switch (action) {
+                case _MenuAction.settings:
+                  context.go('/league/$leagueId/settings');
+                case _MenuAction.admin:
+                  break; // placeholder
+              }
+            },
+            itemBuilder: (context) => [
+              const PopupMenuItem(
+                value: _MenuAction.settings,
+                child: Text('Settings'),
+              ),
+              if (isAdmin)
+                const PopupMenuItem(
+                  value: _MenuAction.admin,
+                  child: Text('Admin'),
+                ),
+            ],
           ),
         ],
       ),
-      body: switch (leagueState) {
-        AsyncData(:final value) => SingleChildScrollView(
+      body: switch (leagueAsync) {
+        AsyncData(value: final league) => SingleChildScrollView(
           padding: const EdgeInsets.symmetric(vertical: GreenieSizes.large),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: GreenieSizes.large,
             children: [
-              LeagueInfoHeader(league: value),
-              if (roundsAsync case AsyncData(:final value))
+              LeagueInfoHeader(league: league),
+              if (roundsAsync case AsyncData(value: final rounds))
                 ...() {
-                  final upcoming =
-                      value
-                          .where(
-                            (r) =>
-                                r.status == RoundStatus.upcoming ||
-                                r.status == RoundStatus.inProgress,
-                          )
-                          .toList()
-                        ..sort((a, b) => a.date.compareTo(b.date));
-                  if (upcoming.isNotEmpty) {
-                    return [
-                      UpcomingRoundCard(
-                        round: upcoming.first,
-                        leagueId: leagueId,
-                      ),
-                    ];
-                  }
-                  return <Widget>[];
+                  final upcoming = rounds
+                      .where(
+                        (r) =>
+                            r.status == RoundStatus.upcoming ||
+                            r.status == RoundStatus.inProgress,
+                      )
+                      .toList()
+                    ..sort((a, b) => a.date.compareTo(b.date));
+                  return upcoming.isNotEmpty
+                      ? [UpcomingRoundCard(round: upcoming.first, leagueId: leagueId)]
+                      : <Widget>[];
                 }(),
-              LeagueQuickLinks(
-                leagueId: leagueId,
-                isAdmin: switch (userAsync) {
-                  AsyncData(:final value) => value.isAdmin,
-                  _ => false,
-                },
-              ),
+              if (standingsAsync case AsyncData(value: final standings)
+                  when standings.isNotEmpty) ...[
+                const SectionHeader(title: 'Standings'),
+                StandingsPreview(
+                  standings: standings,
+                  userMemberId: memberId,
+                  league: league,
+                  leagueId: leagueId,
+                ),
+              ],
+              if (roundsAsync case AsyncData(value: final rounds))
+                if (memberId.isNotEmpty &&
+                    rounds.any(
+                      (r) =>
+                          r.status == RoundStatus.completed &&
+                          r.scores.any((s) => s.memberId == memberId),
+                    )) ...[
+                  const SectionHeader(title: 'Recent Rounds'),
+                  RoundsPreview(
+                    rounds: rounds,
+                    memberId: memberId,
+                    leagueId: leagueId,
+                  ),
+                ],
+              if (membersAsync case AsyncData(value: final members)
+                  when members.isNotEmpty) ...[
+                const SectionHeader(title: 'Members'),
+                MembersPreview(
+                  members: members,
+                  userMemberId: memberId,
+                  leagueId: leagueId,
+                ),
+              ],
             ],
           ),
         ),
