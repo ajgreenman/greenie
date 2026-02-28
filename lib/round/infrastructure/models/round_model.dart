@@ -12,6 +12,8 @@ class RoundModel {
     required this.holeNumbers,
     required this.scores,
     required this.matchups,
+    this.startTime,
+    this.teamTeeTimes,
   });
 
   final String id;
@@ -26,10 +28,19 @@ class RoundModel {
   final List<ScoreModel> scores;
   final List<MatchupModel> matchups;
 
+  /// Optional tee time for the round (e.g. 5:30 PM on the round's date).
+  final DateTime? startTime;
+
+  /// Per-team tee times keyed by teamId. Teams absent use [startTime].
+  final Map<String, DateTime>? teamTeeTimes;
+
   RoundModel copyWith({
     RoundStatus? status,
     List<ScoreModel>? scores,
     List<MatchupModel>? matchups,
+    List<int>? holeNumbers,
+    DateTime? startTime,
+    Map<String, DateTime>? teamTeeTimes,
   }) {
     return RoundModel(
       id: id,
@@ -37,9 +48,11 @@ class RoundModel {
       courseId: courseId,
       date: date,
       status: status ?? this.status,
-      holeNumbers: holeNumbers,
+      holeNumbers: holeNumbers ?? this.holeNumbers,
       scores: scores ?? this.scores,
       matchups: matchups ?? this.matchups,
+      startTime: startTime ?? this.startTime,
+      teamTeeTimes: teamTeeTimes ?? this.teamTeeTimes,
     );
   }
 }

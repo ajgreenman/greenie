@@ -18,4 +18,10 @@ abstract class RoundRepository {
     Map<int, int> holeScores,
   );
   Future<RoundModel> startRound(String roundId);
+  Future<RoundModel> updateRoundSchedule(
+    String roundId, {
+    List<int>? holeNumbers,
+    DateTime? startTime,
+    Map<String, DateTime>? teamTeeTimes,
+  });
 }

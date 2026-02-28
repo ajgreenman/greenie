@@ -22,7 +22,7 @@ void main() {
         _buildTestApp(const MemberListTile(member: member)),
       );
       expect(find.text('Alice Smith'), findsOneWidget);
-      expect(find.text('HC 10'), findsOneWidget);
+      expect(find.text('10'), findsOneWidget);
     });
 
     testWidgets('shows initials in CircleAvatar', (tester) async {

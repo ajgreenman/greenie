@@ -356,3 +356,35 @@ Modify `lib/league/presentation/components/member_list_tile.dart`:
 
 ### App state after Phase 9
 The league home shows three inline preview tables: Standings (with W-L-T and points), Recent Rounds (dates and scores), and Members (with handicap ranks). Each table windows around the current user with ±1 neighbors. Every row is tappable and navigates to the detail screen for that entity. The Members screen has a sort toggle that switches between alphabetical order and handicap order; in handicap mode the handicap number is displayed large and bold.
+
+---
+
+## Phase 10: Commissioner / Admin Features
+
+### 10.1 Fix per-league admin check
+Modify `lib/league/presentation/league_home_screen.dart` — replace global `isAdmin` derivation with a per-league check: `u.id == league.adminId`. Wire the `_MenuAction.admin` case to `context.go('/league/$leagueId/admin')`.
+
+### 10.2 Extend `RoundModel`
+Modify `lib/round/infrastructure/models/round_model.dart` — add two nullable fields (`startTime: DateTime?`, `teamTeeTimes: Map<String, DateTime>?`) and expand `copyWith` to include `holeNumbers`, `startTime`, and `teamTeeTimes`.
+
+### 10.3 Repository: schedule update method
+Modify `lib/round/infrastructure/round_repository.dart` — add abstract method `updateRoundSchedule(roundId, {holeNumbers, startTime, teamTeeTimes})`.
+Modify `lib/round/infrastructure/fake_round_repository.dart` — implement following the existing `startRound` pattern.
+
+### 10.4 New routes
+Modify `lib/app/core/routing.dart` — add three GoRoutes under `/league/:leagueId`:
+- `admin` → `AdminHubScreen`
+- `admin/schedule/:roundId` → `AdminScheduleScreen`
+- `admin/scorecard/:roundId` → `AdminScorecardScreen`
+
+### 10.5 Admin hub screen
+Create `lib/league/presentation/admin_hub_screen.dart` — `ConsumerWidget` showing all rounds sorted by date descending. Each round card has "Set Schedule" and "Correct Scores" buttons.
+
+### 10.6 Admin schedule screen
+Create `lib/league/presentation/admin_schedule_screen.dart` — `ConsumerStatefulWidget` to set front/back nine and tee times (round-level + per-team) via `showTimePicker`.
+
+### 10.7 Admin scorecard screen
+Create `lib/league/presentation/admin_scorecard_screen.dart` — `ConsumerStatefulWidget` reusing the `Scorecard` + `ScoreInputBottomSheet` pattern with `isEditable: true` for all members. Saves via `updateScore` for each member.
+
+### App state after Phase 10
+Admin users see an "Admin" item in the settings popup. Tapping it opens an admin hub listing all rounds with two actions: Set Schedule (toggle front/back nine and set tee times per team) and Correct Scores (full editable scorecard for all players). Regular users see no admin UI.

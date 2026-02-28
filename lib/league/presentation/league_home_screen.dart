@@ -32,12 +32,44 @@ class LeagueHomeScreen extends ConsumerWidget {
       AsyncData(value: final u) => u.memberId,
       _ => '',
     };
-    final isAdmin = switch (userAsync) {
-      AsyncData(value: final u) => u.isAdmin,
+    final isAdmin = switch ((userAsync, leagueAsync)) {
+      (AsyncData(value: final u), AsyncData(value: final league)) =>
+        u.id == league.adminId,
       _ => false,
     };
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text(leagueAsync.hasValue ? leagueAsync.value!.name : ''),
+        leading: IconButton(
+          onPressed: () => context.go('/'),
+          icon: const Icon(Icons.arrow_back),
+        ),
+        actions: [
+          PopupMenuButton<_MenuAction>(
+            icon: const Icon(Icons.settings),
+            onSelected: (action) {
+              switch (action) {
+                case _MenuAction.settings:
+                  context.go('/league/$leagueId/settings');
+                case _MenuAction.admin:
+                  context.go('/league/$leagueId/admin');
+              }
+            },
+            itemBuilder: (context) => [
+              const PopupMenuItem(
+                value: _MenuAction.settings,
+                child: Text('Settings'),
+              ),
+              if (isAdmin)
+                const PopupMenuItem(
+                  value: _MenuAction.admin,
+                  child: Text('Admin'),
+                ),
+            ],
+          ),
+        ],
+      ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: 0,
         onDestinationSelected: (index) {
@@ -56,37 +88,6 @@ class LeagueHomeScreen extends ConsumerWidget {
           ),
         ],
       ),
-      appBar: AppBar(
-        title: Text(leagueAsync.hasValue ? leagueAsync.value!.name : ''),
-        leading: IconButton(
-          onPressed: () => context.go('/'),
-          icon: const Icon(Icons.arrow_back),
-        ),
-        actions: [
-          PopupMenuButton<_MenuAction>(
-            icon: const Icon(Icons.settings),
-            onSelected: (action) {
-              switch (action) {
-                case _MenuAction.settings:
-                  context.go('/league/$leagueId/settings');
-                case _MenuAction.admin:
-                  break; // placeholder
-              }
-            },
-            itemBuilder: (context) => [
-              const PopupMenuItem(
-                value: _MenuAction.settings,
-                child: Text('Settings'),
-              ),
-              if (isAdmin)
-                const PopupMenuItem(
-                  value: _MenuAction.admin,
-                  child: Text('Admin'),
-                ),
-            ],
-          ),
-        ],
-      ),
       body: switch (leagueAsync) {
         AsyncData(value: final league) => SingleChildScrollView(
           padding: const EdgeInsets.symmetric(vertical: GreenieSizes.large),
@@ -97,20 +98,27 @@ class LeagueHomeScreen extends ConsumerWidget {
               LeagueInfoHeader(league: league),
               if (roundsAsync case AsyncData(value: final rounds))
                 ...() {
-                  final upcoming = rounds
-                      .where(
-                        (r) =>
-                            r.status == RoundStatus.upcoming ||
-                            r.status == RoundStatus.inProgress,
-                      )
-                      .toList()
-                    ..sort((a, b) => a.date.compareTo(b.date));
+                  final upcoming =
+                      rounds
+                          .where(
+                            (r) =>
+                                r.status == RoundStatus.upcoming ||
+                                r.status == RoundStatus.inProgress,
+                          )
+                          .toList()
+                        ..sort((a, b) => a.date.compareTo(b.date));
                   return upcoming.isNotEmpty
-                      ? [UpcomingRoundCard(round: upcoming.first, leagueId: leagueId)]
+                      ? [
+                          UpcomingRoundCard(
+                            round: upcoming.first,
+                            leagueId: leagueId,
+                          ),
+                        ]
                       : <Widget>[];
                 }(),
-              if (standingsAsync case AsyncData(value: final standings)
-                  when standings.isNotEmpty) ...[
+              if (standingsAsync case AsyncData(
+                value: final standings,
+              ) when standings.isNotEmpty) ...[
                 const SectionHeader(title: 'Standings'),
                 StandingsPreview(
                   standings: standings,
@@ -133,8 +141,9 @@ class LeagueHomeScreen extends ConsumerWidget {
                     leagueId: leagueId,
                   ),
                 ],
-              if (membersAsync case AsyncData(value: final members)
-                  when members.isNotEmpty) ...[
+              if (membersAsync case AsyncData(
+                value: final members,
+              ) when members.isNotEmpty) ...[
                 const SectionHeader(title: 'Members'),
                 MembersPreview(
                   members: members,

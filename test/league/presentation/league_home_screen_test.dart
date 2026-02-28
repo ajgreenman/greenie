@@ -60,12 +60,15 @@ Widget _buildScreen({
   List<RoundModel>? rounds,
   List<MemberModel>? members,
 }) {
+  // _testLeague.adminId is 'member-1'. Use a different ID for non-admin users
+  // so the per-league check (u.id == league.adminId) resolves correctly.
+  final userId = isAdmin ? 'member-1' : 'member-99';
   final user = UserModel(
-    id: 'member-1',
+    id: userId,
     name: 'Test User',
     email: 'test@example.com',
     isAdmin: isAdmin,
-    memberId: 'member-1',
+    memberId: userId,
   );
   return ProviderScope(
     overrides: [

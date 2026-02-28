@@ -45,6 +45,23 @@ class FakeRoundRepository extends RoundRepository {
     return started;
   }
 
+  @override
+  Future<RoundModel> updateRoundSchedule(
+    String roundId, {
+    List<int>? holeNumbers,
+    DateTime? startTime,
+    Map<String, DateTime>? teamTeeTimes,
+  }) async {
+    final index = _rounds.indexWhere((r) => r.id == roundId);
+    if (index == -1) throw StateError('Round not found: $roundId');
+    _rounds[index] = _rounds[index].copyWith(
+      holeNumbers: holeNumbers,
+      startTime: startTime,
+      teamTeeTimes: teamTeeTimes,
+    );
+    return _rounds[index];
+  }
+
   static final _initialRounds = [
     // ─── Round 1: front 9 ───────────────────────────────────────────────────
     // Matchups: team-1 vs team-2, team-3 vs team-4, team-5 vs team-6
