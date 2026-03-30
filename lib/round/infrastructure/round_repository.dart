@@ -1,4 +1,3 @@
-import 'package:greenie/round/infrastructure/fake_round_repository.dart';
 import 'package:greenie/round/infrastructure/models/round_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -6,7 +5,10 @@ part 'round_repository.g.dart';
 
 @riverpod
 RoundRepository roundRepository(Ref ref) {
-  return FakeRoundRepository();
+  throw UnimplementedError(
+    'roundRepositoryProvider must be overridden via ProviderScope. '
+    'Launch the app via main.dart or main_development.dart.',
+  );
 }
 
 abstract class RoundRepository {

@@ -9,7 +9,6 @@ import 'package:greenie/round/infrastructure/round_repository.dart';
 import 'package:greenie/user/infrastructure/fake_user_repository.dart';
 import 'package:greenie/user/infrastructure/user_repository.dart';
 
-// TODO: Replace fake repositories with Firebase implementations.
 void main() => bootstrap(
   ProviderScope(
     overrides: [
