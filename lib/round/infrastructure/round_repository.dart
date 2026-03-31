@@ -1,4 +1,4 @@
-import 'package:greenie/round/infrastructure/models/round_model.dart';
+import 'package:greenie/round/infrastructure/models/models.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'round_repository.g.dart';

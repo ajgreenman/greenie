@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:greenie/app/core/theme/sizes.dart';
-import 'package:greenie/app/presentation/components/section_header.dart';
+import 'package:greenie/app/presentation/components/components.dart';
 import 'package:greenie/league/league_providers.dart';
-import 'package:greenie/round/infrastructure/round_repository.dart';
+import 'package:greenie/round/infrastructure/infrastructure.dart';
 import 'package:greenie/round/round_providers.dart';
 
 class AdminScheduleScreen extends ConsumerStatefulWidget {

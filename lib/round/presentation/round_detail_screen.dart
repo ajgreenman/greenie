@@ -2,15 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:greenie/course/course_providers.dart';
-import 'package:greenie/course/presentation/components/scorecard.dart';
+import 'package:greenie/course/presentation/components/components.dart';
 import 'package:greenie/league/league_providers.dart';
-import 'package:greenie/round/infrastructure/models/matchup_model.dart';
-import 'package:greenie/round/infrastructure/models/round_model.dart';
-import 'package:greenie/round/infrastructure/models/round_status.dart';
-import 'package:greenie/round/presentation/components/matchup_card.dart';
-import 'package:greenie/round/presentation/components/round_info_section.dart';
-import 'package:greenie/round/presentation/components/round_leaderboard.dart';
-import 'package:greenie/round/presentation/components/start_round_button.dart';
+import 'package:greenie/round/infrastructure/infrastructure.dart';
+import 'package:greenie/round/presentation/components/components.dart';
 import 'package:greenie/round/round_providers.dart';
 import 'package:greenie/user/user_providers.dart';
 

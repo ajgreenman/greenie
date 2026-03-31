@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:greenie/league/presentation/components/preview_table.dart';
-import 'package:greenie/user/infrastructure/models/member_model.dart';
+import 'package:greenie/user/infrastructure/models/models.dart';
 
 class MembersPreview extends StatelessWidget {
   const MembersPreview({

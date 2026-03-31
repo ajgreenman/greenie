@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:greenie/course/infrastructure/models/course.dart';
-import 'package:greenie/course/infrastructure/models/hole.dart';
+import 'package:greenie/course/infrastructure/models/models.dart';
 import 'package:greenie/course/presentation/components/hole_header_cell.dart';
 import 'package:greenie/course/presentation/components/score_cell.dart';
 import 'package:greenie/course/presentation/components/scorecard_row.dart';
 import 'package:greenie/course/presentation/components/scorecard_totals.dart';
-import 'package:greenie/round/infrastructure/handicap_calculator.dart';
-import 'package:greenie/round/infrastructure/models/round_model.dart';
-import 'package:greenie/round/infrastructure/models/score_model.dart';
-import 'package:greenie/round/infrastructure/skins_calculator.dart';
-import 'package:greenie/user/infrastructure/models/member_model.dart';
+import 'package:greenie/round/infrastructure/infrastructure.dart';
+import 'package:greenie/user/infrastructure/infrastructure.dart';
 
 class Scorecard extends StatelessWidget {
   const Scorecard({

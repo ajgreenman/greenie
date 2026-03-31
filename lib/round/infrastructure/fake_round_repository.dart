@@ -1,7 +1,4 @@
-import 'package:greenie/round/infrastructure/models/matchup_model.dart';
-import 'package:greenie/round/infrastructure/models/round_model.dart';
-import 'package:greenie/round/infrastructure/models/round_status.dart';
-import 'package:greenie/round/infrastructure/models/score_model.dart';
+import 'package:greenie/round/infrastructure/models/models.dart';
 import 'package:greenie/round/infrastructure/round_repository.dart';
 
 class FakeRoundRepository extends RoundRepository {

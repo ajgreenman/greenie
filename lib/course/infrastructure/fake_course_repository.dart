@@ -1,6 +1,5 @@
 import 'package:greenie/course/infrastructure/course_repository.dart';
-import 'package:greenie/course/infrastructure/models/course.dart';
-import 'package:greenie/course/infrastructure/models/hole.dart';
+import 'package:greenie/course/infrastructure/models/models.dart';
 
 class FakeCourseRepository extends CourseRepository {
   @override

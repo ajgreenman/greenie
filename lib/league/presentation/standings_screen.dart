@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:greenie/app/core/theme/sizes.dart';
-import 'package:greenie/app/presentation/components/empty_state.dart';
-import 'package:greenie/league/infrastructure/models/league_model.dart';
-import 'package:greenie/league/infrastructure/models/team_standing.dart';
+import 'package:greenie/app/presentation/components/components.dart';
+import 'package:greenie/league/infrastructure/infrastructure.dart';
 import 'package:greenie/league/league_providers.dart';
 import 'package:greenie/user/user_providers.dart';
 

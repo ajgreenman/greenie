@@ -1,4 +1,4 @@
-import 'package:greenie/user/infrastructure/models/member_model.dart';
+import 'package:greenie/user/infrastructure/models/models.dart';
 import 'package:greenie/user/infrastructure/user_repository.dart';
 import 'package:greenie/user/user_model.dart';
 

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:greenie/course/course_providers.dart';
-import 'package:greenie/course/presentation/components/scorecard.dart';
-import 'package:greenie/round/infrastructure/models/score_model.dart';
-import 'package:greenie/round/infrastructure/round_repository.dart';
-import 'package:greenie/round/presentation/components/score_input_bottom_sheet.dart';
+import 'package:greenie/course/presentation/components/components.dart';
+import 'package:greenie/round/infrastructure/infrastructure.dart';
+import 'package:greenie/round/presentation/components/components.dart';
 import 'package:greenie/round/round_providers.dart';
 import 'package:greenie/user/user_providers.dart';
 

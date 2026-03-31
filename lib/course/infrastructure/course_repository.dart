@@ -1,4 +1,4 @@
-import 'package:greenie/course/infrastructure/models/course.dart';
+import 'package:greenie/course/infrastructure/models/models.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'course_repository.g.dart';

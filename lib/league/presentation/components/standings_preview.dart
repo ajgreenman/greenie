@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:greenie/league/infrastructure/models/league_model.dart';
-import 'package:greenie/league/infrastructure/models/team_standing.dart';
+import 'package:greenie/league/infrastructure/models/models.dart';
 import 'package:greenie/league/presentation/components/preview_table.dart';
 
 class StandingsPreview extends StatelessWidget {

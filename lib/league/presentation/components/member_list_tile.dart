@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:greenie/user/infrastructure/models/member_model.dart';
+import 'package:greenie/user/infrastructure/models/models.dart';
 
 class MemberListTile extends StatelessWidget {
   const MemberListTile({

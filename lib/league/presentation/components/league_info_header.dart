@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:greenie/app/core/theme/sizes.dart';
-import 'package:greenie/league/infrastructure/models/league_model.dart';
+import 'package:greenie/league/infrastructure/models/models.dart';
 
 class LeagueInfoHeader extends StatelessWidget {
   const LeagueInfoHeader({super.key, required this.league});

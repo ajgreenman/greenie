@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:greenie/app/core/theme/sizes.dart';
-import 'package:greenie/round/infrastructure/models/matchup_result.dart';
+import 'package:greenie/round/infrastructure/infrastructure.dart';
 import 'package:greenie/round/round_providers.dart';
-import 'package:greenie/user/infrastructure/models/member_model.dart';
+import 'package:greenie/user/infrastructure/infrastructure.dart';
 
 class MatchupDetailScreen extends ConsumerWidget {
   const MatchupDetailScreen({

@@ -1,4 +1,4 @@
-import 'package:greenie/round/infrastructure/models/score_model.dart';
+import 'package:greenie/round/infrastructure/models/models.dart';
 
 /// Returns a map of hole number to the member ID who won the skin.
 /// A skin is won when a player has the uniquely lowest score on a hole.

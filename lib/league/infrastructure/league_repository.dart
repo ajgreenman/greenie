@@ -1,4 +1,4 @@
-import 'package:greenie/league/infrastructure/models/league_model.dart';
+import 'package:greenie/league/infrastructure/models/models.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'league_repository.g.dart';

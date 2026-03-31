@@ -4,8 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:greenie/app/core/theme/sizes.dart';
 import 'package:greenie/app/core/extensions/date_extensions.dart';
 import 'package:greenie/course/course_providers.dart';
-import 'package:greenie/round/infrastructure/models/round_model.dart';
-import 'package:greenie/round/infrastructure/models/round_status.dart';
+import 'package:greenie/round/infrastructure/models/models.dart';
 
 class UpcomingRoundCard extends ConsumerWidget {
   const UpcomingRoundCard({

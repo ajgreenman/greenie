@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:greenie/app/core/extensions/date_extensions.dart';
 import 'package:greenie/league/presentation/components/preview_table.dart';
-import 'package:greenie/round/infrastructure/models/round_model.dart';
-import 'package:greenie/round/infrastructure/models/round_status.dart';
+import 'package:greenie/round/infrastructure/models/models.dart';
 
 class RoundsPreview extends StatelessWidget {
   const RoundsPreview({
