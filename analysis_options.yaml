@@ -7,10 +7,6 @@ analyzer:
   plugins:
     - custom_lint
 
-custom_lint:
-  rules:
-    - scoped_providers_should_specify_dependencies: false
-
 linter:
   rules:
     - avoid_print
