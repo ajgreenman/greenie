@@ -49,4 +49,4 @@ final class RoundRepositoryProvider
   }
 }
 
-String _$roundRepositoryHash() => r'060b26304b681e68b4e7d42ece03d12ac77be3ac';
+String _$roundRepositoryHash() => r'8d6039aa900e2665d1ea1a98b195ddc6255e8ce7';

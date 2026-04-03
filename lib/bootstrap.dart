@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:greenie/app/core/app_providers.dart';
 import 'package:greenie/app/core/routing.dart';
 import 'package:greenie/app/core/theme/theme.dart';
 
-Future<void> bootstrap(Widget app) async {
+Future<void> bootstrap({
+  required List<Override> overrides,
+  List<ProviderObserver> observers = const [],
+}) async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(app);
+  runApp(
+    ProviderScope(
+      overrides: overrides,
+      observers: observers,
+      child: const App(),
+    ),
+  );
 }
 
 class App extends ConsumerWidget {

@@ -1,5 +1,5 @@
+// ignore_for_file: scoped_providers_should_specify_dependencies
 import 'package:flutter/foundation.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:greenie/app/core/provider_logger.dart';
 import 'package:greenie/bootstrap.dart';
 import 'package:greenie/course/infrastructure/infrastructure.dart';
@@ -9,14 +9,11 @@ import 'package:greenie/user/infrastructure/infrastructure.dart';
 
 // TODO: Replace fake repositories with Firebase implementations.
 void main() => bootstrap(
-  ProviderScope(
-    observers: kDebugMode ? [const ProviderLogger()] : [],
-    overrides: [
-      courseRepositoryProvider.overrideWith((_) => FakeCourseRepository()),
-      leagueRepositoryProvider.overrideWith((_) => FakeLeagueRepository()),
-      roundRepositoryProvider.overrideWith((_) => FakeRoundRepository()),
-      userRepositoryProvider.overrideWith((_) => FakeUserRepository()),
-    ],
-    child: const App(),
-  ),
+  observers: kDebugMode ? [const ProviderLogger()] : [],
+  overrides: [
+    courseRepositoryProvider.overrideWith((_) => FakeCourseRepository()),
+    leagueRepositoryProvider.overrideWith((_) => FakeLeagueRepository()),
+    roundRepositoryProvider.overrideWith((_) => FakeRoundRepository()),
+    userRepositoryProvider.overrideWith((_) => FakeUserRepository()),
+  ],
 );

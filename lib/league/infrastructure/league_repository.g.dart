@@ -53,4 +53,4 @@ final class LeagueRepositoryProvider
   }
 }
 
-String _$leagueRepositoryHash() => r'eeecf63d31afdee6a9714f0cbc120185d44a40b4';
+String _$leagueRepositoryHash() => r'dd01624dd1598270d84ada9ed0a02ab881e99eac';
