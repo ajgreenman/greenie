@@ -1,4 +1,3 @@
-// ignore_for_file: scoped_providers_should_specify_dependencies
 import 'package:flutter/foundation.dart';
 import 'package:greenie/app/core/provider_logger.dart';
 import 'package:greenie/bootstrap.dart';
