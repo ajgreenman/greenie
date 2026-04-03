@@ -1,23 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-/// Logs Riverpod provider lifecycle events in debug mode.
-///
-/// Filters out noisy framework providers (theme, router, scroll) to keep
-/// logs focused on app-level state changes.
+/// Logs all Riverpod provider lifecycle events in debug mode.
 final class ProviderLogger extends ProviderObserver {
   const ProviderLogger();
-
-  static const _noisy = {
-    'themeModeProvider',
-    'routerProvider',
-    'scrollControllerProvider',
-  };
-
-  static bool _isNoisy(ProviderObserverContext context) {
-    final name = context.provider.name ?? context.provider.runtimeType.toString();
-    return _noisy.any((n) => name.contains(n));
-  }
 
   static String _name(ProviderObserverContext context) =>
       context.provider.toString();
@@ -31,7 +17,6 @@ final class ProviderLogger extends ProviderObserver {
 
   @override
   void didAddProvider(ProviderObserverContext context, Object? value) {
-    if (_isNoisy(context)) return;
     debugPrint('[Riverpod] ADD    ${_name(context)} → ${_fmt(value)}');
   }
 
@@ -41,13 +26,11 @@ final class ProviderLogger extends ProviderObserver {
     Object? previousValue,
     Object? newValue,
   ) {
-    if (_isNoisy(context)) return;
     debugPrint('[Riverpod] UPDATE ${_name(context)} → ${_fmt(newValue)}');
   }
 
   @override
   void didDisposeProvider(ProviderObserverContext context) {
-    if (_isNoisy(context)) return;
     debugPrint('[Riverpod] DISP   ${_name(context)}');
   }
 
@@ -57,7 +40,6 @@ final class ProviderLogger extends ProviderObserver {
     Object error,
     StackTrace stackTrace,
   ) {
-    // Always log errors, even noisy providers
     debugPrint('[Riverpod] ERROR  ${_name(context)}: $error');
     debugPrint(stackTrace.toString());
   }
