@@ -81,7 +81,6 @@ const _testUser = UserModel(
   id: 'user-1',
   name: 'Alice Smith',
   email: 'alice@test.com',
-  isAdmin: false,
   memberId: 'member-1',
 );
 

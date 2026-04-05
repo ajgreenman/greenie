@@ -1,11 +1,18 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:greenie/round/infrastructure/infrastructure.dart';
 import 'package:greenie/round/round_providers.dart';
 
 void main() {
+  ProviderContainer makeContainer() => ProviderContainer(
+    overrides: [
+      roundRepositoryProvider.overrideWithValue(FakeRoundRepository()),
+    ],
+  );
+
   group('Round Providers', () {
     test('fetchRoundsForLeagueProvider returns rounds', () async {
-      final container = ProviderContainer();
+      final container = makeContainer();
       addTearDown(container.dispose);
 
       final rounds = await container.read(
@@ -15,7 +22,7 @@ void main() {
     });
 
     test('fetchRoundProvider returns a round by id', () async {
-      final container = ProviderContainer();
+      final container = makeContainer();
       addTearDown(container.dispose);
 
       final rounds = await container.read(
@@ -28,7 +35,7 @@ void main() {
     });
 
     test('fetchRoundProvider returns null for unknown id', () async {
-      final container = ProviderContainer();
+      final container = makeContainer();
       addTearDown(container.dispose);
 
       final round = await container.read(fetchRoundProvider('unknown').future);

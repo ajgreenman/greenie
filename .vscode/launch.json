@@ -13,21 +13,24 @@
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
-      "flutterMode": "debug"
+      "flutterMode": "debug",
+      "args": ["--dart-define-from-file=dart_defines/production.json"]
     },
     {
       "name": "Release",
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
-      "flutterMode": "release"
+      "flutterMode": "release",
+      "args": ["--dart-define-from-file=dart_defines/production.json"]
     },
     {
       "name": "Profile",
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
-      "flutterMode": "profile"
+      "flutterMode": "profile",
+      "args": ["--dart-define-from-file=dart_defines/production.json"]
     }
   ]
 }

@@ -1,17 +1,44 @@
+import 'package:greenie/auth/auth_repository.dart';
 import 'package:greenie/user/infrastructure/models/models.dart';
 import 'package:greenie/user/infrastructure/user_repository.dart';
 import 'package:greenie/user/user_model.dart';
 
 class FakeUserRepository extends UserRepository {
-  @override
-  Future<UserModel> getCurrentUser() async {
-    return const UserModel(
+  /// [authRepository] is optional. When provided, [getCurrentUser] returns the
+  /// user matching whoever is currently signed in. When omitted (e.g. in unit
+  /// tests), defaults to the first account (AJ Greenman).
+  FakeUserRepository({AuthRepository? authRepository})
+      : _authRepository = authRepository;
+
+  final AuthRepository? _authRepository;
+
+  static const _usersByAuthId = {
+    'user-1': UserModel(
       id: 'user-1',
       name: 'AJ Greenman',
-      email: 'aj@greenie.app',
-      isAdmin: true,
+      email: 'brother3@greenie.app',
       memberId: 'member-1',
-    );
+    ),
+    'user-4': UserModel(
+      id: 'user-4',
+      name: 'Aaron Greenman',
+      email: 'brother4@greenie.app',
+      memberId: 'member-4',
+    ),
+    'user-6': UserModel(
+      id: 'user-6',
+      name: 'Brady Greenman',
+      email: 'brother6@greenie.app',
+      memberId: 'member-6',
+    ),
+  };
+
+  @override
+  Future<UserModel> getCurrentUser() async {
+    final authId = _authRepository?.currentUser?.id ?? 'user-1';
+    final user = _usersByAuthId[authId];
+    if (user == null) throw StateError('No fake user for auth id: $authId');
+    return user;
   }
 
   @override

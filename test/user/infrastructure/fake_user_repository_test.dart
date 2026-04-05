@@ -9,14 +9,13 @@ void main() {
   });
 
   group('FakeUserRepository', () {
-    test('getCurrentUser returns an admin user', () async {
+    test('getCurrentUser returns a user with name and email', () async {
       final user = await repo.getCurrentUser();
-      expect(user.isAdmin, true);
       expect(user.name, isNotEmpty);
       expect(user.email, isNotEmpty);
     });
 
-    test('getCurrentUser has memberId member-1', () async {
+    test('getCurrentUser defaults to AJ Greenman (member-1)', () async {
       final user = await repo.getCurrentUser();
       expect(user.memberId, 'member-1');
     });

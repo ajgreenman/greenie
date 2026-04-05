@@ -1,4 +1,6 @@
 // ignore_for_file: scoped_providers_should_specify_dependencies
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -48,7 +50,6 @@ const _testUser = UserModel(
   id: 'member-1',
   name: 'Test User',
   email: 'test@example.com',
-  isAdmin: true,
   memberId: 'member-1',
 );
 
@@ -68,7 +69,6 @@ Widget _buildScreen({
     id: userId,
     name: 'Test User',
     email: 'test@example.com',
-    isAdmin: isAdmin,
     memberId: userId,
   );
   return ProviderScope(
@@ -147,6 +147,11 @@ void main() {
     testWidgets('shows loading indicator initially', (tester) async {
       await tester.pumpWidget(
         ProviderScope(
+          overrides: [
+            fetchLeagueProvider(
+              'league-1',
+            ).overrideWith((ref) => Completer<LeagueModel>().future),
+          ],
           child: MaterialApp(
             theme: GreenieTheme.light,
             home: const LeagueHomeScreen(leagueId: 'league-1'),

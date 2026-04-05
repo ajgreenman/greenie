@@ -1,6 +1,13 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:greenie/app/presentation/home_screen.dart';
+import 'package:greenie/app/presentation/login_screen.dart';
 import 'package:greenie/app/presentation/settings_screen.dart';
+import 'package:greenie/auth/auth_providers.dart';
+import 'package:greenie/auth/auth_repository.dart';
+import 'package:greenie/auth/auth_user.dart';
 import 'package:greenie/league/presentation/admin_hub_screen.dart';
 import 'package:greenie/league/presentation/admin_schedule_screen.dart';
 import 'package:greenie/league/presentation/admin_scorecard_screen.dart';
@@ -16,10 +23,39 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'routing.g.dart';
 
-@riverpod
+/// Bridges auth state changes into a [ChangeNotifier] so GoRouter
+/// re-evaluates [redirect] whenever the user signs in or out.
+class _AuthNotifier extends ChangeNotifier {
+  _AuthNotifier(AuthRepository authRepo) {
+    _sub = authRepo.authStateChanges.listen((_) => notifyListeners());
+  }
+
+  late final StreamSubscription<AuthUser?> _sub;
+
+  @override
+  void dispose() {
+    _sub.cancel();
+    super.dispose();
+  }
+}
+
+@Riverpod(keepAlive: true)
 GoRouter router(Ref ref) {
+  final notifier = _AuthNotifier(ref.read(authRepositoryProvider));
+  ref.onDispose(notifier.dispose);
+
   return GoRouter(
+    refreshListenable: notifier,
+    redirect: (context, state) {
+      final isLoggedIn = ref.read(authRepositoryProvider).currentUser != null;
+      final isOnLogin = state.matchedLocation == '/login';
+
+      if (!isLoggedIn && !isOnLogin) return '/login';
+      if (isLoggedIn && isOnLogin) return '/';
+      return null;
+    },
     routes: [
+      GoRoute(path: '/login', builder: (context, state) => const LoginScreen()),
       GoRoute(path: '/', builder: (context, state) => const HomeScreen()),
       GoRoute(
         path: '/league/:leagueId',

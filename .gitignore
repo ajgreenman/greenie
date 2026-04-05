@@ -26,6 +26,9 @@ migrate_working_dir/
 # Claude
 CLAUDE.local.md
 
+# Supabase credentials (never commit these)
+dart_defines/
+
 # Coverage
 coverage/
 

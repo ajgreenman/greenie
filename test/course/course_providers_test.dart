@@ -1,11 +1,18 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:greenie/course/course_providers.dart';
+import 'package:greenie/course/infrastructure/infrastructure.dart';
 
 void main() {
+  ProviderContainer makeContainer() => ProviderContainer(
+    overrides: [
+      courseRepositoryProvider.overrideWithValue(FakeCourseRepository()),
+    ],
+  );
+
   group('Course Providers', () {
     test('fetchCoursesProvider returns courses from fake repository', () async {
-      final container = ProviderContainer();
+      final container = makeContainer();
       addTearDown(container.dispose);
 
       final courses = await container.read(fetchCoursesProvider.future);
@@ -14,7 +21,7 @@ void main() {
     });
 
     test('fetchCourseProvider returns a course by id', () async {
-      final container = ProviderContainer();
+      final container = makeContainer();
       addTearDown(container.dispose);
 
       final courses = await container.read(fetchCoursesProvider.future);
@@ -26,7 +33,7 @@ void main() {
     });
 
     test('fetchCourseProvider returns null for unknown id', () async {
-      final container = ProviderContainer();
+      final container = makeContainer();
       addTearDown(container.dispose);
 
       final course = await container.read(

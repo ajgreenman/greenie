@@ -1,11 +1,18 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:greenie/league/infrastructure/infrastructure.dart';
 import 'package:greenie/league/league_providers.dart';
 
 void main() {
+  ProviderContainer makeContainer() => ProviderContainer(
+    overrides: [
+      leagueRepositoryProvider.overrideWithValue(FakeLeagueRepository()),
+    ],
+  );
+
   group('League Providers', () {
     test('fetchLeaguesProvider returns leagues from fake repository', () async {
-      final container = ProviderContainer();
+      final container = makeContainer();
       addTearDown(container.dispose);
 
       final leagues = await container.read(fetchLeaguesProvider.future);
@@ -13,7 +20,7 @@ void main() {
     });
 
     test('fetchLeagueProvider returns a league by id', () async {
-      final container = ProviderContainer();
+      final container = makeContainer();
       addTearDown(container.dispose);
 
       final leagues = await container.read(fetchLeaguesProvider.future);
@@ -24,7 +31,7 @@ void main() {
     });
 
     test('fetchLeagueProvider throws for unknown id', () async {
-      final container = ProviderContainer();
+      final container = makeContainer();
       addTearDown(container.dispose);
 
       expect(

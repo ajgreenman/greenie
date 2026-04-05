@@ -5,10 +5,10 @@ import 'package:greenie/app/core/app_providers.dart';
 import 'package:greenie/app/core/routing.dart';
 import 'package:greenie/app/core/theme/theme.dart';
 
-Future<void> bootstrap({
+void bootstrap({
   required List<Override> overrides,
   List<ProviderObserver> observers = const [],
-}) async {
+}) {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
     ProviderScope(

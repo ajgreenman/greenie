@@ -10,3 +10,4 @@ class ThemeModeNotifier extends _$ThemeModeNotifier {
 
   void setThemeMode(ThemeMode mode) => state = mode;
 }
+
