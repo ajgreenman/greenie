@@ -27,8 +27,8 @@ class StandingsScreen extends ConsumerWidget {
         AsyncData(:final value) => _StandingsList(
           standings: value,
           userMemberId: switch (userAsync) {
-            AsyncData(:final value) => value.memberId,
-            _ => '',
+            AsyncData(:final value) => value.id,
+            _ => null,
           },
           league: switch (leagueAsync) {
             AsyncData(:final value) => value,
@@ -50,7 +50,7 @@ class _StandingsList extends StatelessWidget {
   });
 
   final List<TeamStanding> standings;
-  final String userMemberId;
+  final String? userMemberId;
   final LeagueModel? league;
 
   bool _isUserTeam(TeamStanding standing) {

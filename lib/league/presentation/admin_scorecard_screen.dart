@@ -47,16 +47,16 @@ class _AdminScorecardScreenState extends ConsumerState<AdminScorecardScreen> {
             if (!_initialized) {
               _localScores = {
                 for (final s in value.scores)
-                  s.memberId: Map.of(s.holeScores),
+                  s.userId: Map.of(s.holeScores),
               };
               _initialized = true;
             }
 
             final localRound = value.copyWith(
               scores: value.scores.map((s) {
-                final local = _localScores[s.memberId];
+                final local = _localScores[s.userId];
                 if (local != null) {
-                  return ScoreModel(memberId: s.memberId, holeScores: local);
+                  return ScoreModel(userId: s.userId, holeScores: local);
                 }
                 return s;
               }).toList(),

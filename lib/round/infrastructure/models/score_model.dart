@@ -1,7 +1,7 @@
 class ScoreModel {
-  const ScoreModel({required this.memberId, required this.holeScores});
+  const ScoreModel({required this.userId, required this.holeScores});
 
-  final String memberId;
+  final String userId;
 
   /// Map from hole number to strokes.
   final Map<int, int> holeScores;

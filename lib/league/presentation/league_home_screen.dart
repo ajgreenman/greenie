@@ -24,9 +24,9 @@ class LeagueHomeScreen extends ConsumerWidget {
     final standingsAsync = ref.watch(fetchStandingsProvider(leagueId));
     final membersAsync = ref.watch(fetchMembersProvider(leagueId));
 
-    final memberId = switch (userAsync) {
-      AsyncData(value: final u) => u.memberId,
-      _ => '',
+    final userId = switch (userAsync) {
+      AsyncData(value: final u) => u.id,
+      _ => null,
     };
     final isAdmin = switch ((userAsync, leagueAsync)) {
       (AsyncData(value: final u), AsyncData(value: final league)) =>
@@ -118,22 +118,22 @@ class LeagueHomeScreen extends ConsumerWidget {
                 const SectionHeader(title: 'Standings'),
                 StandingsPreview(
                   standings: standings,
-                  userMemberId: memberId,
+                  userMemberId: userId,
                   league: league,
                   leagueId: leagueId,
                 ),
               ],
               if (roundsAsync case AsyncData(value: final rounds))
-                if (memberId.isNotEmpty &&
+                if (userId != null &&
                     rounds.any(
                       (r) =>
                           r.status == RoundStatus.completed &&
-                          r.scores.any((s) => s.memberId == memberId),
+                          r.scores.any((s) => s.userId == userId),
                     )) ...[
                   const SectionHeader(title: 'Recent Rounds'),
                   RoundsPreview(
                     rounds: rounds,
-                    memberId: memberId,
+                    userId: userId,
                     leagueId: leagueId,
                   ),
                 ],
@@ -143,7 +143,7 @@ class LeagueHomeScreen extends ConsumerWidget {
                 const SectionHeader(title: 'Members'),
                 MembersPreview(
                   members: members,
-                  userMemberId: memberId,
+                  userMemberId: userId,
                   leagueId: leagueId,
                 ),
               ],

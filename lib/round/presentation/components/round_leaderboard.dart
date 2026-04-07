@@ -45,8 +45,8 @@ class _RoundLeaderboardState extends ConsumerState<RoundLeaderboard> {
     final sorted = [...widget.round.scores];
     if (_showNet) {
       sorted.sort((a, b) {
-        final aHandicap = findMember(a.memberId)?.handicap ?? 0;
-        final bHandicap = findMember(b.memberId)?.handicap ?? 0;
+        final aHandicap = findMember(a.userId)?.handicap ?? 0;
+        final bHandicap = findMember(b.userId)?.handicap ?? 0;
         final aNet = _netTotal(a, aHandicap, widget.round.holeNumbers);
         final bNet = _netTotal(b, bHandicap, widget.round.holeNumbers);
         return aNet.compareTo(bNet);
@@ -85,7 +85,7 @@ class _RoundLeaderboardState extends ConsumerState<RoundLeaderboard> {
             ...sorted.asMap().entries.map((entry) {
               final rank = entry.key + 1;
               final score = entry.value;
-              final member = findMember(score.memberId);
+              final member = findMember(score.userId);
               final memberName = member?.name;
               final initials = member?.initials ?? '??';
               final handicap = member?.handicap ?? 0;
@@ -112,7 +112,7 @@ class _RoundLeaderboardState extends ConsumerState<RoundLeaderboard> {
                           ),
                         ),
                         CircleAvatar(child: Text(initials)),
-                        Expanded(child: Text(memberName ?? score.memberId)),
+                        Expanded(child: Text(memberName ?? score.userId)),
                         Text(
                           '$displayScore',
                           style: theme.textTheme.titleSmall?.copyWith(

@@ -15,9 +15,9 @@ void main() {
       expect(user.email, isNotEmpty);
     });
 
-    test('getCurrentUser defaults to AJ Greenman (member-1)', () async {
+    test('getCurrentUser defaults to AJ Greenman (user-1)', () async {
       final user = await repo.getCurrentUser();
-      expect(user.memberId, 'member-1');
+      expect(user.id, 'user-1');
     });
 
     test('fetchMembersForLeague returns members', () async {

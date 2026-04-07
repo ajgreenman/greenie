@@ -16,10 +16,10 @@ const _testUser = UserModel(
   id: 'user-1',
   name: 'Alice',
   email: 'alice@test.com',
-  memberId: 'member-1',
+  handicap: 10,
 );
 
-const _testMembers = [MemberModel(id: 'member-1', name: 'Alice', handicap: 10)];
+const _testMembers = [MemberModel(id: 'user-1', name: 'Alice', handicap: 10)];
 
 // 2 completed rounds, member-1 scores: 40 and 36 → avg 38, best 36
 final _testRounds = [
@@ -32,7 +32,7 @@ final _testRounds = [
     holeNumbers: const [1, 2, 3, 4, 5, 6, 7, 8, 9],
     scores: const [
       ScoreModel(
-        memberId: 'member-1',
+        userId: 'user-1',
         holeScores: {1: 5, 2: 4, 3: 5, 4: 4, 5: 4, 6: 5, 7: 4, 8: 5, 9: 4},
       ),
     ],
@@ -47,7 +47,7 @@ final _testRounds = [
     holeNumbers: const [1, 2, 3, 4, 5, 6, 7, 8, 9],
     scores: const [
       ScoreModel(
-        memberId: 'member-1',
+        userId: 'user-1',
         holeScores: {1: 4, 2: 4, 3: 4, 4: 4, 5: 4, 6: 4, 7: 4, 8: 4, 9: 4},
       ),
     ],

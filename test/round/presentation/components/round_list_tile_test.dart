@@ -28,7 +28,7 @@ final _testCompletedRound = RoundModel(
   status: RoundStatus.completed,
   holeNumbers: const [1, 2, 3],
   scores: const [
-    ScoreModel(memberId: 'member-1', holeScores: {1: 4, 2: 3, 3: 5}),
+    ScoreModel(userId: 'member-1', holeScores: {1: 4, 2: 3, 3: 5}),
   ],
   matchups: const [],
 );
@@ -52,7 +52,7 @@ final _testInProgressRound = RoundModel(
   status: RoundStatus.inProgress,
   holeNumbers: const [1, 2, 3],
   scores: const [
-    ScoreModel(memberId: 'member-1', holeScores: {1: 4}),
+    ScoreModel(userId: 'member-1', holeScores: {1: 4}),
   ],
   matchups: const [],
 );

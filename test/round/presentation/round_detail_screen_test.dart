@@ -31,22 +31,22 @@ final _testCourse = CourseModel(
 );
 
 const _testMembers = [
-  MemberModel(id: 'member-1', name: 'Alice Smith', handicap: 10),
-  MemberModel(id: 'member-2', name: 'Bob Jones', handicap: 18),
+  MemberModel(id: 'user-1', name: 'Alice Smith', handicap: 10),
+  MemberModel(id: 'user-2', name: 'Bob Jones', handicap: 18),
 ];
 
 // Teams and matchup for the user's round
 const _team1 = TeamModel(
   id: 'team-1',
   leagueId: 'league-1',
-  memberIds: ['member-1', 'member-2'],
+  memberIds: ['user-1', 'user-2'],
   name: 'Alice & Bob',
 );
 
 const _team2 = TeamModel(
   id: 'team-2',
   leagueId: 'league-1',
-  memberIds: ['member-3', 'member-4'],
+  memberIds: ['user-3', 'user-4'],
   name: 'Carol & Dave',
 );
 
@@ -62,7 +62,7 @@ final _testLeagueWithTeams = LeagueModel(
   name: 'Test League',
   course: _testCourse,
   day: DayOfTheWeek.wednesday,
-  memberIds: const ['member-1', 'member-2', 'member-3', 'member-4'],
+  memberIds: const ['user-1', 'user-2', 'user-3', 'user-4'],
   adminId: 'user-1',
   teams: const [_team1, _team2],
 );
@@ -72,7 +72,7 @@ final _testLeagueNoTeams = LeagueModel(
   name: 'Test League',
   course: _testCourse,
   day: DayOfTheWeek.wednesday,
-  memberIds: const ['member-1'],
+  memberIds: const ['user-1'],
   adminId: 'user-1',
   teams: const [],
 );
@@ -81,7 +81,7 @@ const _testUser = UserModel(
   id: 'user-1',
   name: 'Alice Smith',
   email: 'alice@test.com',
-  memberId: 'member-1',
+  handicap: 10,
 );
 
 final _testCompletedRound = RoundModel(
@@ -92,8 +92,8 @@ final _testCompletedRound = RoundModel(
   status: RoundStatus.completed,
   holeNumbers: const [1, 2, 3],
   scores: const [
-    ScoreModel(memberId: 'member-1', holeScores: {1: 4, 2: 3, 3: 5}),
-    ScoreModel(memberId: 'member-2', holeScores: {1: 5, 2: 4, 3: 6}),
+    ScoreModel(userId: 'user-1', holeScores: {1: 4, 2: 3, 3: 5}),
+    ScoreModel(userId: 'user-2', holeScores: {1: 5, 2: 4, 3: 6}),
   ],
   matchups: const [],
 );
@@ -106,8 +106,8 @@ final _testCompletedRoundWithMatchup = RoundModel(
   status: RoundStatus.completed,
   holeNumbers: const [1, 2, 3],
   scores: const [
-    ScoreModel(memberId: 'member-1', holeScores: {1: 4, 2: 3, 3: 5}),
-    ScoreModel(memberId: 'member-2', holeScores: {1: 5, 2: 4, 3: 6}),
+    ScoreModel(userId: 'user-1', holeScores: {1: 4, 2: 3, 3: 5}),
+    ScoreModel(userId: 'user-2', holeScores: {1: 5, 2: 4, 3: 6}),
   ],
   matchups: const [_matchup1],
 );
@@ -131,16 +131,16 @@ final _testInProgressRound = RoundModel(
   status: RoundStatus.inProgress,
   holeNumbers: const [1, 2, 3],
   scores: const [
-    ScoreModel(memberId: 'member-1', holeScores: {1: 4}),
+    ScoreModel(userId: 'user-1', holeScores: {1: 4}),
   ],
   matchups: const [],
 );
 
 MatchupResult _makeMatchupResult() {
-  const a1 = MemberModel(id: 'member-1', name: 'Alice Smith', handicap: 10);
-  const b1 = MemberModel(id: 'member-2', name: 'Bob Jones', handicap: 18);
-  const a2 = MemberModel(id: 'member-3', name: 'Carol', handicap: 8);
-  const b2 = MemberModel(id: 'member-4', name: 'Dave', handicap: 15);
+  const a1 = MemberModel(id: 'user-1', name: 'Alice Smith', handicap: 10);
+  const b1 = MemberModel(id: 'user-2', name: 'Bob Jones', handicap: 18);
+  const a2 = MemberModel(id: 'user-3', name: 'Carol', handicap: 8);
+  const b2 = MemberModel(id: 'user-4', name: 'Dave', handicap: 15);
   return const MatchupResult(
     matchup: _matchup1,
     team1: _team1,

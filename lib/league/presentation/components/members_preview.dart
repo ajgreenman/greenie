@@ -12,7 +12,7 @@ class MembersPreview extends StatelessWidget {
   });
 
   final List<MemberModel> members;
-  final String userMemberId;
+  final String? userMemberId;
   final String leagueId;
 
   /// Members ranked by handicap ascending (lower = better). Ties broken

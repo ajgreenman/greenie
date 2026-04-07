@@ -28,8 +28,8 @@ final _testCompletedRound = RoundModel(
   status: RoundStatus.completed,
   holeNumbers: const [1, 2, 3],
   scores: const [
-    ScoreModel(memberId: 'member-1', holeScores: {1: 4, 2: 3, 3: 5}),
-    ScoreModel(memberId: 'member-2', holeScores: {1: 5, 2: 4, 3: 6}),
+    ScoreModel(userId: 'member-1', holeScores: {1: 4, 2: 3, 3: 5}),
+    ScoreModel(userId: 'member-2', holeScores: {1: 5, 2: 4, 3: 6}),
   ],
   matchups: const [],
 );

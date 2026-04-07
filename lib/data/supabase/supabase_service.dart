@@ -71,6 +71,117 @@ class SupabaseService {
   }
 
   // ---------------------------------------------------------------------------
+  // Courses
+  // ---------------------------------------------------------------------------
+
+  Future<List<Map<String, dynamic>>> fetchCourses() async {
+    final data = await _client
+        .from('courses')
+        .select('id, name, holes(number, par)');
+    return List<Map<String, dynamic>>.from(data);
+  }
+
+  Future<Map<String, dynamic>?> fetchCourse(String id) async {
+    final data = await _client
+        .from('courses')
+        .select('id, name, holes(number, par)')
+        .eq('id', id)
+        .maybeSingle();
+    return data;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Rounds
+  // ---------------------------------------------------------------------------
+
+  static const _roundSelect = '''
+    id, league_id, course_id, date, status, hole_numbers, start_time, team_tee_times,
+    scores(user_id, hole_scores),
+    matchups(id, team1_id, team2_id)
+  ''';
+
+  Future<List<Map<String, dynamic>>> fetchRoundsForLeague(
+    String leagueId,
+  ) async {
+    final data = await _client
+        .from('rounds')
+        .select(_roundSelect)
+        .eq('league_id', leagueId)
+        .order('date', ascending: false);
+    return List<Map<String, dynamic>>.from(data);
+  }
+
+  Future<Map<String, dynamic>?> fetchRound(String roundId) async {
+    final data = await _client
+        .from('rounds')
+        .select(_roundSelect)
+        .eq('id', roundId)
+        .maybeSingle();
+    return data;
+  }
+
+  /// Upserts a score row. [holeScores] keys are int hole numbers; they are
+  /// serialized to strings for JSONB storage.
+  Future<void> upsertScore(
+    String roundId,
+    String userId,
+    Map<int, int> holeScores,
+  ) async {
+    await _client.from('scores').upsert(
+      {
+        'round_id': roundId,
+        'user_id': userId,
+        'hole_scores': holeScores.map((k, v) => MapEntry(k.toString(), v)),
+      },
+      onConflict: 'round_id, user_id',
+    );
+  }
+
+  Future<Map<String, dynamic>> updateRoundStatus(
+    String roundId,
+    String status,
+  ) async {
+    await _client
+        .from('rounds')
+        .update({'status': status})
+        .eq('id', roundId);
+    return (await fetchRound(roundId))!;
+  }
+
+  Future<Map<String, dynamic>> updateRoundSchedule(
+    String roundId,
+    Map<String, dynamic> updates,
+  ) async {
+    await _client.from('rounds').update(updates).eq('id', roundId);
+    return (await fetchRound(roundId))!;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Leagues
+  // ---------------------------------------------------------------------------
+
+  static const _leagueSelect = '''
+    id, name, day, admin_user_id,
+    courses(id, name, holes(number, par)),
+    league_members(user_id),
+    teams(id, name, team_members(user_id))
+  ''';
+
+  Future<List<Map<String, dynamic>>> fetchLeagues() async {
+    final data = await _client.from('leagues').select(_leagueSelect);
+    return List<Map<String, dynamic>>.from(data);
+  }
+
+  Future<Map<String, dynamic>> fetchLeague(String id) async {
+    final data = await _client
+        .from('leagues')
+        .select(_leagueSelect)
+        .eq('id', id)
+        .single();
+    return data;
+  }
+
+  // ---------------------------------------------------------------------------
   // User / profiles
   // ---------------------------------------------------------------------------
 

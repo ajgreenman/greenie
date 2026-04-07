@@ -45,22 +45,22 @@ const _holes = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 final _completeScores = [
   // a1 (hdcp 2) — strong round
   const ScoreModel(
-    memberId: 'a1',
+    userId: 'a1',
     holeScores: {1: 4, 2: 3, 3: 4, 4: 4, 5: 3, 6: 4, 7: 4, 8: 3, 9: 4},
   ),
   // b1 (hdcp 14) — high handicapper
   const ScoreModel(
-    memberId: 'b1',
+    userId: 'b1',
     holeScores: {1: 6, 2: 5, 3: 5, 4: 6, 5: 5, 6: 5, 7: 6, 8: 5, 9: 5},
   ),
   // a2 (hdcp 5) — slightly worse than a1
   const ScoreModel(
-    memberId: 'a2',
+    userId: 'a2',
     holeScores: {1: 4, 2: 3, 3: 5, 4: 5, 5: 4, 6: 4, 7: 5, 8: 4, 9: 4},
   ),
   // b2 (hdcp 10) — moderate
   const ScoreModel(
-    memberId: 'b2',
+    userId: 'b2',
     holeScores: {1: 5, 2: 4, 3: 5, 4: 5, 5: 5, 6: 5, 7: 5, 8: 4, 9: 5},
   ),
 ];
@@ -109,7 +109,7 @@ void main() {
           members: [tiedA, tiedB, _memberA2, _memberB2],
           scores: [
             const ScoreModel(
-              memberId: 'ta',
+              userId: 'ta',
               holeScores: {
                 1: 5,
                 2: 4,
@@ -123,7 +123,7 @@ void main() {
               },
             ),
             const ScoreModel(
-              memberId: 'tb',
+              userId: 'tb',
               holeScores: {
                 1: 5,
                 2: 4,
@@ -199,7 +199,7 @@ void main() {
           scores: [
             // a1 (hdcp 2) gross: 4 every hole
             const ScoreModel(
-              memberId: 'a1',
+              userId: 'a1',
               holeScores: {
                 1: 4,
                 2: 4,
@@ -213,7 +213,7 @@ void main() {
               },
             ),
             const ScoreModel(
-              memberId: 'b1',
+              userId: 'b1',
               holeScores: {
                 1: 5,
                 2: 5,
@@ -237,7 +237,7 @@ void main() {
             // hole 5: a1 gross=4, strokes=0 → net=4; a2 strokes=1 → gross=5 net=4 ✓
             // hole 6-9: a1 strokes=0 → net=4; a2 strokes=0 → gross=4 net=4 ✓
             const ScoreModel(
-              memberId: 'a2',
+              userId: 'a2',
               holeScores: {
                 1: 4,
                 2: 4,
@@ -251,7 +251,7 @@ void main() {
               },
             ),
             const ScoreModel(
-              memberId: 'b2',
+              userId: 'b2',
               holeScores: {
                 1: 5,
                 2: 5,
@@ -294,19 +294,19 @@ void main() {
           members: _allMembers,
           scores: [
             const ScoreModel(
-              memberId: 'a1',
+              userId: 'a1',
               holeScores: {1: 4, 2: 3, 3: 4, 4: 4},
             ),
             const ScoreModel(
-              memberId: 'b1',
+              userId: 'b1',
               holeScores: {1: 6, 2: 5, 3: 5, 4: 6},
             ),
             const ScoreModel(
-              memberId: 'a2',
+              userId: 'a2',
               holeScores: {1: 4, 2: 3, 3: 5, 4: 5},
             ),
             const ScoreModel(
-              memberId: 'b2',
+              userId: 'b2',
               holeScores: {1: 5, 2: 4, 3: 5, 4: 5},
             ),
           ],
@@ -324,10 +324,10 @@ void main() {
           team2: _team2,
           members: _allMembers,
           scores: [
-            const ScoreModel(memberId: 'a1', holeScores: {1: 4, 2: 3, 3: 4}),
+            const ScoreModel(userId: 'a1', holeScores: {1: 4, 2: 3, 3: 4}),
             // b1 has no scores
-            const ScoreModel(memberId: 'a2', holeScores: {1: 4, 2: 3, 3: 5}),
-            const ScoreModel(memberId: 'b2', holeScores: {1: 5, 2: 4, 3: 5}),
+            const ScoreModel(userId: 'a2', holeScores: {1: 4, 2: 3, 3: 5}),
+            const ScoreModel(userId: 'b2', holeScores: {1: 5, 2: 4, 3: 5}),
           ],
           holeNumbers: _holes,
         );

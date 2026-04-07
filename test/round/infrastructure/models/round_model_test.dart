@@ -14,7 +14,7 @@ void main() {
       status: RoundStatus.completed,
       holeNumbers: [1, 2, 3],
       scores: [
-        const ScoreModel(memberId: 'm1', holeScores: {1: 4, 2: 3, 3: 5}),
+        const ScoreModel(userId: 'm1', holeScores: {1: 4, 2: 3, 3: 5}),
       ],
       matchups: const [],
     );
@@ -38,7 +38,7 @@ void main() {
 
     test('copyWith replaces scores', () {
       final newScores = [
-        const ScoreModel(memberId: 'm2', holeScores: {1: 5}),
+        const ScoreModel(userId: 'm2', holeScores: {1: 5}),
       ];
       final updated = round.copyWith(scores: newScores);
       expect(updated.scores, newScores);

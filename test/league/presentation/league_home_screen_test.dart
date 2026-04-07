@@ -50,7 +50,7 @@ const _testUser = UserModel(
   id: 'member-1',
   name: 'Test User',
   email: 'test@example.com',
-  memberId: 'member-1',
+  handicap: 10,
 );
 
 const _testMembers = [MemberModel(id: 'member-1', name: 'Test User', handicap: 10)];
@@ -69,7 +69,7 @@ Widget _buildScreen({
     id: userId,
     name: 'Test User',
     email: 'test@example.com',
-    memberId: userId,
+    handicap: 10,
   );
   return ProviderScope(
     overrides: [

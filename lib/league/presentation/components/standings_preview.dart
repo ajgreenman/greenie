@@ -13,7 +13,7 @@ class StandingsPreview extends StatelessWidget {
   });
 
   final List<TeamStanding> standings;
-  final String userMemberId;
+  final String? userMemberId;
   final LeagueModel league;
   final String leagueId;
 

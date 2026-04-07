@@ -90,14 +90,14 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
     required List<MemberModel> members,
     required List<RoundModel> rounds,
   }) {
-    final memberId = user.memberId;
+    final memberId = user.id;
 
     final myRounds =
         rounds
             .where(
               (r) =>
                   r.status == RoundStatus.completed &&
-                  r.scores.any((s) => s.memberId == memberId),
+                  r.scores.any((s) => s.userId == memberId),
             )
             .toList()
           ..sort((a, b) => b.date.compareTo(a.date));
@@ -123,7 +123,7 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
             _PersonalStats(
               myRounds: myRounds,
               myMember: myMember,
-              memberId: memberId,
+              userId: memberId,
             )
           else
             const EmptyState(
@@ -140,19 +140,19 @@ class _PersonalStats extends StatelessWidget {
   const _PersonalStats({
     required this.myRounds,
     required this.myMember,
-    required this.memberId,
+    required this.userId,
   });
 
   final List<RoundModel> myRounds;
   final MemberModel? myMember;
-  final String memberId;
+  final String? userId;
 
   @override
   Widget build(BuildContext context) {
     final myScores = myRounds
         .map(
           (r) =>
-              r.scores.firstWhere((s) => s.memberId == memberId).totalStrokes,
+              r.scores.firstWhere((s) => s.userId == userId).totalStrokes,
         )
         .toList();
 
@@ -209,7 +209,7 @@ class _PersonalStats extends StatelessWidget {
         else
           ...recentRounds.map((r) {
             final score = r.scores
-                .firstWhere((s) => s.memberId == memberId)
+                .firstWhere((s) => s.userId == userId)
                 .totalStrokes;
             return ListTile(
               leading: const Icon(Icons.flag_outlined),

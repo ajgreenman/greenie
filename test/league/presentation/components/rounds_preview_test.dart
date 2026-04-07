@@ -15,7 +15,7 @@ final _rounds = [
     status: RoundStatus.completed,
     holeNumbers: const [1, 2, 3, 4, 5, 6, 7, 8, 9],
     scores: const [
-      ScoreModel(memberId: 'member-1', holeScores: {1: 5, 2: 4, 3: 5, 4: 4, 5: 4, 6: 5, 7: 4, 8: 5, 9: 4}),
+      ScoreModel(userId: 'member-1', holeScores: {1: 5, 2: 4, 3: 5, 4: 4, 5: 4, 6: 5, 7: 4, 8: 5, 9: 4}),
     ],
     matchups: const [],
   ),
@@ -27,7 +27,7 @@ final _rounds = [
     status: RoundStatus.completed,
     holeNumbers: const [1, 2, 3, 4, 5, 6, 7, 8, 9],
     scores: const [
-      ScoreModel(memberId: 'member-1', holeScores: {1: 4, 2: 4, 3: 4, 4: 4, 5: 4, 6: 4, 7: 4, 8: 4, 9: 4}),
+      ScoreModel(userId: 'member-1', holeScores: {1: 4, 2: 4, 3: 4, 4: 4, 5: 4, 6: 4, 7: 4, 8: 4, 9: 4}),
     ],
     matchups: const [],
   ),
@@ -39,7 +39,7 @@ final _rounds = [
     status: RoundStatus.completed,
     holeNumbers: const [1, 2, 3, 4, 5, 6, 7, 8, 9],
     scores: const [
-      ScoreModel(memberId: 'member-1', holeScores: {1: 3, 2: 4, 3: 4, 4: 4, 5: 4, 6: 4, 7: 4, 8: 4, 9: 4}),
+      ScoreModel(userId: 'member-1', holeScores: {1: 3, 2: 4, 3: 4, 4: 4, 5: 4, 6: 4, 7: 4, 8: 4, 9: 4}),
     ],
     matchups: const [],
   ),
@@ -51,7 +51,7 @@ final _rounds = [
     status: RoundStatus.completed,
     holeNumbers: const [1, 2, 3, 4, 5, 6, 7, 8, 9],
     scores: const [
-      ScoreModel(memberId: 'member-1', holeScores: {1: 4, 2: 4, 3: 4, 4: 4, 5: 4, 6: 4, 7: 4, 8: 4, 9: 4}),
+      ScoreModel(userId: 'member-1', holeScores: {1: 4, 2: 4, 3: 4, 4: 4, 5: 4, 6: 4, 7: 4, 8: 4, 9: 4}),
     ],
     matchups: const [],
   ),
@@ -63,7 +63,7 @@ Widget _buildWidget({required List<RoundModel> rounds}) {
     home: Scaffold(
       body: RoundsPreview(
         rounds: rounds,
-        memberId: 'member-1',
+        userId: 'member-1',
         leagueId: 'league-1',
       ),
     ),
@@ -112,7 +112,7 @@ void main() {
         status: RoundStatus.completed,
         holeNumbers: const [1, 2, 3],
         scores: const [
-          ScoreModel(memberId: 'member-99', holeScores: {1: 4, 2: 4, 3: 4}),
+          ScoreModel(userId: 'member-99', holeScores: {1: 4, 2: 4, 3: 4}),
         ],
         matchups: const [],
       );

@@ -24,8 +24,8 @@ class FakeRoundRepository extends RoundRepository {
     if (index == -1) return;
     final round = _rounds[index];
     final updatedScores = round.scores.map((s) {
-      if (s.memberId == memberId) {
-        return ScoreModel(memberId: memberId, holeScores: holeScores);
+      if (s.userId == memberId) {
+        return ScoreModel(userId: memberId, holeScores: holeScores);
       }
       return s;
     }).toList();
@@ -93,56 +93,56 @@ class FakeRoundRepository extends RoundRepository {
       scores: const [
         // team-1: Ben (hdcp 1, A), Joel (hdcp 17, B)
         ScoreModel(
-          memberId: 'member-14',
+          userId: 'user-14',
           holeScores: {1: 4, 2: 3, 3: 4, 4: 4, 5: 3, 6: 4, 7: 4, 8: 3, 9: 4},
         ),
         ScoreModel(
-          memberId: 'member-13',
+          userId: 'user-13',
           holeScores: {1: 6, 2: 5, 3: 5, 4: 6, 5: 5, 6: 5, 7: 6, 8: 5, 9: 5},
         ),
         // team-2: Brady (hdcp 2, A), Matt (hdcp 12, B)
         ScoreModel(
-          memberId: 'member-6',
+          userId: 'user-6',
           holeScores: {1: 4, 2: 3, 3: 4, 4: 4, 5: 4, 6: 3, 7: 4, 8: 4, 9: 4},
         ),
         ScoreModel(
-          memberId: 'member-10',
+          userId: 'user-10',
           holeScores: {1: 5, 2: 4, 3: 5, 4: 5, 5: 4, 6: 5, 7: 5, 8: 4, 9: 5},
         ),
         // team-3: Aaron (hdcp 3, A), Brett (hdcp 15, B)
         ScoreModel(
-          memberId: 'member-4',
+          userId: 'user-4',
           holeScores: {1: 4, 2: 3, 3: 4, 4: 5, 5: 4, 6: 4, 7: 4, 8: 4, 9: 4},
         ),
         ScoreModel(
-          memberId: 'member-8',
+          userId: 'user-8',
           holeScores: {1: 6, 2: 5, 3: 5, 4: 6, 5: 5, 6: 5, 7: 6, 8: 5, 9: 5},
         ),
         // team-4: Ryan C (hdcp 5, A), Ryan A (hdcp 12, B)
         ScoreModel(
-          memberId: 'member-7',
+          userId: 'user-7',
           holeScores: {1: 5, 2: 4, 3: 4, 4: 5, 5: 4, 6: 4, 7: 5, 8: 4, 9: 5},
         ),
         ScoreModel(
-          memberId: 'member-9',
+          userId: 'user-9',
           holeScores: {1: 5, 2: 4, 3: 5, 4: 6, 5: 4, 6: 5, 7: 5, 8: 5, 9: 5},
         ),
         // team-5: Andrew (hdcp 6, A), Mike (hdcp 8, B)
         ScoreModel(
-          memberId: 'member-11',
+          userId: 'user-11',
           holeScores: {1: 5, 2: 4, 3: 4, 4: 5, 5: 4, 6: 5, 7: 5, 8: 4, 9: 4},
         ),
         ScoreModel(
-          memberId: 'member-3',
+          userId: 'user-3',
           holeScores: {1: 5, 2: 4, 3: 5, 4: 5, 5: 5, 6: 4, 7: 5, 8: 4, 9: 5},
         ),
         // team-6: Brandon (hdcp 9, A), Jake (hdcp 11, B)
         ScoreModel(
-          memberId: 'member-2',
+          userId: 'user-2',
           holeScores: {1: 5, 2: 4, 3: 5, 4: 5, 5: 5, 6: 4, 7: 5, 8: 5, 9: 4},
         ),
         ScoreModel(
-          memberId: 'member-12',
+          userId: 'user-12',
           holeScores: {1: 5, 2: 5, 3: 5, 4: 5, 5: 4, 6: 5, 7: 5, 8: 5, 9: 5},
         ),
       ],
@@ -181,7 +181,7 @@ class FakeRoundRepository extends RoundRepository {
       scores: const [
         // team-1: Ben (hdcp 1, A), Joel (hdcp 17, B)
         ScoreModel(
-          memberId: 'member-14',
+          userId: 'user-14',
           holeScores: {
             10: 4,
             11: 3,
@@ -195,7 +195,7 @@ class FakeRoundRepository extends RoundRepository {
           },
         ),
         ScoreModel(
-          memberId: 'member-13',
+          userId: 'user-13',
           holeScores: {
             10: 5,
             11: 5,
@@ -210,7 +210,7 @@ class FakeRoundRepository extends RoundRepository {
         ),
         // team-3: Aaron (hdcp 3, A), Brett (hdcp 15, B)
         ScoreModel(
-          memberId: 'member-4',
+          userId: 'user-4',
           holeScores: {
             10: 4,
             11: 4,
@@ -224,7 +224,7 @@ class FakeRoundRepository extends RoundRepository {
           },
         ),
         ScoreModel(
-          memberId: 'member-8',
+          userId: 'user-8',
           holeScores: {
             10: 6,
             11: 5,
@@ -239,7 +239,7 @@ class FakeRoundRepository extends RoundRepository {
         ),
         // team-2: Brady (hdcp 2, A), Matt (hdcp 12, B)
         ScoreModel(
-          memberId: 'member-6',
+          userId: 'user-6',
           holeScores: {
             10: 3,
             11: 4,
@@ -253,7 +253,7 @@ class FakeRoundRepository extends RoundRepository {
           },
         ),
         ScoreModel(
-          memberId: 'member-10',
+          userId: 'user-10',
           holeScores: {
             10: 5,
             11: 5,
@@ -268,7 +268,7 @@ class FakeRoundRepository extends RoundRepository {
         ),
         // team-5: Andrew (hdcp 6, A), Mike (hdcp 8, B)
         ScoreModel(
-          memberId: 'member-11',
+          userId: 'user-11',
           holeScores: {
             10: 4,
             11: 4,
@@ -282,7 +282,7 @@ class FakeRoundRepository extends RoundRepository {
           },
         ),
         ScoreModel(
-          memberId: 'member-3',
+          userId: 'user-3',
           holeScores: {
             10: 5,
             11: 4,
@@ -297,7 +297,7 @@ class FakeRoundRepository extends RoundRepository {
         ),
         // team-4: Ryan C (hdcp 5, A), Ryan A (hdcp 12, B)
         ScoreModel(
-          memberId: 'member-7',
+          userId: 'user-7',
           holeScores: {
             10: 4,
             11: 4,
@@ -311,7 +311,7 @@ class FakeRoundRepository extends RoundRepository {
           },
         ),
         ScoreModel(
-          memberId: 'member-9',
+          userId: 'user-9',
           holeScores: {
             10: 5,
             11: 5,
@@ -326,7 +326,7 @@ class FakeRoundRepository extends RoundRepository {
         ),
         // team-7: AJ (hdcp 10, A), Adam (hdcp 10, B) — tied hdcp, list order
         ScoreModel(
-          memberId: 'member-1',
+          userId: 'user-1',
           holeScores: {
             10: 5,
             11: 4,
@@ -340,7 +340,7 @@ class FakeRoundRepository extends RoundRepository {
           },
         ),
         ScoreModel(
-          memberId: 'member-5',
+          userId: 'user-5',
           holeScores: {
             10: 5,
             11: 5,
@@ -389,56 +389,56 @@ class FakeRoundRepository extends RoundRepository {
       scores: const [
         // team-1: Ben (hdcp 1, A), Joel (hdcp 17, B)
         ScoreModel(
-          memberId: 'member-14',
+          userId: 'user-14',
           holeScores: {1: 3, 2: 3, 3: 4, 4: 4, 5: 3, 6: 4, 7: 4, 8: 3, 9: 4},
         ),
         ScoreModel(
-          memberId: 'member-13',
+          userId: 'user-13',
           holeScores: {1: 6, 2: 5, 3: 5, 4: 6, 5: 5, 6: 6, 7: 5, 8: 5, 9: 5},
         ),
         // team-4: Ryan C (hdcp 5, A), Ryan A (hdcp 12, B)
         ScoreModel(
-          memberId: 'member-7',
+          userId: 'user-7',
           holeScores: {1: 5, 2: 4, 3: 4, 4: 5, 5: 4, 6: 4, 7: 5, 8: 4, 9: 4},
         ),
         ScoreModel(
-          memberId: 'member-9',
+          userId: 'user-9',
           holeScores: {1: 5, 2: 4, 3: 5, 4: 6, 5: 5, 6: 5, 7: 5, 8: 5, 9: 5},
         ),
         // team-2: Brady (hdcp 2, A), Matt (hdcp 12, B)
         ScoreModel(
-          memberId: 'member-6',
+          userId: 'user-6',
           holeScores: {1: 4, 2: 3, 3: 3, 4: 4, 5: 4, 6: 3, 7: 4, 8: 3, 9: 4},
         ),
         ScoreModel(
-          memberId: 'member-10',
+          userId: 'user-10',
           holeScores: {1: 5, 2: 4, 3: 5, 4: 5, 5: 5, 6: 5, 7: 5, 8: 5, 9: 5},
         ),
         // team-7: AJ (hdcp 10, A), Adam (hdcp 10, B)
         ScoreModel(
-          memberId: 'member-1',
+          userId: 'user-1',
           holeScores: {1: 5, 2: 4, 3: 4, 4: 5, 5: 5, 6: 4, 7: 5, 8: 4, 9: 4},
         ),
         ScoreModel(
-          memberId: 'member-5',
+          userId: 'user-5',
           holeScores: {1: 5, 2: 5, 3: 5, 4: 6, 5: 5, 6: 5, 7: 5, 8: 5, 9: 5},
         ),
         // team-3: Aaron (hdcp 3, A), Brett (hdcp 15, B)
         ScoreModel(
-          memberId: 'member-4',
+          userId: 'user-4',
           holeScores: {1: 4, 2: 4, 3: 3, 4: 5, 5: 4, 6: 4, 7: 4, 8: 4, 9: 4},
         ),
         ScoreModel(
-          memberId: 'member-8',
+          userId: 'user-8',
           holeScores: {1: 6, 2: 5, 3: 5, 4: 6, 5: 6, 6: 5, 7: 6, 8: 5, 9: 5},
         ),
         // team-6: Brandon (hdcp 9, A), Jake (hdcp 11, B)
         ScoreModel(
-          memberId: 'member-2',
+          userId: 'user-2',
           holeScores: {1: 5, 2: 4, 3: 5, 4: 5, 5: 5, 6: 5, 7: 5, 8: 5, 9: 4},
         ),
         ScoreModel(
-          memberId: 'member-12',
+          userId: 'user-12',
           holeScores: {1: 5, 2: 5, 3: 5, 4: 6, 5: 5, 6: 5, 7: 6, 8: 5, 9: 5},
         ),
       ],
@@ -477,7 +477,7 @@ class FakeRoundRepository extends RoundRepository {
       scores: const [
         // team-1: Ben (hdcp 1, A), Joel (hdcp 17, B)
         ScoreModel(
-          memberId: 'member-14',
+          userId: 'user-14',
           holeScores: {
             10: 4,
             11: 3,
@@ -491,7 +491,7 @@ class FakeRoundRepository extends RoundRepository {
           },
         ),
         ScoreModel(
-          memberId: 'member-13',
+          userId: 'user-13',
           holeScores: {
             10: 5,
             11: 5,
@@ -506,7 +506,7 @@ class FakeRoundRepository extends RoundRepository {
         ),
         // team-5: Andrew (hdcp 6, A), Mike (hdcp 8, B)
         ScoreModel(
-          memberId: 'member-11',
+          userId: 'user-11',
           holeScores: {
             10: 4,
             11: 4,
@@ -520,7 +520,7 @@ class FakeRoundRepository extends RoundRepository {
           },
         ),
         ScoreModel(
-          memberId: 'member-3',
+          userId: 'user-3',
           holeScores: {
             10: 5,
             11: 4,
@@ -535,7 +535,7 @@ class FakeRoundRepository extends RoundRepository {
         ),
         // team-2: Brady (hdcp 2, A), Matt (hdcp 12, B)
         ScoreModel(
-          memberId: 'member-6',
+          userId: 'user-6',
           holeScores: {
             10: 3,
             11: 3,
@@ -549,7 +549,7 @@ class FakeRoundRepository extends RoundRepository {
           },
         ),
         ScoreModel(
-          memberId: 'member-10',
+          userId: 'user-10',
           holeScores: {
             10: 5,
             11: 4,
@@ -564,7 +564,7 @@ class FakeRoundRepository extends RoundRepository {
         ),
         // team-6: Brandon (hdcp 9, A), Jake (hdcp 11, B)
         ScoreModel(
-          memberId: 'member-2',
+          userId: 'user-2',
           holeScores: {
             10: 5,
             11: 4,
@@ -578,7 +578,7 @@ class FakeRoundRepository extends RoundRepository {
           },
         ),
         ScoreModel(
-          memberId: 'member-12',
+          userId: 'user-12',
           holeScores: {
             10: 5,
             11: 5,
@@ -593,7 +593,7 @@ class FakeRoundRepository extends RoundRepository {
         ),
         // team-3: Aaron (hdcp 3, A), Brett (hdcp 15, B)
         ScoreModel(
-          memberId: 'member-4',
+          userId: 'user-4',
           holeScores: {
             10: 4,
             11: 3,
@@ -607,7 +607,7 @@ class FakeRoundRepository extends RoundRepository {
           },
         ),
         ScoreModel(
-          memberId: 'member-8',
+          userId: 'user-8',
           holeScores: {
             10: 6,
             11: 5,
@@ -622,7 +622,7 @@ class FakeRoundRepository extends RoundRepository {
         ),
         // team-7: AJ (hdcp 10, A), Adam (hdcp 10, B)
         ScoreModel(
-          memberId: 'member-1',
+          userId: 'user-1',
           holeScores: {
             10: 4,
             11: 4,
@@ -636,7 +636,7 @@ class FakeRoundRepository extends RoundRepository {
           },
         ),
         ScoreModel(
-          memberId: 'member-5',
+          userId: 'user-5',
           holeScores: {
             10: 5,
             11: 5,
@@ -685,23 +685,23 @@ class FakeRoundRepository extends RoundRepository {
       ],
       scores: const [
         // team-1: Ben (hdcp 1, A), Joel (hdcp 17, B)
-        ScoreModel(memberId: 'member-14', holeScores: {1: 4, 2: 3, 3: 4, 4: 4}),
-        ScoreModel(memberId: 'member-13', holeScores: {1: 6, 2: 5, 3: 5, 4: 6}),
+        ScoreModel(userId: 'user-14', holeScores: {1: 4, 2: 3, 3: 4, 4: 4}),
+        ScoreModel(userId: 'user-13', holeScores: {1: 6, 2: 5, 3: 5, 4: 6}),
         // team-6: Brandon (hdcp 9, A), Jake (hdcp 11, B)
-        ScoreModel(memberId: 'member-2', holeScores: {1: 5, 2: 4, 3: 5, 4: 5}),
-        ScoreModel(memberId: 'member-12', holeScores: {1: 5, 2: 5, 3: 5, 4: 5}),
+        ScoreModel(userId: 'user-2', holeScores: {1: 5, 2: 4, 3: 5, 4: 5}),
+        ScoreModel(userId: 'user-12', holeScores: {1: 5, 2: 5, 3: 5, 4: 5}),
         // team-2: Brady (hdcp 2, A), Matt (hdcp 12, B)
-        ScoreModel(memberId: 'member-6', holeScores: {1: 4, 2: 3, 3: 3, 4: 4}),
-        ScoreModel(memberId: 'member-10', holeScores: {1: 5, 2: 4, 3: 5, 4: 5}),
+        ScoreModel(userId: 'user-6', holeScores: {1: 4, 2: 3, 3: 3, 4: 4}),
+        ScoreModel(userId: 'user-10', holeScores: {1: 5, 2: 4, 3: 5, 4: 5}),
         // team-4: Ryan C (hdcp 5, A), Ryan A (hdcp 12, B)
-        ScoreModel(memberId: 'member-7', holeScores: {1: 5, 2: 4, 3: 4, 4: 5}),
-        ScoreModel(memberId: 'member-9', holeScores: {1: 5, 2: 4, 3: 5, 4: 6}),
+        ScoreModel(userId: 'user-7', holeScores: {1: 5, 2: 4, 3: 4, 4: 5}),
+        ScoreModel(userId: 'user-9', holeScores: {1: 5, 2: 4, 3: 5, 4: 6}),
         // team-5: Andrew (hdcp 6, A), Mike (hdcp 8, B)
-        ScoreModel(memberId: 'member-11', holeScores: {1: 5, 2: 4, 3: 4, 4: 5}),
-        ScoreModel(memberId: 'member-3', holeScores: {1: 5, 2: 5, 3: 5, 4: 5}),
+        ScoreModel(userId: 'user-11', holeScores: {1: 5, 2: 4, 3: 4, 4: 5}),
+        ScoreModel(userId: 'user-3', holeScores: {1: 5, 2: 5, 3: 5, 4: 5}),
         // team-7: AJ (hdcp 10, A), Adam (hdcp 10, B)
-        ScoreModel(memberId: 'member-1', holeScores: {1: 5, 2: 4, 3: 4, 4: 5}),
-        ScoreModel(memberId: 'member-5', holeScores: {1: 5, 2: 5, 3: 5, 4: 6}),
+        ScoreModel(userId: 'user-1', holeScores: {1: 5, 2: 4, 3: 4, 4: 5}),
+        ScoreModel(userId: 'user-5', holeScores: {1: 5, 2: 5, 3: 5, 4: 6}),
       ],
     ),
 

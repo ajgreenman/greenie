@@ -36,8 +36,8 @@ final _testRound = RoundModel(
   status: RoundStatus.inProgress,
   holeNumbers: const [1, 2, 3],
   scores: const [
-    ScoreModel(memberId: 'member-1', holeScores: {1: 4, 2: 3}),
-    ScoreModel(memberId: 'member-2', holeScores: {1: 5}),
+    ScoreModel(userId: 'member-1', holeScores: {1: 4, 2: 3}),
+    ScoreModel(userId: 'member-2', holeScores: {1: 5}),
   ],
   matchups: const [],
 );

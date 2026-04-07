@@ -40,7 +40,7 @@ MatchupResult calculateMatchupResult({
   final t2BStrokes = calculateHandicapStrokes(team2B.handicap, holeNumbers);
 
   ScoreModel? resolveScore(String memberId) =>
-      scores.where((s) => s.memberId == memberId).firstOrNull;
+      scores.where((s) => s.userId == memberId).firstOrNull;
 
   final t1AScore = resolveScore(team1A.id);
   final t1BScore = resolveScore(team1B.id);

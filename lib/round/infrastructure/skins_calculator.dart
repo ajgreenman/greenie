@@ -13,7 +13,7 @@ Map<int, String?> calculateSkins(
     for (final score in scores) {
       final strokes = score.holeScores[holeNumber];
       if (strokes != null) {
-        holeScores[score.memberId] = strokes;
+        holeScores[score.userId] = strokes;
       }
     }
     if (holeScores.isEmpty) {

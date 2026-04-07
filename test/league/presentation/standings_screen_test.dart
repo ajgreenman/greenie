@@ -18,7 +18,7 @@ const _course = CourseModel(id: 'c1', name: 'Test Course', holes: []);
 const _team1 = TeamModel(
   id: 'team-1',
   leagueId: 'league-1',
-  memberIds: ['m1', 'm2'],
+  memberIds: ['user-1', 'm2'],
   name: 'Alpha Squad',
 );
 
@@ -34,7 +34,7 @@ const _testLeague = LeagueModel(
   name: 'Test League',
   course: _course,
   day: DayOfTheWeek.wednesday,
-  memberIds: ['m1', 'm2', 'm3', 'm4'],
+  memberIds: ['user-1', 'm2', 'm3', 'm4'],
   adminId: 'user-1',
   teams: [_team1, _team2],
 );
@@ -62,7 +62,7 @@ const _testUser = UserModel(
   id: 'user-1',
   name: 'Test User',
   email: 'test@test.com',
-  memberId: 'm1',
+  handicap: 10,
 );
 
 Widget _buildScreen({List<TeamStanding>? standings, bool throwError = false}) {

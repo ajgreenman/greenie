@@ -8,12 +8,12 @@ void main() {
         id: 'u1',
         name: 'Test User',
         email: 'test@test.com',
-        memberId: 'member-1',
+        handicap: 10,
       );
       expect(user.id, 'u1');
       expect(user.name, 'Test User');
       expect(user.email, 'test@test.com');
-      expect(user.memberId, 'member-1');
+      expect(user.handicap, 10);
     });
   });
 }

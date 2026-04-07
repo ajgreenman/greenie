@@ -86,7 +86,7 @@ class _MatchupSection extends ConsumerWidget {
 
     // Find the current user's team
     final userTeam = league.teams
-        .where((t) => t.memberIds.contains(user.memberId))
+        .where((t) => t.memberIds.contains(user.id))
         .firstOrNull;
     if (userTeam == null) return const SizedBox.shrink();
 

@@ -8,12 +8,12 @@ class RoundsPreview extends StatelessWidget {
   const RoundsPreview({
     super.key,
     required this.rounds,
-    required this.memberId,
+    required this.userId,
     required this.leagueId,
   });
 
   final List<RoundModel> rounds;
-  final String memberId;
+  final String userId;
   final String leagueId;
 
   @override
@@ -22,7 +22,7 @@ class RoundsPreview extends StatelessWidget {
         .where(
           (r) =>
               r.status == RoundStatus.completed &&
-              r.scores.any((s) => s.memberId == memberId),
+              r.scores.any((s) => s.userId == userId),
         )
         .toList()
       ..sort((a, b) => b.date.compareTo(a.date));
@@ -44,12 +44,11 @@ class RoundsPreview extends StatelessWidget {
               cells: [
                 r.date.displayDate,
                 r.scores
-                    .firstWhere((s) => s.memberId == memberId)
+                    .firstWhere((s) => s.userId == userId)
                     .totalStrokes
                     .toString(),
               ],
-              onTap: () =>
-                  context.go('/league/$leagueId/round/${r.id}'),
+              onTap: () => context.go('/league/$leagueId/round/${r.id}'),
             ),
           )
           .toList(),

@@ -74,7 +74,7 @@ class Scorecard extends StatelessWidget {
           // Player score rows with net scores
           ...round.scores.map((score) {
             final member = members
-                .where((m) => m.id == score.memberId)
+                .where((m) => m.id == score.userId)
                 .firstOrNull;
             final handicapStrokes = member != null
                 ? calculateHandicapStrokes(member.handicap, round.holeNumbers)
@@ -82,7 +82,7 @@ class Scorecard extends StatelessWidget {
             return Column(
               children: [
                 ScorecardRow(
-                  label: member?.name ?? score.memberId,
+                  label: member?.name ?? score.userId,
                   cells: holes.map((h) {
                     final strokes = score.holeScores[h.number];
                     return ScoreCell(
@@ -90,7 +90,7 @@ class Scorecard extends StatelessWidget {
                       par: h.par,
                       isEditable: isEditable,
                       onTap: onScoreTap != null
-                          ? () => onScoreTap!(score.memberId, h.number)
+                          ? () => onScoreTap!(score.userId, h.number)
                           : null,
                     );
                   }).toList(),

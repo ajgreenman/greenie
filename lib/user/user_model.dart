@@ -3,13 +3,11 @@ class UserModel {
     required this.id,
     required this.name,
     required this.email,
-    required this.memberId,
+    required this.handicap,
   });
 
   final String id;
   final String name;
   final String email;
-
-  /// Links this user to their [MemberModel] in a league.
-  final String memberId;
+  final int handicap;
 }

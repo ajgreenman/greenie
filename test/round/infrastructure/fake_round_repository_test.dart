@@ -33,9 +33,9 @@ void main() {
 
     test('updateScore modifies existing score', () async {
       // member-14 plays in round-1 (team-1 vs team-2, team-7 has bye)
-      await repo.updateScore('round-1', 'member-14', {1: 10});
+      await repo.updateScore('round-1', 'user-14', {1: 10});
       final round = await repo.fetchRound('round-1');
-      final score = round!.scores.firstWhere((s) => s.memberId == 'member-14');
+      final score = round!.scores.firstWhere((s) => s.userId == 'user-14');
       expect(score.holeScores[1], 10);
     });
 
