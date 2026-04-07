@@ -8,6 +8,7 @@ import 'package:greenie/data/supabase/supabase_service.dart';
 import 'package:greenie/league/infrastructure/infrastructure.dart';
 import 'package:greenie/round/infrastructure/infrastructure.dart';
 import 'package:greenie/user/infrastructure/infrastructure.dart';
+import 'package:greenie/user/infrastructure/remote_user_repository.dart';
 
 Future<void> main() async {
   await SupabaseService.initialize();
@@ -22,7 +23,9 @@ Future<void> main() async {
       courseRepositoryProvider.overrideWith((_) => FakeCourseRepository()),
       leagueRepositoryProvider.overrideWith((_) => FakeLeagueRepository()),
       roundRepositoryProvider.overrideWith((_) => FakeRoundRepository()),
-      userRepositoryProvider.overrideWith((_) => FakeUserRepository()),
+      userRepositoryProvider.overrideWith(
+        (ref) => RemoteUserRepository(ref.watch(supabaseServiceProvider)),
+      ),
     ],
   );
 }

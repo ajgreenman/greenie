@@ -69,4 +69,32 @@ class SupabaseService {
       throw AuthException(e.message);
     }
   }
+
+  // ---------------------------------------------------------------------------
+  // User / profiles
+  // ---------------------------------------------------------------------------
+
+  /// Returns the profile row for the currently signed-in user.
+  Future<Map<String, dynamic>> fetchCurrentProfile() async {
+    final userId = _client.auth.currentUser?.id;
+    if (userId == null) throw StateError('No authenticated user');
+    final data = await _client
+        .from('profiles')
+        .select('id, name, email, handicap')
+        .eq('id', userId)
+        .single();
+    return data;
+  }
+
+  /// Returns all members of a league, with effective handicap
+  /// (handicap_override when set, otherwise the profile's global handicap).
+  Future<List<Map<String, dynamic>>> fetchLeagueMembers(
+    String leagueId,
+  ) async {
+    final data = await _client
+        .from('league_members')
+        .select('handicap_override, profiles(id, name, handicap)')
+        .eq('league_id', leagueId);
+    return List<Map<String, dynamic>>.from(data);
+  }
 }
