@@ -12,38 +12,31 @@ class LeagueInfoHeader extends StatelessWidget {
     final theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: GreenieSizes.large),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: GreenieSizes.small,
         children: [
-          Icon(
-            Icons.golf_course,
-            size: GreenieSizes.large,
-            color: theme.colorScheme.outline,
+          Text(
+            league.course.name,
+            style: theme.textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: GreenieSizes.extraSmall),
-            child: Text(
-              league.course.name,
-              style: theme.textTheme.bodyMedium?.copyWith(
+          Row(
+            spacing: GreenieSizes.extraSmall,
+            children: [
+              Icon(
+                Icons.calendar_today,
+                size: GreenieSizes.large,
                 color: theme.colorScheme.outline,
               ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: GreenieSizes.medium),
-            child: Icon(
-              Icons.calendar_today,
-              size: GreenieSizes.large,
-              color: theme.colorScheme.outline,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: GreenieSizes.extraSmall),
-            child: Text(
-              '${league.day.displayName}s',
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.outline,
+              Text(
+                '${league.day.displayName}s',
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: theme.colorScheme.outline,
+                ),
               ),
-            ),
+            ],
           ),
         ],
       ),

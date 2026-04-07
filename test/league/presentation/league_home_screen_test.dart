@@ -138,10 +138,10 @@ void main() {
       expect(find.text('Next Round'), findsOneWidget);
     });
 
-    testWidgets('shows Members section when members loaded', (tester) async {
-      await tester.pumpWidget(_buildScreen());
+    testWidgets('shows empty state when no rounds or standings', (tester) async {
+      await tester.pumpWidget(_buildScreen(rounds: []));
       await tester.pumpAndSettle();
-      expect(find.text('Members'), findsOneWidget);
+      expect(find.textContaining('No rounds scheduled'), findsOneWidget);
     });
 
     testWidgets('shows loading indicator initially', (tester) async {
