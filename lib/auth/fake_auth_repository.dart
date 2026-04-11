@@ -18,7 +18,7 @@ class FakeAuthRepository implements AuthRepository {
     'brother6@greenie.app': AuthUser(id: 'user-6', email: 'brother6@greenie.app'),
   };
 
-  AuthUser? _currentUser;
+  AuthUser? _currentUser = _accounts['brother3@greenie.app'];
   final _controller = StreamController<AuthUser?>.broadcast();
 
   @override
