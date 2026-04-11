@@ -36,8 +36,9 @@ class DevMenuOverlay extends ConsumerWidget {
       builder: (_) => _ScenarioPicker(
         current: current,
         onSelect: (scenario) {
-          ref.read(devScenarioProvider.notifier).select(scenario);
           Navigator.of(navContext).pop();
+          ref.read(routerProvider).go('/');
+          ref.read(devScenarioProvider.notifier).select(scenario);
         },
       ),
     );
