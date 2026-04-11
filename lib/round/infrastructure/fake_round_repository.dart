@@ -1,8 +1,22 @@
+import 'package:greenie/dev/dev_scenario.dart';
 import 'package:greenie/round/infrastructure/models/models.dart';
 import 'package:greenie/round/infrastructure/round_repository.dart';
 
 class FakeRoundRepository extends RoundRepository {
-  final List<RoundModel> _rounds = List.of(_initialRounds);
+  FakeRoundRepository({this.scenario = const ActiveSeason()});
+
+  final DevScenario scenario;
+
+  late final List<RoundModel> _rounds = List.of(_roundsFor(scenario));
+
+  static List<RoundModel> _roundsFor(DevScenario scenario) => switch (scenario) {
+    FreshSignup() || NewLeagueAdmin() || NewLeagueMember() => [],
+    FirstRoundUpcoming() => _firstUpcomingRounds,
+    RoundInProgress() => _roundInProgressRounds,
+    ActiveSeason() => _activeSeasonRounds,
+    SeasonComplete() => _completedSeasonRounds,
+    MultiLeague() => [..._activeSeasonRounds, _league2Round],
+  };
 
   @override
   Future<List<RoundModel>> fetchRoundsForLeague(String leagueId) async {
@@ -59,7 +73,10 @@ class FakeRoundRepository extends RoundRepository {
     return _rounds[index];
   }
 
-  static final _initialRounds = [
+  // ── Active season (default) ─────────────────────────────────────────────
+  // Rounds 1–4 completed, round 5 in-progress, round 6 upcoming.
+
+  static final _activeSeasonRounds = [
     // ─── Round 1: front 9 ───────────────────────────────────────────────────
     // Matchups: team-1 vs team-2, team-3 vs team-4, team-5 vs team-6
     // Bye: team-7 (AJ + Adam)
@@ -738,4 +755,107 @@ class FakeRoundRepository extends RoundRepository {
       scores: const [],
     ),
   ];
+
+  // ── First round upcoming ─────────────────────────────────────────────────
+  // League has teams but no history. One round on the schedule.
+
+  static final _firstUpcomingRounds = [
+    RoundModel(
+      id: 'round-1',
+      leagueId: 'league-1',
+      courseId: 'course-1',
+      date: DateTime(2025, 7, 9),
+      status: RoundStatus.upcoming,
+      holeNumbers: const [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      matchups: const [
+        MatchupModel(id: 'matchup-1-1', roundId: 'round-1', team1Id: 'team-1', team2Id: 'team-2'),
+        MatchupModel(id: 'matchup-1-2', roundId: 'round-1', team1Id: 'team-3', team2Id: 'team-4'),
+        MatchupModel(id: 'matchup-1-3', roundId: 'round-1', team1Id: 'team-5', team2Id: 'team-6'),
+      ],
+      scores: const [],
+    ),
+  ];
+
+  // ── Round in progress ────────────────────────────────────────────────────
+  // Front 9, 4 holes complete. Mirrors the active-season round-5 data.
+
+  static final _roundInProgressRounds = [
+    _activeSeasonRounds[4], // round-5 (index 4)
+  ];
+
+  // ── Season complete ──────────────────────────────────────────────────────
+  // All 6 rounds finished with full scores.
+
+  static final _completedSeasonRounds = [
+    ..._activeSeasonRounds.take(4), // rounds 1–4 unchanged
+    // Round 5 — fully scored (extends the partial in-progress data)
+    RoundModel(
+      id: 'round-5',
+      leagueId: 'league-1',
+      courseId: 'course-1',
+      date: DateTime(2025, 7, 2),
+      status: RoundStatus.completed,
+      holeNumbers: const [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      matchups: const [
+        MatchupModel(id: 'matchup-5-1', roundId: 'round-5', team1Id: 'team-1', team2Id: 'team-6'),
+        MatchupModel(id: 'matchup-5-2', roundId: 'round-5', team1Id: 'team-2', team2Id: 'team-4'),
+        MatchupModel(id: 'matchup-5-3', roundId: 'round-5', team1Id: 'team-5', team2Id: 'team-7'),
+      ],
+      scores: const [
+        ScoreModel(userId: 'user-14', holeScores: {1:4, 2:3, 3:4, 4:4, 5:3, 6:4, 7:4, 8:3, 9:4}),
+        ScoreModel(userId: 'user-13', holeScores: {1:6, 2:5, 3:5, 4:6, 5:5, 6:6, 7:5, 8:5, 9:6}),
+        ScoreModel(userId: 'user-2',  holeScores: {1:5, 2:4, 3:5, 4:5, 5:5, 6:4, 7:5, 8:5, 9:4}),
+        ScoreModel(userId: 'user-12', holeScores: {1:5, 2:5, 3:5, 4:5, 5:5, 6:5, 7:5, 8:5, 9:5}),
+        ScoreModel(userId: 'user-6',  holeScores: {1:4, 2:3, 3:3, 4:4, 5:4, 6:3, 7:4, 8:3, 9:4}),
+        ScoreModel(userId: 'user-10', holeScores: {1:5, 2:4, 3:5, 4:5, 5:5, 6:5, 7:5, 8:5, 9:5}),
+        ScoreModel(userId: 'user-7',  holeScores: {1:5, 2:4, 3:4, 4:5, 5:4, 6:4, 7:5, 8:4, 9:5}),
+        ScoreModel(userId: 'user-9',  holeScores: {1:5, 2:4, 3:5, 4:6, 5:5, 6:5, 7:5, 8:5, 9:5}),
+        ScoreModel(userId: 'user-11', holeScores: {1:5, 2:4, 3:4, 4:5, 5:4, 6:5, 7:5, 8:4, 9:4}),
+        ScoreModel(userId: 'user-3',  holeScores: {1:5, 2:5, 3:5, 4:5, 5:5, 6:5, 7:5, 8:5, 9:5}),
+        ScoreModel(userId: 'user-1',  holeScores: {1:5, 2:4, 3:4, 4:5, 5:5, 6:4, 7:5, 8:4, 9:5}),
+        ScoreModel(userId: 'user-5',  holeScores: {1:5, 2:5, 3:5, 4:6, 5:5, 6:5, 7:6, 8:5, 9:5}),
+      ],
+    ),
+    // Round 6 — back 9, fully scored. Bye: team-2 (Brady + Matt).
+    RoundModel(
+      id: 'round-6',
+      leagueId: 'league-1',
+      courseId: 'course-1',
+      date: DateTime(2025, 7, 9),
+      status: RoundStatus.completed,
+      holeNumbers: const [10, 11, 12, 13, 14, 15, 16, 17, 18],
+      matchups: const [
+        MatchupModel(id: 'matchup-6-1', roundId: 'round-6', team1Id: 'team-1', team2Id: 'team-7'),
+        MatchupModel(id: 'matchup-6-2', roundId: 'round-6', team1Id: 'team-3', team2Id: 'team-5'),
+        MatchupModel(id: 'matchup-6-3', roundId: 'round-6', team1Id: 'team-4', team2Id: 'team-6'),
+      ],
+      scores: const [
+        ScoreModel(userId: 'user-14', holeScores: {10:4, 11:3, 12:3, 13:4, 14:5, 15:3, 16:3, 17:5, 18:4}),
+        ScoreModel(userId: 'user-13', holeScores: {10:6, 11:5, 12:5, 13:6, 14:6, 15:5, 16:6, 17:6, 18:5}),
+        ScoreModel(userId: 'user-1',  holeScores: {10:5, 11:4, 12:4, 13:5, 14:5, 15:4, 16:5, 17:5, 18:4}),
+        ScoreModel(userId: 'user-5',  holeScores: {10:5, 11:5, 12:4, 13:5, 14:6, 15:5, 16:5, 17:6, 18:5}),
+        ScoreModel(userId: 'user-4',  holeScores: {10:4, 11:3, 12:3, 13:4, 14:5, 15:4, 16:3, 17:5, 18:4}),
+        ScoreModel(userId: 'user-8',  holeScores: {10:6, 11:5, 12:5, 13:6, 14:7, 15:5, 16:5, 17:6, 18:5}),
+        ScoreModel(userId: 'user-11', holeScores: {10:4, 11:4, 12:4, 13:5, 14:5, 15:4, 16:4, 17:5, 18:4}),
+        ScoreModel(userId: 'user-3',  holeScores: {10:5, 11:5, 12:4, 13:5, 14:6, 15:5, 16:4, 17:5, 18:5}),
+        ScoreModel(userId: 'user-7',  holeScores: {10:4, 11:4, 12:4, 13:5, 14:5, 15:4, 16:4, 17:5, 18:4}),
+        ScoreModel(userId: 'user-9',  holeScores: {10:5, 11:5, 12:4, 13:6, 14:6, 15:5, 16:4, 17:6, 18:5}),
+        ScoreModel(userId: 'user-2',  holeScores: {10:5, 11:4, 12:5, 13:5, 14:5, 15:5, 16:4, 17:5, 18:5}),
+        ScoreModel(userId: 'user-12', holeScores: {10:5, 11:5, 12:5, 13:5, 14:6, 15:5, 16:4, 17:6, 18:5}),
+      ],
+    ),
+  ];
+
+  // ── League-2 round for MultiLeague scenario ──────────────────────────────
+
+  static final _league2Round = RoundModel(
+    id: 'league2-round-1',
+    leagueId: 'league-2',
+    courseId: 'course-2',
+    date: DateTime(2025, 7, 3),
+    status: RoundStatus.upcoming,
+    holeNumbers: const [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    matchups: const [],
+    scores: const [],
+  );
 }
