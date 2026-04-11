@@ -8,19 +8,24 @@ import 'package:greenie/app/core/theme/theme.dart';
 void bootstrap({
   required List<Override> overrides,
   List<ProviderObserver> observers = const [],
+  Widget? devOverlay,
 }) {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
     ProviderScope(
       overrides: overrides,
       observers: observers,
-      child: const App(),
+      child: App(devOverlay: devOverlay),
     ),
   );
 }
 
 class App extends ConsumerWidget {
-  const App({super.key});
+  const App({super.key, this.devOverlay});
+
+  /// When non-null, rendered as a floating overlay on top of every screen.
+  /// Only passed in dev builds — prod always passes null.
+  final Widget? devOverlay;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -30,6 +35,15 @@ class App extends ConsumerWidget {
       darkTheme: GreenieTheme.dark,
       themeMode: ref.watch(themeModeProvider),
       routerConfig: ref.watch(routerProvider),
+      builder: devOverlay != null
+          ? (context, child) => Stack(
+                fit: StackFit.expand,
+                children: [
+                  child ?? const SizedBox.shrink(),
+                  devOverlay!,
+                ],
+              )
+          : null,
     );
   }
 }
