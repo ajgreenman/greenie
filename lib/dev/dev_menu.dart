@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:greenie/app/core/routing.dart';
 import 'package:greenie/dev/dev_scenario.dart';
 import 'package:greenie/dev/dev_scenario_notifier.dart';
 
@@ -18,22 +19,25 @@ class DevMenuOverlay extends ConsumerWidget {
         heroTag: 'devMenu',
         backgroundColor: Colors.deepOrange,
         foregroundColor: Colors.white,
-        tooltip: 'Dev scenario: ${current.displayName}',
-        onPressed: () => _showPicker(context, ref, current),
+        onPressed: () => _showPicker(ref, current),
         child: const Icon(Icons.developer_mode),
       ),
     );
   }
 
-  void _showPicker(BuildContext context, WidgetRef ref, DevScenario current) {
+  void _showPicker(WidgetRef ref, DevScenario current) {
+    // DevMenuOverlay is placed outside GoRouter's Navigator in MaterialApp's
+    // builder, so it has no Overlay/Navigator ancestor. Use the router's
+    // navigatorKey to get a context that IS inside the Navigator.
+    final navContext = ref.read(routerProvider).routerDelegate.navigatorKey.currentContext!;
     showModalBottomSheet<void>(
-      context: context,
+      context: navContext,
       isScrollControlled: true,
       builder: (_) => _ScenarioPicker(
         current: current,
         onSelect: (scenario) {
           ref.read(devScenarioProvider.notifier).select(scenario);
-          Navigator.of(context).pop();
+          Navigator.of(navContext).pop();
         },
       ),
     );
