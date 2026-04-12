@@ -9,9 +9,9 @@ void main() {
         id: 'c1',
         name: 'Test Course',
         holes: [
-          HoleModel(number: 1, par: 3),
-          HoleModel(number: 2, par: 4),
-          HoleModel(number: 3, par: 5),
+          HoleModel(number: 1, par: 3, yardage: 0, handicapIndex: 0),
+          HoleModel(number: 2, par: 4, yardage: 0, handicapIndex: 0),
+          HoleModel(number: 3, par: 5, yardage: 0, handicapIndex: 0),
         ],
       );
       expect(course.totalPar, 12);
@@ -23,7 +23,7 @@ void main() {
     });
 
     test('stores id, name, and holes', () {
-      final holes = [HoleModel(number: 1, par: 4)];
+      final holes = [HoleModel(number: 1, par: 4, yardage: 0, handicapIndex: 0)];
       final course = CourseModel(id: 'c1', name: 'My Course', holes: holes);
       expect(course.id, 'c1');
       expect(course.name, 'My Course');
@@ -33,7 +33,7 @@ void main() {
 
   group('HoleModel', () {
     test('stores number and par', () {
-      final hole = HoleModel(number: 7, par: 5);
+      final hole = HoleModel(number: 7, par: 5, yardage: 0, handicapIndex: 0);
       expect(hole.number, 7);
       expect(hole.par, 5);
     });

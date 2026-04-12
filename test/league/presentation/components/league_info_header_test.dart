@@ -14,7 +14,7 @@ final _testLeague = LeagueModel(
   course: CourseModel(
     id: 'course-1',
     name: 'Test Course',
-    holes: [HoleModel(number: 1, par: 4)],
+    holes: [HoleModel(number: 1, par: 4, yardage: 0, handicapIndex: 0)],
   ),
   day: DayOfTheWeek.wednesday,
   memberIds: const ['member-1'],

@@ -9,15 +9,15 @@ void main() {
   });
 
   group('FakeCourseRepository', () {
-    test('fetchCourses returns 3 courses', () async {
+    test('fetchCourses returns 5 courses', () async {
       final courses = await repo.fetchCourses();
-      expect(courses.length, 3);
+      expect(courses.length, 5);
     });
 
     test('fetchCourse returns existing course by id', () async {
       final course = await repo.fetchCourse('course-1');
       expect(course, isNotNull);
-      expect(course!.name, 'Crown Golf Club');
+      expect(course!.name, 'The Crown Golf Club');
     });
 
     test('fetchCourse returns null for unknown id', () async {

@@ -17,9 +17,9 @@ final _testCourse = CourseModel(
   id: 'course-1',
   name: 'Test Course',
   holes: [
-    HoleModel(number: 1, par: 4),
-    HoleModel(number: 2, par: 3),
-    HoleModel(number: 3, par: 5),
+    HoleModel(number: 1, par: 4, yardage: 0, handicapIndex: 0),
+    HoleModel(number: 2, par: 3, yardage: 0, handicapIndex: 0),
+    HoleModel(number: 3, par: 5, yardage: 0, handicapIndex: 0),
   ],
 );
 

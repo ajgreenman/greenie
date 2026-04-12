@@ -23,15 +23,19 @@ create table if not exists profiles (
 create table if not exists courses (
   id         uuid primary key default gen_random_uuid(),
   name       text not null,
+  rating     numeric(4,1),  -- course rating from white/middle tees (e.g. 66.1)
+  slope      integer,       -- slope rating from white/middle tees (e.g. 116)
   created_at timestamptz not null default now()
 );
 
 -- Holes: child of courses. (course_id, number) must be unique.
 create table if not exists holes (
-  id        uuid primary key default gen_random_uuid(),
-  course_id uuid not null references courses(id) on delete cascade,
-  number    integer not null,
-  par       integer not null,
+  id             uuid primary key default gen_random_uuid(),
+  course_id      uuid not null references courses(id) on delete cascade,
+  number         integer not null,
+  par            integer not null,
+  yardage        integer not null,        -- white/middle tee yardage
+  handicap_index integer not null,        -- stroke index 1–18
   unique(course_id, number)
 );
 

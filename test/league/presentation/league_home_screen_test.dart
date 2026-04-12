@@ -22,7 +22,7 @@ import 'package:greenie/user/user_providers.dart';
 final _testCourse = CourseModel(
   id: 'course-1',
   name: 'Pine Valley',
-  holes: [HoleModel(number: 1, par: 4), HoleModel(number: 2, par: 3)],
+  holes: [HoleModel(number: 1, par: 4, yardage: 0, handicapIndex: 0), HoleModel(number: 2, par: 3, yardage: 0, handicapIndex: 0)],
 );
 
 final _testLeague = LeagueModel(

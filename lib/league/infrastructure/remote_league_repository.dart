@@ -28,6 +28,8 @@ class RemoteLeagueRepository extends LeagueRepository {
         .map((h) => HoleModel(
               number: h['number'] as int,
               par: h['par'] as int,
+              yardage: h['yardage'] as int,
+              handicapIndex: h['handicap_index'] as int,
             ))
         .toList()
       ..sort((a, b) => a.number.compareTo(b.number));
@@ -35,6 +37,8 @@ class RemoteLeagueRepository extends LeagueRepository {
       id: courseRow['id'] as String,
       name: courseRow['name'] as String,
       holes: holes,
+      rating: (courseRow['rating'] as num?)?.toDouble(),
+      slope: courseRow['slope'] as int?,
     );
 
     final memberIds = (row['league_members'] as List<dynamic>)

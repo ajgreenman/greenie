@@ -12,7 +12,7 @@ import 'package:greenie/round/infrastructure/models/round_status.dart';
 final _testCourse = CourseModel(
   id: 'course-1',
   name: 'Pine Valley',
-  holes: [HoleModel(number: 1, par: 4)],
+  holes: [HoleModel(number: 1, par: 4, yardage: 0, handicapIndex: 0)],
 );
 
 final _testUpcomingRound = RoundModel(

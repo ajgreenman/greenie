@@ -26,6 +26,8 @@ class RemoteCourseRepository extends CourseRepository {
         .map((h) => HoleModel(
               number: h['number'] as int,
               par: h['par'] as int,
+              yardage: h['yardage'] as int,
+              handicapIndex: h['handicap_index'] as int,
             ))
         .toList()
       ..sort((a, b) => a.number.compareTo(b.number));
@@ -33,6 +35,8 @@ class RemoteCourseRepository extends CourseRepository {
       id: row['id'] as String,
       name: row['name'] as String,
       holes: holes,
+      rating: (row['rating'] as num?)?.toDouble(),
+      slope: row['slope'] as int?,
     );
   }
 }

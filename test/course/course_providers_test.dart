@@ -17,7 +17,7 @@ void main() {
 
       final courses = await container.read(fetchCoursesProvider.future);
       expect(courses, isNotEmpty);
-      expect(courses.length, 3);
+      expect(courses.length, 5);
     });
 
     test('fetchCourseProvider returns a course by id', () async {
