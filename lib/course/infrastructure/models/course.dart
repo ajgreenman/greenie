@@ -13,10 +13,10 @@ class CourseModel {
   final String name;
   final List<HoleModel> holes;
 
-  /// Course rating from the white/middle tees (e.g. 66.1).
+  /// Course rating from the blue tees (e.g. 70.0).
   final double? rating;
 
-  /// Slope rating from the white/middle tees (e.g. 116).
+  /// Slope rating from the blue tees (e.g. 128).
   final int? slope;
 
   int get totalPar => holes.fold(0, (total, hole) => total + hole.par);

@@ -9,7 +9,7 @@ class HoleModel {
   final int number;
   final int par;
 
-  /// Yardage from the white/middle tees.
+  /// Yardage from the blue tees.
   final int yardage;
 
   /// Stroke index (1 = hardest, 18 = easiest).
